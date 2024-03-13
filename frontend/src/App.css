@@ -1,4 +1,19 @@
+/*body {
+  margin: 0;
+  padding: 0;
+  background-image: url('../../frontend/src/assets/backgr.jpg');
+  background-size: cover;
+  background-position: center;
+  font-family: sans-serif; /* Ajoutez le style de police que vous souhaitez */
 
+  body {
+    margin: 0;
+    padding: 0;
+    background: url('../../frontend/src/assets/backgr.jpg') center center/cover no-repeat;
+    height: 100vh; /* Assurez-vous que le corps prend toute la hauteur de la vue */
+    font-family: sans-serif; /* Ajoutez la police de caractères souhaitée si nécessaire */
+  }
+  
 .app {
   display: flex;
   flex-direction: column;

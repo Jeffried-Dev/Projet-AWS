@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "firebase": "^10.8.1",
+    "mdb-react-ui-kit": "^7.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.2"
+  }
+}

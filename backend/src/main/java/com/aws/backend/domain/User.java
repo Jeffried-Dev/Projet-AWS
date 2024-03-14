@@ -2,12 +2,9 @@ package com.aws.backend.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,15 +13,17 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Data @NoArgsConstructor @AllArgsConstructor
-@Builder(toBuilder = true)
-@EntityListeners(AuditingEntityListener.class)
 @Table(name = "user")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     @Column(name = "name", nullable = true, unique = false, length = 100)
     private String name;
     @Column(name = "username", nullable = false, unique = true, length = 100)
@@ -60,22 +59,26 @@ public class User implements UserDetails {
     @OneToOne(cascade = CascadeType.ALL)
     private Role role;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return  Collections.singletonList(new SimpleGrantedAuthority("ROLE_"+this.role.getLibelle()));
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public String getPassword() {
+        return this.password;
     }
 
+    @Override
     public String getUsername() {
         return this.mail;
     }
@@ -100,17 +103,16 @@ public class User implements UserDetails {
         return this.actived;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_"+this.role.getLibelle()));
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public void setPassword(String password) {
@@ -219,5 +221,13 @@ public class User implements UserDetails {
 
     public void setDateNaiss(Date dateNaiss) {
         this.dateNaiss = dateNaiss;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

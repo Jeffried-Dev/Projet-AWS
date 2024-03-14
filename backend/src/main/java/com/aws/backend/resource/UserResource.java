@@ -43,17 +43,17 @@ public class UserResource {
 
     @PostMapping(path = "/activation")
     public void activation(@RequestBody Map<String, String> activation) {
-        userService.activation(activation);
+        //userService.activation(activation);
     }
 
     @PostMapping(path = "/connexion")
-    public Map<String, String> connexion(@RequestBody AuthentificationDTO authentificationDTO) {
+    public Map<String, String> connexion(@RequestBody UserDto authentificationDTO) {
         final Authentication authenticate = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(authentificationDTO.username(), authentificationDTO.password())
+                new UsernamePasswordAuthenticationToken(authentificationDTO.getMail(), authentificationDTO.getPassword())
         );
 
         if(authenticate.isAuthenticated()) {
-            return this.jwtService.generate(authentificationDTO.username());
+            return this.jwtService.generate(authentificationDTO.getMail());
         }
         return null;
     }
@@ -79,7 +79,7 @@ public class UserResource {
     }
 
     @DeleteMapping(path = "/delete/{id}", consumes = { MediaType.APPLICATION_JSON_VALUE })
-    public ResponseEntity<?> userDelete(@PathVariable(value = "id")  Long userId) {
+    public ResponseEntity<?> userDelete(@PathVariable(value = "id")  Integer userId) {
         User user = userService.userGet(userId);
         Map<String, Object> output = new HashMap<>();
         if(user == null){
@@ -94,7 +94,7 @@ public class UserResource {
     }
 
     @GetMapping(path = "/get/{id}", consumes = { MediaType.APPLICATION_JSON_VALUE })
-    public ResponseEntity<UserDto> userRead(@PathVariable(value = "id")  Long userId) {
+    public ResponseEntity<UserDto> userRead(@PathVariable(value = "id")  Integer userId) {
         User user = userService.userGet(userId);
         Map<String, Object> output = new HashMap<>();
         if(user == null){

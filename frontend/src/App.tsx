@@ -5,6 +5,8 @@ import Header from './Components/homePage/header/header';
 import Rectangle from './Components/homePage/rectangle/rectangle';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Page1 from './Components/page1/Login/Login';
+import Inscription from './Components/inscription/inscription';
+
 const App: React.FC = () => {
   return (
     <div className="app">
@@ -20,13 +22,13 @@ const App: React.FC = () => {
 
 function AppWithRouter() {
   return (
-    <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/page1" element={<Page1 />} />
-      {/* ... autres routes ... */}
-    </Routes>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/page1" element={<Page1 />} />
+        <Route path="/inscription" element={<Inscription />} /> {/* Ajoutez cette route pour la page d'inscription */}
+        {/* ... autres routes ... */}
+      </Routes>
   );
 }
-
 
 export default AppWithRouter;

@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface UserService extends UserDetailsService {
     List<UserDto> getUsers();
+    int test ();
     UserDto signUp(UserDto userDto);
     UserDto login(User user, UserDto userDto);
     boolean validateToken(String token);

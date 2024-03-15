@@ -4,6 +4,7 @@ import com.aws.backend.config.JwtService;
 import com.aws.backend.domain.User;
 import com.aws.backend.domain.dto.UserDto;
 import com.aws.backend.repo.UserRepo;
+import com.aws.backend.service.NotificationService;
 import com.aws.backend.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,8 @@ public class UserResource {
     private AuthenticationManager authenticationManager;
     private JwtService jwtService;
     @Autowired
+    private NotificationService notificationService;
+    @Autowired
     private UserService userService;
     @Autowired
     private UserRepo userRepo;
@@ -46,6 +49,16 @@ public class UserResource {
         //userService.activation(activation);
     }
 
+    @PostMapping(path = "/test")
+    public int test() {
+        User user = new User();
+        user.setMail("nouadjenouleho@gmail.com");
+        user.setName("Jeffried");
+        user.setActivationKey("ygheauozriefygtuyihoeiughzkrfdj");
+        notificationService.envoyer(user);
+        return notificationService.test();
+    }
+
     @PostMapping(path = "/connexion")
     public Map<String, String> connexion(@RequestBody UserDto authentificationDTO) {
         final Authentication authenticate = authenticationManager.authenticate(
@@ -58,9 +71,7 @@ public class UserResource {
         return null;
     }
 
-
-
-
+    //old
 
     @PutMapping(path = "/update", consumes = { MediaType.APPLICATION_JSON_VALUE })
     public ResponseEntity<UserDto> userUpdate(@RequestBody UserDto userDto) {

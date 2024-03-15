@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDto {
-    private Long id;
+    private Integer id;
     private String name;
     private String username;
     private String password;
@@ -34,11 +34,11 @@ public class UserDto {
     private String token;
     private String refreshtoken;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

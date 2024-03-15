@@ -1,6 +1,6 @@
 package com.aws.backend.service.impl;
 
-//import com.aws.backend.config.security.JwtManager;
+
 import com.aws.backend.config.JwtService;
 import com.aws.backend.domain.User;
 import com.aws.backend.domain.dto.UserDto;
@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-//import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -33,7 +32,7 @@ public class UserServiceImpl implements UserService {
     private JwtService jwtManager;
 
     @Override
-    public User userGet(Long userId) {
+    public User userGet(Integer userId) {
         return userRepository.findById(userId).orElseThrow(()-> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "user not found"));
     }
     public User loadUserByUsername(String username){

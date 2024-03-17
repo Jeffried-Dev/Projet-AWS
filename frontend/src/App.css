@@ -9,8 +9,8 @@
   body {
     margin: 0;
     padding: 0;
-    background: url('../../frontend/src/assets/backgr.jpg') center center/cover no-repeat;
-    height: 100vh; /* Assurez-vous que le corps prend toute la hauteur de la vue */
+   /* background: url('../../frontend/src/assets/backgr.jpg') center center/cover no-repeat;*/
+    height: 100%; /* Assurez-vous que le corps prend toute la hauteur de la vue */
     font-family: sans-serif; /* Ajoutez la police de caractères souhaitée si nécessaire */
   }
   

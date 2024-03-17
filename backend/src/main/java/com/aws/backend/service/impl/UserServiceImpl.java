@@ -49,6 +49,10 @@ public class UserServiceImpl implements UserService {
 //        sendMail("registration complete",signUser.getMail(), "registration complete");
         return userMapper.toDto(signUser);
     }
+    @Override
+    public int test() {
+        return 0;
+    }
 
     @Override
     public UserDto passwordRecover(User user) {

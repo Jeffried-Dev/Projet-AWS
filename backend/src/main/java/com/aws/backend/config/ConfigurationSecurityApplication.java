@@ -37,9 +37,10 @@ public class ConfigurationSecurityApplication{
                         .authorizeHttpRequests(
                                 authorize ->
                                         authorize
-                                                .requestMatchers(POST,"/inscription").permitAll()
-                                                .requestMatchers(POST,"/activation").permitAll()
-                                                .requestMatchers(POST,"/connexion").permitAll()
+                                                .requestMatchers(POST,"/utilisateur/inscription").permitAll()
+                                                .requestMatchers(POST,"/utilisateur/activation").permitAll()
+                                                .requestMatchers(POST,"/utilisateur/connexion").permitAll()
+                                                .requestMatchers(POST,"/utilisateur/test").permitAll()
                                                 .anyRequest().authenticated()
                         )
                         .sessionManagement(httpSecuritySessionManagementConfigurer ->

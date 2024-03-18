@@ -6,7 +6,6 @@ interface UserProfileProps {
   username: string;
   email: string;
   bio: string;
-  // Ajoutez d'autres propriétés utilisateur nécessaires
 }
 
 // Composant UserProfile fonctionnel avec les propriétés spécifiées

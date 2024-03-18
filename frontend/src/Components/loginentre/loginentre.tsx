@@ -29,11 +29,11 @@ export default function Loginentre() {
           />
         </div>
         <div className="w-1/2 space-y-6">
-          <h2 className="text-4xl font-bold">Log-in</h2>
+          <h2 className="text-4xl font-bold">Connexion</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700" htmlFor="username">
-                Username
+              Nom d'utilisateur
               </label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <input
@@ -49,7 +49,7 @@ export default function Loginentre() {
             </div>
             <div className="mb-12">
               <label className="block text-sm font-medium text-gray-700" htmlFor="password">
-                Password
+              Mot de passe
               </label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <input

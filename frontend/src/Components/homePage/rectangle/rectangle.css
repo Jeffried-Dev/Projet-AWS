@@ -37,11 +37,11 @@
   white-space: nowrap;
 
 }
-
+/*
 .button:hover {
   background-color: #00796b; 
 }
-
+*/
 .long-text {
   width: 800px; 
   white-space: nowrap; /* Empêche le saut de ligne */
@@ -57,7 +57,7 @@
   margin-top: 10px; 
 }
 
-
+/*
 .left-bottom-button {
   background-color: #74BBE4; 
   color: white
@@ -68,8 +68,8 @@
   background-color: #ffff;
   color: #056BB3
  
-}
-
+}*/
+/*
 .bottom-button {
   width: 100px; 
   height: 50px; 
@@ -81,4 +81,9 @@
   white-space: nowrap; 
   width: auto;
   text-align: center;
+}
+*/
+.button-small {
+  padding: 8px 16px; 
+  font-size: 14px; 
 }

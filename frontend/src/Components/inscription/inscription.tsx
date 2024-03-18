@@ -19,47 +19,47 @@ export default function Component() {
             />
           </div>
           <div className="w-1/2">
-            <h2 className="text-3xl font-bold mb-6">Company Details</h2>
+            <h2 className="text-3xl font-bold mb-6">Détails de l'entreprise</h2>
             <div className="grid gap-4">
               <div>
                 <label className="block text-sm font-semibold mb-1" htmlFor="company-name">
-                  Company Name
+                Nom de l'entreprise
                 </label>
                 <input className="border-2 border-[#004c8c] rounded-md" type="text" placeholder="Enter your company's name" />
               </div>
               <div>
                 <label className="block text-sm font-semibold mb-1" htmlFor="email-address">
-                  Email-Address
+                Adresse e-mail
                 </label>
                 <input className="border-2 border-[#004c8c] rounded-md" type="email" placeholder="example@mail.com" />
               </div>
               <div>
                 <label className="block text-sm font-semibold mb-1" htmlFor="location">
-                  Location
+                Adresse
                 </label>
                 <input className="border-2 border-[#004c8c] rounded-md" type="text" placeholder="Company's address" />
               </div>
               <div>
                 <label className="block text-sm font-semibold mb-1" htmlFor="description">
-                  Description
+                Description
                 </label>
                 <textarea className="border-2 border-[#004c8c] rounded-md" placeholder="A brief description of your company" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold mb-1" htmlFor="password">
-                    Password
+                  Mot de passe
                   </label>
                   <input className="border-2 border-[#004c8c] rounded-md" type="password" placeholder="Enter your password" />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold mb-1" htmlFor="retype-password">
-                    Re-type password
+                  Retapez le mot de passe
                   </label>
                   <input className="border-2 border-[#004c8c] rounded-md" type="password" placeholder="Re-enter your password" />
                 </div>
               </div>
-              <button className="w-full bg-[#004c8c] text-white">Register</button>
+              <button className="w-full bg-[#004c8c] text-white">S'inscrire</button>
             </div>
           </div>
         </div>

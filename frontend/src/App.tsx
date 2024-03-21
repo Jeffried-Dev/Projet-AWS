@@ -6,10 +6,12 @@ import Rectangle from './Components/commun/homePage/rectangle/rectangle';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Page1 from './Components/utilisateur/page1/Login/Login';
 import Inscription from './Components/entreprise/inscription/inscription';
+import InscriptionUser from './Components/utilisateur/inscription/UserInscription'
 import Loginentre from './Components/entreprise/loginentre/loginentre';
 import Contact from './Components/commun/contact/contact';
 import Logintest from './Components/entreprise/loginentre/testlogin';
 import Postuler from './Components/utilisateur/postuler/postuler';
+
 
 const App: React.FC = () => {
   return (
@@ -29,9 +31,11 @@ function AppWithRouter() {
       <Routes>
         {/* routes communes */}  
         <Route path="/" element={<App />} />
+
         <Route path="/contact" element={<Contact />} />
         {/* routes utilisateurs */}  
         <Route path="/utilisateur/connexion" element={<Page1 />} />
+        <Route path="/utilisateur/inscription" element={<InscriptionUser />} />
         <Route path="/utilisateur/postuler" element={<Postuler />} />
         {/* routes entreprises */}  
         <Route path="/entreprise/inscription" element={<Inscription />} /> {/* Ajoutez cette route pour la page d'inscription */}    
@@ -40,6 +44,7 @@ function AppWithRouter() {
         element = {<Loginentre />}
         />
         {/* routes administrateur */}
+
       </Routes>
   );
 }

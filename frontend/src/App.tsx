@@ -11,7 +11,8 @@ import Loginentre from './Components/entreprise/loginentre/loginentre';
 import Contact from './Components/commun/contact/contact';
 import Logintest from './Components/entreprise/loginentre/testlogin';
 import Postuler from './Components/utilisateur/postuler/postuler';
-import Chercheur from './Components/utilisateur/Recherche/chercheur'
+import Chercheur from './Components/utilisateur/Recherche/chercheur';
+import UserProfile from'./Components/utilisateur/UserProfile/UserProfile';
 
 
 const App: React.FC = () => {
@@ -32,13 +33,13 @@ function AppWithRouter() {
       <Routes>
         {/* routes communes */}  
         <Route path="/" element={<App />} />
-
         <Route path="/contact" element={<Contact />} />
         {/* routes utilisateurs */}  
         <Route path="/utilisateur/connexion" element={<Page1 />} />
         <Route path="/utilisateur/inscription" element={<InscriptionUser />} />
         <Route path="/utilisateur/postuler" element={<Postuler />} />
         <Route path="/utilisateur/recherche" element={<Chercheur />} />
+        <Route path="/utilisateur/profile" element={<UserProfile username="JohnDoe" email="johndoe@example.com" bio="Lorem ipsum dolor sit amet" />} />
         {/* routes entreprises */}  
         <Route path="/entreprise/inscription" element={<Inscription />} /> {/* Ajoutez cette route pour la page d'inscription */}    
         <Route path="/entreprise/connexion" 

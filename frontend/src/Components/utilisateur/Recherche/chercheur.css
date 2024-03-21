@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,0,0");
+
+.searchPage {
+  background-image: url('../../../assets/Bac.jpg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2%;
+  padding-top: 50px;
+}
+
+.searchBar {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.searchBar button {
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color:#74BBE4; /* Couleur du bouton */
+}
+
+.searchBar .inputSearch {
+  display: flex;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.inputSearch input {
+  font-size: 2rem;
+  color: black; /* Couleur du texte */
+  border: none;
+  background-color: #F1F2F6;
+  display: flex;
+  padding: 1rem;
+  font-size: 25px;
+  width: 500px; 
+}
+
+.inputSearch input:focus {
+  outline: none;
+}
+
+.searchBar ul {
+  width: 100%;
+  list-style: none;
+  background-color: #F1F2F6;
+  border-radius: 5px;
+  font-size: 2rem;
+  color: black; /* Couleur du texte */
+  overflow: hidden;
+  position: absolute;
+  top: 5rem;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.searchBar ul li {
+  padding: 1rem;
+  cursor: pointer;
+  font-size: 25px;
+}
+
+.searchBar ul li:hover {
+  background-color: #74BBE4; /* Couleur de survol */
+}
+
+.inputSearch span {
+  color: black; /* Couleur du texte */
+  padding: 1rem 2rem;
+}
+
+.navbar {
+  margin-top: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color:#004C8C; /* Couleur de la navbar */
+  color: white; /* Couleur du texte */
+}
+
+.navbar h1 {
+  margin: 0;
+}
+
+.navbar nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end; /* Pour aligner les boutons à droite */
+  flex-grow: 1; /* Pour que les boutons prennent tout l'espace disponible à droite */
+}
+
+
+
+.navbar nav ul li {
+  margin-right: 1rem;
+}
+
+.navbar nav ul li:last-child {
+  margin-right: 0;
+}
+
+.navbar nav ul li a {
+  color: white; /* Couleur du texte des liens */
+  text-decoration: none;
+}
+
+.logo {
+  font-size: 30px;
+  font-weight: bold;
+  color: white; /* Couleur du texte du logo */
+}
+

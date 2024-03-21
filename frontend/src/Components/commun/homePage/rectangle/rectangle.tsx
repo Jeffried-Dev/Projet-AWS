@@ -56,10 +56,10 @@ const Rectangle: React.FC<RectangleProps> = ({ color, bottomTextColor, isLeftBut
     <div className="rectangle container" style={{ backgroundColor: color }}>
       <div className="circle"><img src={logo} className="circle" alt="Logo" /></div>
       <div className="button-container">
-        <button className="button">{color === '#F1F2F6' ? <Link to="./entreprise/inscription">Inscrivez-vous en tant que recruteur</Link> : <Link to="./utilisateur/inscription">Inscrivez-vous en tant que chercheur d'emploi</Link>}</button>
+        <button className="button">{color === '#F1F2F6' ? <Link to="/entreprise/inscription">Inscrivez-vous en tant que recruteur</Link> : <Link to="/utilisateur/inscription">Inscrivez-vous en tant que chercheur d'emploi</Link>}</button>
         <div className="bottom-text" style={{ color: bottomTextColor }}>{color === '#F1F2F6' ? <span className="already-registered-text-left">Déjà inscrit(e)?</span> : <span className="already-registered-text-right">Déjà inscrit(e)?</span>}</div>
-        {isLeftButtonVisible && <button className="bottom-button left-bottom-button"><Link to="./entreprise/connexion">Connectez-vous ici</Link></button>}
-        {isRightButtonVisible && <button className="bottom-button right-bottom-button"><Link to="./utilisateur/connexion">Connectez-vous ici</Link></button>}
+        {isLeftButtonVisible && <button className="bottom-button left-bottom-button"><Link to="/entreprise/connexion">Connectez-vous ici</Link></button>}
+        {isRightButtonVisible && <button className="bottom-button right-bottom-button"><Link to="/utilisateur/connexion">Connectez-vous ici</Link></button>}
       </div>
       <div className="animated-phrases-container">
         <div className="animated-phrase left-phrase">{leftPhrase}</div>

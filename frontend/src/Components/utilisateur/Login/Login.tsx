@@ -70,7 +70,7 @@ export default function Loginentre() {
               </div>
             </div>
             {/* Bouton de connexion */}
-            <button className="w-full bg-[#004c8c] text-white py-2 rounded-md" type="submit">Se connecter</button>
+            <button className="w-full bg-[#004c8c] text-white py-2 rounded-md" type="submit"><Link to="/utilisateur/recherche">Se connecter</Link></button>
           </form>
           {/* Liens pour la récupération de mot de passe et l'inscription */}
           {/* 

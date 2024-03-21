@@ -13,13 +13,13 @@ export default function Component() {
             <img
               alt="Team working together"
               className="rounded-lg"
-              height="548"
+             // height="548"
               src={compLogo}
               style={{
-                aspectRatio: "675/548",
-                objectFit: "cover",
-              }}
-              width="675"
+                height: '100%', // Redimensionner l'image 
+                maxWidth: '100%', // Ajuster l'objet de l'image pour qu'elle s'adapte à la nouvelle taille
+               }}
+             // width="675"
             />
           </div>
           {/* Deuxième moitié de la mise en page avec les détails de l'entreprise */}

@@ -7,6 +7,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Page1 from './Components/page1/Login/Login';
 import Inscription from './Components/inscription/inscription';
 import Loginentre from './Components/loginentre/loginentre';
+import Contact from './Components/commun/contact/contact';
+import Logintest from './Components/loginentre/testlogin';
+import Postuler from './Components/utilisateur/postuler/postuler';
+
 const App: React.FC = () => {
   return (
     <div className="app">
@@ -23,11 +27,18 @@ const App: React.FC = () => {
 function AppWithRouter() {
   return (
       <Routes>
+        {/* routes communes */}  
         <Route path="/" element={<App />} />
-        <Route path="/page1" element={<Page1 />} />
-        <Route path="/inscription" element={<Inscription />} /> {/* Ajoutez cette route pour la page d'inscription */}    
-        <Route path="/loginentre" element={<Loginentre />} />
-        {/* ... autres routes ... */}
+        <Route path="/contact" element={<Contact />} />
+        {/* routes utilisateurs */}  
+        <Route path="/utilisateur/connexion" element={<Page1 />} />
+        <Route path="/utilisateur/postuler" element={<Postuler />} />
+        {/* routes entreprises */}  
+        <Route path="/entreprise/inscription" element={<Inscription />} /> {/* Ajoutez cette route pour la page d'inscription */}    
+        <Route path="/entreprise/connexion" element={<Logintest onLoginSuccess={function (): void {
+        throw new Error('Function not implemented.');
+      } } />} />
+        {/* routes administrateur */}
       </Routes>
   );
 }

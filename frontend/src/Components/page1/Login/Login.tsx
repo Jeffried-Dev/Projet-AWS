@@ -24,9 +24,9 @@ export default function Loginentre() {
             className="w-full h-auto"
             src={login}
             style={{
-              maxHeight: '300px', // Redimensionner l'image pour qu'elle ne dépasse pas une hauteur de 300 pixels
-              objectFit: 'contain', // Ajuster l'objet de l'image pour qu'elle s'adapte à la nouvelle taille
-            }}
+              height: '100%', // Redimensionner l'image 
+              maxWidth: '100%', // Ajuster l'objet de l'image pour qu'elle s'adapte à la nouvelle taille
+             }}
           />
         </div>
         {/* Deuxième moitié de la mise en page avec le formulaire de connexion */}

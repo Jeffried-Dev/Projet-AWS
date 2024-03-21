@@ -5,6 +5,7 @@ import com.aws.backend.config.JwtService;
 import com.aws.backend.domain.User;
 import com.aws.backend.domain.dto.UserDto;
 import com.aws.backend.repo.UserRepo;
+import com.aws.backend.service.NotificationService;
 import com.aws.backend.service.UserService;
 import com.aws.backend.service.mapper.UserMapper;
 import org.slf4j.Logger;
@@ -30,6 +31,9 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private JwtService jwtManager;
+    @Autowired
+    private NotificationService notificationService;
+
 
     @Override
     public User userGet(Integer userId) {
@@ -104,9 +108,10 @@ public class UserServiceImpl implements UserService {
                 user.setActivationKey(activationkey);
                 user.setCreatedDate(date);
                 newUserDto = userMapper.toDto(userRepository.save(user));
-//                String link = "http://localhost:4200/auth/sign-up-complete?key=" + activationkey;
+                ///String link = "http://localhost:4200/auth/sign-up-complete?key=" + activationkey;
+                notificationService.envoyer(user);
 //                sendMail(link,newUserDto.getMail(),"Waiting for complete registration");
-                newUserDto.setToken("mail or username don't exist");
+               // newUserDto.setToken("mail or username don't exist");
             }else{
                 newUserDto.setToken("username already exist");
             }

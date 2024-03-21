@@ -26,7 +26,7 @@ public class User implements UserDetails {
     private int id;
     @Column(name = "name", nullable = true, unique = false, length = 100)
     private String name;
-    @Column(name = "username", nullable = false, unique = true, length = 100)
+    @Column(name = "username", nullable = true, unique = true, length = 100)
     private String username;
     @Column(name = "password", nullable = false, length = 100)
     private String password;
@@ -36,25 +36,25 @@ public class User implements UserDetails {
     private Long tel;
     @Column(name = "image", nullable = true, unique = false, length = 100)
     private String image;
-    @Column(name = "actived")
+    @Column(name = "actived", nullable = true)
     private Boolean actived = false;
-    @Column(name = "verification")
+    @Column(name = "verification", nullable = true)
     private Boolean verification;
-    @Column(name = "activation_key", length = 20)
+    @Column(name = "activation_key", length = 20, nullable = true)
     private String activationKey;
-    @Column(name = "reset_key", length = 20)
+    @Column(name = "reset_key", length = 20, nullable = true)
     private String resetKey;
-    @Column(name = "reset_date")
+    @Column(name = "reset_date", nullable = true)
     private Date resetDate = null;
-    @Column(name = "created_date")
+    @Column(name = "created_date", nullable = true)
     private Date createdDate = null;
-    @Column(name = "gender")
+    @Column(name = "gender", nullable = true)
     private String gender;
-    @Column(name = "nationality")
+    @Column(name = "nationality", nullable = true)
     private String nationality;
-    @Column(name = "secondName")
+    @Column(name = "secondName", nullable = true)
     private String secondName;
-    @Column(name = "dateNaiss")
+    @Column(name = "dateNaiss", nullable = true)
     private Date dateNaiss;
     @OneToOne(cascade = CascadeType.ALL)
     private Role role;

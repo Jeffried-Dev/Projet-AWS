@@ -36,10 +36,10 @@ const Rectangle: React.FC<RectangleProps> = ({ color, bottomTextColor, isLeftBut
       <div className="circle"><img src={logo} className="circle" alt="Logo"></img></div>
       <div className="button-container">
         {/* Utilisation de la balise Link pour la navigation */}
-        <Link to="./inscription" className="button">{phrase}</Link>
+        <Link to="./entreprise/inscription" className="button">{phrase}</Link>
         <div className="bottom-text" style={{ color: bottomTextColor }}>{bottomText}</div>
-        {isLeftButtonVisible && <button className="bottom-button left-bottom-button"> <Link to="./page1" className="button button-small">Connectez-vous ici</Link></button>}
-        {isRightButtonVisible && <button className="bottom-button right-bottom-button"> <Link to="./loginentre" className="button button-small">Connectez-vous ici</Link></button>}
+        {isLeftButtonVisible && <button className="bottom-button left-bottom-button"> <Link to="./utilisateur/connexion" className="button button-small">Connectez-vous ici</Link></button>}
+        {isRightButtonVisible && <button className="bottom-button right-bottom-button"> <Link to="./entreprise/connexion" className="button button-small">Connectez-vous ici</Link></button>}
       </div>
     </div>
   );

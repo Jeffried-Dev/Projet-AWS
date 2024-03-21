@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Page1 from './Components/page1/Login/Login';
 import Inscription from './Components/inscription/inscription';
 import Loginentre from './Components/loginentre/loginentre';
+import UserInscription from './Components/UserInscription';
 const App: React.FC = () => {
   return (
     <div className="app">
@@ -27,6 +28,7 @@ function AppWithRouter() {
         <Route path="/page1" element={<Page1 />} />
         <Route path="/inscription" element={<Inscription />} /> {/* Ajoutez cette route pour la page d'inscription */}    
         <Route path="/loginentre" element={<Loginentre />} />
+        <Route path="/UserInscription" element={<UserInscription/>} />
         {/* ... autres routes ... */}
       </Routes>
   );

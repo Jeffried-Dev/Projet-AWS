@@ -22,13 +22,13 @@ export default function Loginentre() {
           <img
             alt="Illustration"
             className="w-full h-auto"
-            height="400"
+            //height="400"
             src={imgEntrep}
             style={{
-              aspectRatio: '400/400',
-              objectFit: 'cover',
-            }}
-            width="400"
+              height: '100%', // Redimensionner l'image 
+              maxWidth: '100%', // Ajuster l'objet de l'image pour qu'elle s'adapte à la nouvelle taille
+             }}
+            //width="400"
           />
         </div>
         {/* Deuxième moitié de la mise en page avec le formulaire de connexion */}

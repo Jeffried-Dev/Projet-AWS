@@ -1,5 +1,5 @@
 import React from "react";
-import userLogo from '../assets/Utilisateur.jpg';
+import userLogo from '../../../assets/Utilisateur.jpg';
 
 export default function UserInscription() {
   return (

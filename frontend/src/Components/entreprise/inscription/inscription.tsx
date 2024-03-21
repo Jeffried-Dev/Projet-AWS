@@ -1,5 +1,5 @@
 import React from "react";
-import compLogo from '../../assets/comp.jpg';
+import compLogo from '../../../assets/comp.jpg';
 
 export default function Component() {
   return (

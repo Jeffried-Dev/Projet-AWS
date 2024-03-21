@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from '../../../assets/Logof.jpg';
-import logoLangue from '../../../assets/icone.png';
+import logo from '../../../../assets/Logof.jpg';
+import logoLangue from '../../../../assets/icone.png';
 import './header.css';
 import { Link } from 'react-router-dom';
 

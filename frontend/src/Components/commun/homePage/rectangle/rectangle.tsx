@@ -13,15 +13,6 @@ interface RectangleProps {
 
 const Rectangle: React.FC<RectangleProps> = ({ color, bottomTextColor, isLeftButtonVisible, isRightButtonVisible }) => {
   let logo;
-
-  if (color === '#F1F2F6') {
-    logo = compLogo;
-  } else if (color === '#74BBE4') {
-    logo = userLogo;
-  } else {
-    return null;
-  }
-
   const [leftPhrase, setLeftPhrase] = useState("");
   const [rightPhrase, setRightPhrase] = useState("");
 
@@ -52,6 +43,16 @@ const Rectangle: React.FC<RectangleProps> = ({ color, bottomTextColor, isLeftBut
     setTimeout(typeNextRightChar, leftTargetPhrase.length * typeSpeed); // Commencer la deuxième phrase après la première
   }, []);
 
+  if (color === '#F1F2F6') {
+    logo = compLogo;
+  } else if (color === '#74BBE4') {
+    logo = userLogo;
+  } else {
+    return null;
+  }
+
+
+
   return (
     <div className="rectangle container" style={{ backgroundColor: color }}>
       <div className="circle"><img src={logo} className="circle" alt="Logo" /></div>
@@ -62,8 +63,7 @@ const Rectangle: React.FC<RectangleProps> = ({ color, bottomTextColor, isLeftBut
         {isRightButtonVisible && <button className="bottom-button right-bottom-button"><Link to="/utilisateur/connexion">Connectez-vous ici</Link></button>}
       </div>
       <div className="animated-phrases-container">
-        <div className="animated-phrase left-phrase">{leftPhrase}</div>
-        <div className="animated-phrase right-phrase">{rightPhrase}</div>
+      {isLeftButtonVisible ? <div className="animated-phrase left-phrase">{leftPhrase}</div> : <div className="animated-phrase right-phrase">{rightPhrase}</div>}
       </div>
     </div>
   );

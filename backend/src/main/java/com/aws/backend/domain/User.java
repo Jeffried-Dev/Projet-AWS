@@ -19,51 +19,52 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "user")
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    protected Long  id;
     @Column(name = "name", nullable = true, unique = false, length = 100)
-    private String name;
+    protected String name;
     @Column(name = "username", nullable = true, unique = true, length = 100)
-    private String username;
+    protected String username;
     @Column(name = "password", nullable = false, length = 100)
-    private String password;
+    protected String password;
     @Column(name = "mail", nullable = false, unique = true, length = 100)
-    private String mail;
+    protected String mail;
     @Column(name = "tel", nullable = true, unique = true, length = 100)
-    private Long tel;
+    protected Long tel;
     @Column(name = "image", nullable = true, unique = false, length = 100)
-    private String image;
+    protected String image;
     @Column(name = "actived", nullable = true)
-    private Boolean actived = false;
+    protected Boolean actived = false;
     @Column(name = "verification", nullable = true)
-    private Boolean verification;
+    protected Boolean verification;
     @Column(name = "activation_key", length = 20, nullable = true)
-    private String activationKey;
+    protected String activationKey;
     @Column(name = "reset_key", length = 20, nullable = true)
-    private String resetKey;
+    protected String resetKey;
     @Column(name = "reset_date", nullable = true)
-    private Date resetDate = null;
+    protected Date resetDate = null;
     @Column(name = "created_date", nullable = true)
-    private Date createdDate = null;
+    protected Date createdDate = null;
     @Column(name = "gender", nullable = true)
-    private String gender;
+    protected String gender;
     @Column(name = "nationality", nullable = true)
-    private String nationality;
+    protected String nationality;
     @Column(name = "secondName", nullable = true)
-    private String secondName;
+    protected String secondName;
     @Column(name = "dateNaiss", nullable = true)
-    private Date dateNaiss;
+    protected Date dateNaiss;
     @OneToOne(cascade = CascadeType.ALL)
-    private Role role;
+    protected Role role;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

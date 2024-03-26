@@ -35,7 +35,7 @@ function AppWithRouter() {
         <Route path="/" element={<App />} />
         <Route path="/contact" element={<Contact />} />
         {/* routes utilisateurs */}  
-        <Route path="/utilisateur/connexion" element={<Page1 />} />
+        <Route path="/utilisateur/connexion" element={<Page1 />}> </Route>
         <Route path="/utilisateur/inscription" element={<InscriptionUser />} />
         <Route path="/utilisateur/postuler" element={<Postuler />} />
         <Route path="/utilisateur/recherche" element={<Chercheur />} />

@@ -1,6 +1,5 @@
 package com.aws.backend.domain;
 
-import com.aws.backend.domain.type.TypeRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,13 +11,16 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "role")
-public class Role {
+@Table(name = "prerequi")
+public class Prerequi {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Enumerated(EnumType.STRING)
-    private TypeRole libelle;
+    @Column(name = "libelle", nullable = true, unique = false, length = 100)
+    private String libelle;
+    @ManyToOne
+    @JoinColumn(name="offre_id", nullable=false)
+    private Offre offre;
 
     public int getId() {
         return id;
@@ -28,11 +30,19 @@ public class Role {
         this.id = id;
     }
 
-    public TypeRole getLibelle() {
+    public String getLibelle() {
         return libelle;
     }
 
-    public void setLibelle(TypeRole libelle) {
+    public void setLibelle(String libelle) {
         this.libelle = libelle;
+    }
+
+    public Offre getOffre() {
+        return offre;
+    }
+
+    public void setOffre(Offre offre) {
+        this.offre = offre;
     }
 }

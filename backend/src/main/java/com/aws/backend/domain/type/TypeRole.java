@@ -1,4 +1,4 @@
-package com.aws.backend.domain;
+package com.aws.backend.domain.type;
 
 public enum TypeRole {
     UTILISATEUR,

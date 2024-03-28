@@ -1,0 +1,97 @@
+/* Navbar.css */
+
+.navbars {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbars-logo img {
+    height: 40px; 
+  }
+  
+  .navbars-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    margin-left: auto;
+  }
+  
+  .navbars-links li {
+    margin-right: 20px;
+  }
+  
+  .navbars-links a {
+    text-decoration: none;
+    color: black ;
+    font-weight: bold;
+    transition: color 0.3s;
+    align-items: right;
+  }
+  
+  .navbars-links a:hover {
+    color: #007bff;
+  }
+  
+  .publish-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .publish-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .contents {
+    max-width: 100%;
+    padding: 20px;
+    color:white ;
+  }
+  
+  .text-containers {
+    text-align: right; /* Aligne le texte à droite */
+  }
+  
+  .text-containers h1 {
+    font-weight: bold; /* Met le texte en gras */
+    white-space: pre-line; /* Permet au texte de faire un saut de ligne */
+    margin: 0; /* Supprime les marges par défaut */
+  }
+  .text-containers h1 {
+    background-image: url('../../../assets/pub.jpg');
+    height: 88vh; /* Utilisation de 100vh pour garantir que la section couvre toute la hauteur de la fenêtre */
+    background-repeat: no-repeat;
+    padding-top: 50px;
+    background-size: cover; /* Pour que l'image couvre toute la surface */
+    background-position: center; /* Pour centrer l'image horizontalement et verticalement */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Aligne le contenu à droite */
+    justify-content: center;
+    max-width: 100%;
+    padding: 20px;
+    color:white;
+    font-size: 35px;
+  
+  }
+  .text-containers h1 > br {
+    margin-left: -20px;
+  }
+
+  
+
+
+
+
+
+ 
+  

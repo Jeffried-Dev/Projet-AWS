@@ -1,0 +1,207 @@
+/* Formulaire.css */
+
+.container-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding-top: 20px;
+    min-height: 100vh;
+  }
+  
+  .container-image {
+    width: 50%;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 50px;
+    position: relative;
+    background-image: url('../../../assets/for.jpg');
+    background-size: cover;
+    background-position: center;
+    text-align: center; /* Centrer le texte */
+    color: white; /* Couleur du texte */
+  }
+  
+  .container-image h2 {
+    padding-top: 150px;
+     /* Ajustez la position verticale du texte */
+    /* Ajoutez d'autres styles de texte si nécessaire */
+    right: 10%; /* Pour décaler le texte tout à droite */
+    transform: translateY(-50%);
+    text-align: right; /* Alignement du texte à droite */
+    color: #004C8C;
+    font-size: 22px; /* Taille du texte */
+    font-weight: bold; /* Texte en gras */
+    margin-right: 30px;
+  }
+  
+  .container-formulaire {
+    width: 60%;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
+  }
+  
+  .container-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding-top: 70px; /* Marge en haut de la page */
+    min-height: 100vh; /* Taille minimale de la page égale à la hauteur de l'écran */
+  }
+  
+    /* Styles du formulaire */
+    form {
+        width: 100%;
+        margin-top: 20px;
+      }
+      
+      label {
+        display: block;
+        margin-bottom: 5px;
+        display: block;
+        font-weight: bold; /* Ajoute le style en gras */
+        }
+      
+      
+      input[type="text"],
+      input[type="email"],
+      textarea {
+        width: calc(100% - 22px);
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+
+      }
+      
+      textarea {
+        resize: vertical;
+      }
+      
+      /* Styles des boutons */
+      .buttons-formulaire {
+        display: flex;
+        justify-content: space-between;
+      }
+      
+      .back-button-formulaire,
+      .next-button-formulaire {
+        padding: 10px 20px;
+        background-color: #2682C4;
+        color: #ffffff;
+        border: none;
+        border-radius: 100px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+      
+      .back-button-formulaire:hover,
+      .next-button-formulaire:hover {
+        background-color: #004C8C;
+      }
+ 
+.required {
+    color: red; /* Couleur rouge pour l'étoile */
+    margin-left: 5px; /* Marge à gauche pour espacer l'étoile du texte */
+  }
+
+
+/* Styles pour la liste déroulante */
+#numberOfPeople {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 16px;
+    appearance: none; /* Supprime l'apparence par défaut de la liste déroulante */
+}
+
+/* Style pour la flèche de la liste déroulante */
+#numberOfPeople::-ms-expand {
+    display: none; /* Masque la flèche dans Internet Explorer */
+}
+
+/* Style pour la flèche personnalisée */
+#numberOfPeople::after {
+    content: '\25BC'; /* Utilise une flèche personnalisée (triangle vers le bas) */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+}
+
+/* Style pour la première option (placeholder) */
+#numberOfPeople option[value=""] {
+    display: none; /* Masque l'option "Sélectionner..." */
+}
+
+.select-container {
+    position: relative;
+    width: 100%;
+}
+
+.select-container select {
+    -webkit-appearance: none;
+    transform-origin: top; 
+    width: calc(100% - 20px);
+    padding-right: 20px; /* Espace pour la flèche à droite */
+    cursor: pointer; /* Curseur indiquant qu'il s'agit d'un champ sélectionnable */
+    appearance: none; /* Supprime le style par défaut du champ select */
+    -moz-appearance: none; /* Pour Firefox */
+    border: 1px solid #74BBE4; /* Ajoute une bordure pour le champ select */
+    border-radius: 5px; /* Ajoute des coins arrondis à la bordure */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 6"><polygon points="0,0 10,0 5,6"/></svg>'); /* Image de la flèche */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image de fond */
+    background-position: calc(100% - 5px) center; /* Positionne l'image de fond tout à droite */
+    background-size: 10px; /* Taille de l'image de la flèche */
+}
+
+.select-container select:focus {
+    outline: none; /* Supprime la bordure de focus par défaut */
+}
+
+
+#lieuPoste {
+    width: calc(100% - 22px); /* Ajustement pour la flèche */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 16px;
+    padding-right: 30px; /* Espace pour la flèche à droite */
+    position: relative; /* Positionnement relatif pour le pseudo-élément */
+    overflow-y: auto; /* Ajoute une barre de défilement verticale si nécessaire */
+}
+
+/* Style pour la flèche personnalisée */
+#lieuPoste::after {
+    content: '\25BC'; /* Utilise une flèche personnalisée (triangle vers le bas) */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+}
+
+
+
+/* Style pour la première option (placeholder) */
+#typeLieuPoste option[value=""] {
+    display: none;
+}
+
+
+
+
+

@@ -48,4 +48,9 @@ public class Entreprise extends User {
     public void setOffres(Collection<Offre> offres) {
         this.offres = offres;
     }
+
+    @Override
+    public void setRole(String role) {
+        super.role = "ENTREPRISE";
+    }
 }

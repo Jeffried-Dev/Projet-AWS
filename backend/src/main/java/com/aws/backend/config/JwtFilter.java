@@ -1,6 +1,8 @@
 package com.aws.backend.config;
 
-import com.aws.backend.service.UserService;
+import com.aws.backend.service.AdministrateurService;
+import com.aws.backend.service.EntrepriseService;
+import com.aws.backend.service.UtilisateurService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,10 +18,12 @@ import java.io.IOException;
 @Service
 public class JwtFilter extends OncePerRequestFilter {
 
-    private UserService utilisateurService;
+    private AdministrateurService administrateurService;
+    private UtilisateurService utilisateurService;
+    private EntrepriseService entrepriseService;
     private JwtService jwtService;
 
-    public JwtFilter(UserService utilisateurService, JwtService jwtService) {
+    public JwtFilter(UtilisateurService utilisateurService, AdministrateurService administrateurService, EntrepriseService entrepriseService, JwtService jwtService) {
         this.utilisateurService = utilisateurService;
         this.jwtService = jwtService;
     }
@@ -27,6 +31,7 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = null;
+        String role = null;
         String username = null;
         boolean isTokenExpired = true;
 
@@ -36,10 +41,18 @@ public class JwtFilter extends OncePerRequestFilter {
             token = authorization.substring(7);
             isTokenExpired = jwtService.isTokenExpired(token);
             username = jwtService.extractUsername(token);
+            role = jwtService.extractRole(token);
         }
 
-        if(!isTokenExpired && username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = utilisateurService.loadUserByUsername(username);
+        if(!isTokenExpired && username != null && role!=null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            UserDetails userDetails = null;
+            if(role.equals("ADMINISTRATEUR")){
+                userDetails = administrateurService.loadUserByUsername(username);
+            }else if(role.equals("ENTREPRISE")){
+                userDetails = entrepriseService.loadUserByUsername(username);
+            }else{
+                userDetails = utilisateurService.loadUserByUsername(username);
+            }
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         }

@@ -25,4 +25,9 @@ public class Utilisateur extends User{
     public void setPostulers(Collection<Postuler> postulers) {
         this.postulers = postulers;
     }
+
+    @Override
+    public void setRole(String role) {
+        super.role = "UTILISATEUR";
+    }
 }

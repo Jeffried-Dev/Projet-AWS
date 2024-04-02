@@ -1,7 +1,6 @@
 package com.aws.backend.config;
 
 import com.aws.backend.domain.User;
-import com.aws.backend.service.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -21,15 +20,23 @@ import static io.jsonwebtoken.Jwts.*;
 @Service
 public class JwtService {
     private final String ENCRIPTION_KEY = "608f36e92dc66d97d5933f0e6371493cb4fc05b1aa8f8de64014732472303a7c";
-    private UserService utilisateurService;
 
-    public Map<String, String> generate(String username) {
-        User utilisateur = this.utilisateurService.loadUserByUsername(username);
-        return this.generateJwt(utilisateur);
+    public  String generate(User user) {
+        return this.generateJwt(user);
     }
 
     public String extractUsername(String token) {
         return this.getClaim(token, Claims::getSubject);
+    }
+
+    public String extractRole(String token) {
+        Claims claims = getAllClaims(token);
+        return (String) claims.get("role");
+    }
+
+    public String extractId(String token) {
+        Claims claims = getAllClaims(token);
+        return (String) claims.get("id");
     }
 
     public boolean isTokenExpired(String token) {
@@ -53,12 +60,13 @@ public class JwtService {
                 .getBody();
     }
 
-    private Map<String, String> generateJwt(User utilisateur) {
+    private String generateJwt(User utilisateur) {
         final long currentTime = System.currentTimeMillis();
         final long expirationTime = currentTime + 30 * 60 * 1000;
 
         final Map<String, Object> claims = Map.of(
-                "nom", utilisateur.getName(),
+                "id", utilisateur.getId(),
+                "role", utilisateur.getRole(),
                 Claims.EXPIRATION, new Date(expirationTime),
                 Claims.SUBJECT, utilisateur.getMail()
         );
@@ -70,7 +78,8 @@ public class JwtService {
                 .setClaims(claims)
                 .signWith(SignatureAlgorithm.HS256, getKey())
                 .compact();
-        return Map.of("bearer", bearer);
+        //return Map.of("bearer", bearer);
+        return bearer;
     }
 
     private Key getKey() {

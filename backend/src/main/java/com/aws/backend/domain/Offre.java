@@ -21,27 +21,32 @@ public class Offre {
     private int id;
     @Column(name = "name", nullable = true, unique = false, length = 100)
     private String name;
-    @Column(name = "description", nullable = true, unique = false, length = 100)
+    @Column(name = "description", nullable = true, unique = false)
     private String description;
+
     @ManyToOne
     @JoinColumn(name="adresse_id", nullable=false)
     private Adresse adresse;
     @Enumerated(EnumType.STRING)
-    private TypeOffre libelle;
+    private TypeOffre typeOffre;
     @Column(name = "duree", nullable = true, unique = true, length = 100)
     protected int duree; // en mois pour les contrats different de cdi
     @ManyToOne
     @JoinColumn(name="entreprise_id", nullable=false)
     private Entreprise entreprise;
     @OneToMany(mappedBy="offre")
-    private Collection<Mission> missions;
-    @OneToMany(mappedBy="offre")
-    private Collection<Prerequi> prerequis;
-    @OneToMany(mappedBy="offre")
     private Collection<Postuler> postulers;
 
     public int getId() {
         return id;
+    }
+
+    public TypeOffre getTypeOffre() {
+        return typeOffre;
+    }
+
+    public void setTypeOffre(TypeOffre typeOffre) {
+        this.typeOffre = typeOffre;
     }
 
     public void setId(int id) {
@@ -72,14 +77,6 @@ public class Offre {
         this.adresse = adresse;
     }
 
-    public TypeOffre getLibelle() {
-        return libelle;
-    }
-
-    public void setLibelle(TypeOffre libelle) {
-        this.libelle = libelle;
-    }
-
     public int getDuree() {
         return duree;
     }
@@ -94,22 +91,6 @@ public class Offre {
 
     public void setEntreprise(Entreprise entreprise) {
         this.entreprise = entreprise;
-    }
-
-    public Collection<Mission> getMissions() {
-        return missions;
-    }
-
-    public void setMissions(Collection<Mission> missions) {
-        this.missions = missions;
-    }
-
-    public Collection<Prerequi> getPrerequis() {
-        return prerequis;
-    }
-
-    public void setPrerequis(Collection<Prerequi> prerequis) {
-        this.prerequis = prerequis;
     }
 
     public Collection<Postuler> getPostulers() {

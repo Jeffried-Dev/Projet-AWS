@@ -18,9 +18,9 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@MappedSuperclass
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@Table(name = "user")
+//@Table(name = "user")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -57,8 +57,8 @@ public class User implements UserDetails {
     protected String secondName;
     @Column(name = "dateNaiss", nullable = true)
     protected Date dateNaiss;
-    @OneToOne(cascade = CascadeType.ALL)
-    protected Role role;
+    @Column(name = "role", nullable = true, unique = false, length = 100)
+    protected String role;
 
     public Long getId() {
         return id;
@@ -71,7 +71,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return  Collections.singletonList(new SimpleGrantedAuthority("ROLE_"+this.role.getLibelle()));
+        return  Collections.singletonList(new SimpleGrantedAuthority("ROLE_"+this.role));
     }
 
     @Override
@@ -224,11 +224,11 @@ public class User implements UserDetails {
         this.dateNaiss = dateNaiss;
     }
 
-    public Role getRole() {
+    public String getRole(){
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role){
         this.role = role;
     }
 }

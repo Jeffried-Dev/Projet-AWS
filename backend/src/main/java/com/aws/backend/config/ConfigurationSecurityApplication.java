@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 
 @Configuration
@@ -38,9 +39,15 @@ public class ConfigurationSecurityApplication{
                                 authorize ->
                                         authorize
                                                 .requestMatchers(POST,"/utilisateur/inscription").permitAll()
-                                                .requestMatchers(POST,"/utilisateur/activation").permitAll()
+                                                .requestMatchers(GET,"/utilisateur/validation/{key}/{mail}").permitAll()
                                                 .requestMatchers(POST,"/utilisateur/connexion").permitAll()
-                                                .requestMatchers(POST,"/utilisateur/test").permitAll()
+                                                .requestMatchers(GET,"/utilisateur/passwordRecover/{mail}").permitAll()
+                                                .requestMatchers(POST,"/utilisateur/completepasswordRecover/{key}").permitAll()
+                                                .requestMatchers(POST,"/entreprise/inscription").permitAll()
+                                                .requestMatchers(GET,"/entreprise/validation/{key}/{mail}").permitAll()
+                                                .requestMatchers(POST,"/entreprise/connexion").permitAll()
+                                                .requestMatchers(GET,"/entreprise/passwordRecover/{mail}").permitAll()
+                                                .requestMatchers(POST,"/entreprise/completepasswordRecover/{key}").permitAll()
                                                 .anyRequest().authenticated()
                         )
                         .sessionManagement(httpSecuritySessionManagementConfigurer ->

@@ -1,9 +1,9 @@
-/*import React, { useState, useEffect } from "react";
-import axios from "axios"; // Importer axios pour effectuer des requêtes HTTP
+import React, { useState, useEffect } from "react";
+//import axios from "axios"; // Importer axios pour effectuer des requêtes HTTP
 
 const ListeOffresEmploi = () => {
   // État local pour stocker la liste des offres d'emploi
-  const [offresEmploi, setOffresEmploi] = useState([]);
+  /*const [offresEmploi, setOffresEmploi] = useState([]);
 
   // Utilisez useEffect pour charger les offres d'emploi lors du chargement initial du composant
   useEffect(() => {
@@ -37,8 +37,7 @@ const ListeOffresEmploi = () => {
         </div>
       ))}
     </div>
-  );
+  );*/
 };
 
 export default ListeOffresEmploi;
-*/

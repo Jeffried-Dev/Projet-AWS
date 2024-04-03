@@ -21,7 +21,7 @@ import java.util.Objects;
 public class UtilisateurResource {
     @Autowired
     private UtilisateurService utilisateurService;
-    @PostMapping(path = "/creation", consumes = { MediaType.APPLICATION_JSON_VALUE })
+    @PostMapping(path = "/inscription", consumes = { MediaType.APPLICATION_JSON_VALUE })
     public ResponseEntity<UtilisateurDto> signUp(@RequestBody  UtilisateurDto userDto) {
         Map<String, Object> output = new HashMap<>();
         if(userDto.getPassword() == null || userDto.getMail() == null){
@@ -107,7 +107,7 @@ public class UtilisateurResource {
         return new ResponseEntity(output, HttpStatus.OK);
     }
 
-    @GetMapping(path = "/creation/complement/{key}/{mail}")
+    @GetMapping(path = "/validation/{key}/{mail}")
     public ResponseEntity<UtilisateurDto> signUpComplete(@PathVariable(value = "key")  String key, @PathVariable(value = "mail")  String mail) {
         Map<String, Object> output = new HashMap<>();
         if(key == null || mail == null){
@@ -142,7 +142,7 @@ public class UtilisateurResource {
         return new ResponseEntity(output, HttpStatus.OK);
     }
 
-    @PostMapping(path = "/completepasswordRecover/{key}/{mail}", consumes = { MediaType.APPLICATION_JSON_VALUE })
+    @PostMapping(path = "/completepasswordRecover/{key}", consumes = { MediaType.APPLICATION_JSON_VALUE })
     public ResponseEntity<UtilisateurDto> passwordRecoverComplete(@PathVariable(value = "key")  String key,@RequestBody UtilisateurDto userDto) {
         Map<String, Object> output = new HashMap<>();
         if(key == null || userDto == null){

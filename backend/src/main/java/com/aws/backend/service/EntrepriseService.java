@@ -13,9 +13,9 @@ public interface EntrepriseService{
     EntrepriseDto EntrepriseUpdate(EntrepriseDto EntrepriseDto);
     ResponseEntity<?> EntrepriseDelete(int EntrepriseId);
     EntrepriseDto EntrepriseGet(int EntrepriseId);
-    List<Entreprise> EntrepriseGetList();
+    List<EntrepriseDto> EntrepriseGetList();
     EntrepriseDto signUpComplete(String mail, String Code);
     EntrepriseDto passwordRecover(String mail);
-    EntrepriseDto passwordRecoverComplete(EntrepriseDto EntrepriseDto);
+    EntrepriseDto passwordRecoverComplete(String key,EntrepriseDto EntrepriseDto);
     User loadUserByUsername(String username);
 }

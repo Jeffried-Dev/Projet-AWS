@@ -55,6 +55,7 @@ label {
 
 input[type="text"],
 input[type="email"],
+input[type="password"],
 textarea,
 select {
   width: calc(100% - 22px);

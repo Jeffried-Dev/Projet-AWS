@@ -1,12 +1,11 @@
 import React from 'react';
-import R from '../../assets/R.jpg';
-import indeed from '../../assets/indeed.jpeg';
-import imgEntrep from '../../assets/entreprise.jpg';
+
+import imgEntrep from '../../../assets/entreprise.jpg';
 
 import './Apropos.css';
 const Apropos = () => {
   return (
-    <div className="min-h-screen bg-[#f1f2f6] flex items-center justify-center p-6">
+    <div className="min-h-screen bg-[#f1f2f6] flex items-center justify-center p-6" id="AproposPage">
       {/* Conteneur principal */}
       <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-4xl flex space-x-8">
         {/* Première moitié de la mise en page avec une image */}

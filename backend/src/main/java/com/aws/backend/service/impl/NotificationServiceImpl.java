@@ -34,9 +34,9 @@ public class NotificationServiceImpl implements NotificationService {
                     "<body>\n" +
                     "    <div style=\"max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f7f7f7; font-family: Arial, sans-serif;\">\n" +
                     "        <h2 style=\"text-align: center;\">Confirmation de création de compte</h2>\n" +
-                    "        <p>Bonjour" + validation.getName() + ",</p>\n" +
+                    "        <p>Bonjour cher nouvel utilisateur ,</p>\n" +
                     "        <p>Votre compte a été créé avec succès. Pour activer votre compte, veuillez renseigner le code ci-dessous :</p>\n" +
-                    "        <p>" + validation.getActivationKey() + "</p>\n" +
+                    "        <p><b>" + validation.getActivationKey() + "<b></p>\n" +
                     "        <p>Une fois votre compte activé, vous pourrez vous connecter à notre site en utilisant vos identifiants.</p>\n" +
                     "        <p>Merci d'avoir créé un compte avec nous.</p>\n" +
                     "        <p>Cordialement,<br>L'équipe CSRecrut</p>\n" +

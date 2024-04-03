@@ -38,9 +38,15 @@ public class ConfigurationSecurityApplication{
                                 authorize ->
                                         authorize
                                                 .requestMatchers(POST,"/utilisateur/inscription").permitAll()
-                                                .requestMatchers(POST,"/utilisateur/activation").permitAll()
+                                                .requestMatchers(POST,"/utilisateur/validation/{key}/{mail}").permitAll()
                                                 .requestMatchers(POST,"/utilisateur/connexion").permitAll()
-                                                .requestMatchers(POST,"/utilisateur/test").permitAll()
+                                                .requestMatchers(POST,"/utilisateur/passwordRecover/{mail}").permitAll()
+                                                .requestMatchers(POST,"/utilisateur/completepasswordRecover/{key}").permitAll()
+                                                .requestMatchers(POST,"/entreprise/inscription").permitAll()
+                                                .requestMatchers(POST,"/entreprise/validation/{key}/{mail}").permitAll()
+                                                .requestMatchers(POST,"/entreprise/connexion").permitAll()
+                                                .requestMatchers(POST,"/entreprise/passwordRecover/{mail}").permitAll()
+                                                .requestMatchers(POST,"/entreprise/completepasswordRecover/{key}").permitAll()
                                                 .anyRequest().authenticated()
                         )
                         .sessionManagement(httpSecuritySessionManagementConfigurer ->

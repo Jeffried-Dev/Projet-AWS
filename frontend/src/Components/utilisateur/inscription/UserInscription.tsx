@@ -24,7 +24,7 @@ export default function UserInscription() {
           </div>
           {/* Deuxième moitié de la mise en page avec les détails de l'entreprise */}
           <div className="w-1/2">
-            <h2 className="text-3xl font-bold mb-6">Creation de compte</h2>
+            <h2 className="text-3xl font-bold mb-6">Création de compte</h2>
             {/* Formulaire d'inscription */}
             <div className="grid gap-4">
               <div>

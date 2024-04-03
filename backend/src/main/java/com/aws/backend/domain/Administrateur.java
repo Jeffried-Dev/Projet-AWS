@@ -14,8 +14,4 @@ import lombok.Setter;
 @Entity
 //@Table(name = "administrateur")
 public class Administrateur extends User{
-    @Override
-    public void setRole(String role) {
-        super.role = "ADMINISTRATEUR";
-    }
 }

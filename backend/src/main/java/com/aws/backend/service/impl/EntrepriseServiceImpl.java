@@ -40,6 +40,7 @@ public class EntrepriseServiceImpl implements EntrepriseService {
             Date date = new Date();
             Entreprise user = entrepriseMapper.toEntity(EntrepriseDto);
             user.setActived(false);
+            user.setRole("ENTREPRISE");
             user.setActivationKey(activationkey);
             user.setCreatedDate(date);
             newUserDto = entrepriseMapper.toDto(entrepriseRepository.save(user));

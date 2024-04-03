@@ -45,6 +45,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             Date date = new Date();
             Utilisateur user = utilisateurMapper.toEntity(UtilisateurDto);
             user.setActived(false);
+            user.setRole("UTILISATEUR");
             user.setActivationKey(activationkey);
             user.setCreatedDate(date);
             newUserDto = utilisateurMapper.toDto(utilisateurRepository.save(user));
@@ -113,6 +114,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     @Override
     public UtilisateurDto signUpComplete(String mail, String Code) {
         Utilisateur utilisateur = utilisateurRepository.findByMail(mail);
+        System.out.println(mail);
         Utilisateur signUser = new Utilisateur();
         if(Objects.equals(utilisateur.getActivationKey(), Code)){
             utilisateur.setActived(true);

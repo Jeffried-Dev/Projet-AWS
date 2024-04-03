@@ -1,15 +1,56 @@
 import { useState } from 'react'; // Importez useState si nécessaire
 import { Link } from 'react-router-dom'; // Importez Link de React Router
 import login from '../../../assets/login.jpg'; // Importez l'image de connexion depuis les assets
+import { useNavigate } from 'react-router-dom';
+
+interface ConnexionFormData {
+  mail: string;
+  password: string;
+}
 
 export default function Loginentre() {
   // État pour le nom d'utilisateur et le mot de passe
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+ // const [username, setUsername] = useState('');
+  //const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState<ConnexionFormData>({
+    mail: '',
+    password: '',
+  })
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   // Fonction pour gérer la soumission du formulaire
-  const handleSubmit = (event: { preventDefault: () => void; }) => {
+  const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
+    try {
+      const response = await fetch('http://localhost:8000/utilisateur/connexion', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        const responseData = await response.json();
+        const signUpUser = responseData.data;
+        localStorage.setItem('mail', formData.mail);
+        localStorage.setItem('token', signUpUser.token);
+        navigate('/utilisateur/recherche');
+      } else {
+        // Handle login failure
+        console.error('error failed');
+        
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
   };
 
   return (
@@ -43,11 +84,12 @@ export default function Loginentre() {
               <div className="mt-1 relative rounded-md shadow-sm">
                 <input
                   className="block w-full pl-10 pr-3 sm:text-sm border-gray-300 rounded-md"
-                  id="username"
+                  name="mail"
                   placeholder="@username OR example@mail.com"
                   type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  value={formData.mail}
+                  onChange={handleChange}
+                  required
                 />
                 {/* Icône utilisateur va ici */}
               </div>
@@ -60,17 +102,18 @@ export default function Loginentre() {
               <div className="mt-1 relative rounded-md shadow-sm">
                 <input
                   className="block w-full pl-10 pr-3 sm:text-sm border-gray-300 rounded-md"
-                  id="password"
+                  name="password"
                   placeholder="Enter your password"
                   type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
                 />
                 {/* Icône de verrouillage va ici */}
               </div>
             </div>
             {/* Bouton de connexion */}
-            <button className="w-full bg-[#004c8c] text-white py-2 rounded-md" type="submit"><Link to="/utilisateur/recherche">Se connecter</Link></button>
+            <button className="w-full bg-[#004c8c] text-white py-2 rounded-md" type="submit">Se connecter</button>
           </form>
           {/* Liens pour la récupération de mot de passe et l'inscription */}
           {/* 

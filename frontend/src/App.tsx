@@ -3,12 +3,13 @@ import './App.css';
 import Footer from './Components/commun/homePage/footer/footer';
 import Header from './Components/commun/homePage/header/header';
 import Rectangle from './Components/commun/homePage/rectangle/rectangle';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Page1 from './Components/utilisateur/Login/Login';
 import Inscription from './Components/entreprise/inscription/inscription';
 import InscriptionUser from './Components/utilisateur/inscription/UserInscription'
 import Loginentre from './Components/entreprise/loginentre/loginentre';
 import Contact from './Components/commun/contact/contact';
+import Apropos from './Components/commun/Apropos/Apropos';
 //import Logintest from './Components/entreprise/loginentre/testlogin';
 import Postuler from './Components/utilisateur/postuler/postuler';
 import Chercheur from './Components/utilisateur/Recherche/chercheur';
@@ -38,9 +39,10 @@ function AppWithRouter() {
         {/* routes communes */}  
         <Route path="/" element={<App />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/Apropos" element={<Apropos />} />
         {/* routes utilisateurs */}  
         <Route path="/utilisateur/connexion" element={<Page1 />}> </Route>
-        <Route path="/utilisateur/inscription" element={<InscriptionUser onSignUpSuccess={function (e: any): void {throw new Error('Function not implemented.');} } />} />
+        <Route path="/utilisateur/inscription" element={<InscriptionUser/>} />
         <Route path="/utilisateur/postuler" element={<Postuler />} />
         <Route path="/utilisateur/importercv" element={< ImportCV />} />
         <Route path="/utilisateur/recherche" element={<Chercheur />} />

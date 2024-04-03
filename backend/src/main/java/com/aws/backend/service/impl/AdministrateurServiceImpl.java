@@ -41,6 +41,7 @@ public class AdministrateurServiceImpl implements AdministrateurService {
             Date date = new Date();
             Administrateur user = administrateurMapper.toEntity(AdministrateurDto);
             user.setActived(false);
+            user.setRole("ADMINISTRATEUR");
             user.setActivationKey(activationkey);
             user.setCreatedDate(date);
             newUserDto = administrateurMapper.toDto(administrateurRepository.save(user));

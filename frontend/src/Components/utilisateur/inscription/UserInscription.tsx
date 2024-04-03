@@ -1,9 +1,9 @@
 import userLogo from '../../../assets/Utilisateur.jpg';
 import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 
 interface InscriptionFormProps {
-  onSignUpSuccess: (e:any) => void;
+  //onSignUpSuccess: (e:any) => void;
 }
 
 interface InscriptionFormData {
@@ -11,12 +11,15 @@ interface InscriptionFormData {
   password: string;
   repeatedpassword: string;
 }
-const UserInscription: React.FC<InscriptionFormProps> = ({ onSignUpSuccess }) => {
+const UserInscription: React.FC<InscriptionFormProps> = () => {
   const [formData, setFormData] = useState<InscriptionFormData>({
     mail: '',
     password: '',
     repeatedpassword: '',
   });
+
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -40,10 +43,17 @@ const UserInscription: React.FC<InscriptionFormProps> = ({ onSignUpSuccess }) =>
         });
         if (response.ok) {
           // Login successful
-          onSignUpSuccess(response);
+         // onSignUpSuccess(response);
+          navigate('/utilisateur/Validation',{
+            state: {
+              mail: formData.mail,
+            }
+          });
         } else {
           // Handle login failure
           console.error('Login failed');
+          setError('Nom d\'utilisateur ou mot de passe incorrect');
+          
         }
       } catch (error) {
         console.error('Error during login:', error);
@@ -126,6 +136,7 @@ const UserInscription: React.FC<InscriptionFormProps> = ({ onSignUpSuccess }) =>
                 </div>
                 {/* Bouton d'inscription */}
                 <button className="w-full bg-[#004c8c] text-white" type="submit">S'inscrire</button>
+                {error && <div style={{ color: 'red' }}>{error}</div>}
               </div>
             </form>
           </div>

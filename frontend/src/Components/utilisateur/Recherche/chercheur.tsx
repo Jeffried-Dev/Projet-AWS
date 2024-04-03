@@ -27,7 +27,7 @@ function Chercheur(){
                 <nav>
                     <ul>
                         <li><Link to="/">Accueil</Link></li>
-                        <li><Link to="/a-propos">À propos</Link></li>
+                        <li><Link to="/Apropos">À propos</Link></li>
                         <li><Link to="/utilisateur/profile">Contact</Link></li>
                         {/* Ajoutez d'autres liens de navigation ici */}
                     </ul>

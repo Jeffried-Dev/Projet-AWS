@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 
 interface LoginFormProps {
-  onLoginSuccess: () => void;
+  onLoginSuccess: () => {
+    
+  };
 }
 
 interface LoginFormData {

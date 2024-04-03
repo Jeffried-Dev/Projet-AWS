@@ -1,4 +1,3 @@
-/* Formulaire.css */
 
 .container-page {
     display: flex;
@@ -19,18 +18,15 @@
     background-size: cover;
     background-position: center;
     text-align: center; /* Centrer le texte */
-    color: white; /* Couleur du texte */
   }
   
   .container-image h2 {
     padding-top: 150px;
-     /* Ajustez la position verticale du texte */
-    /* Ajoutez d'autres styles de texte si nécessaire */
     right: 10%; /* Pour décaler le texte tout à droite */
     transform: translateY(-50%);
     text-align: right; /* Alignement du texte à droite */
     color: #004C8C;
-    font-size: 22px; /* Taille du texte */
+    font-size: 30px; /* Taille du texte */
     font-weight: bold; /* Texte en gras */
     margin-right: 30px;
   }
@@ -200,6 +196,20 @@
 #typeLieuPoste option[value=""] {
     display: none;
 }
+
+
+.location-inputs {
+  display: flex;
+  align-items: center;
+  width: calc(100% - 22px); 
+}
+
+.location-inputs input[type="text"] {
+  flex: 1;
+  margin-right: 5px; /* Ajoute un espace entre les champs */
+}
+
+
 
 
 

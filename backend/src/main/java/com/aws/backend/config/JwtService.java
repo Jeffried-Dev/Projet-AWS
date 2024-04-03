@@ -63,7 +63,7 @@ public class JwtService {
     private String generateJwt(User utilisateur) {
         final long currentTime = System.currentTimeMillis();
         final long expirationTime = currentTime + 30 * 60 * 1000;
-
+        System.out.println(utilisateur.getId());
         final Map<String, Object> claims = Map.of(
                 "id", utilisateur.getId(),
                 "role", utilisateur.getRole(),

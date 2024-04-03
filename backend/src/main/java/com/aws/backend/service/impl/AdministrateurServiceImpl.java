@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
+import java.util.Objects;
 import java.util.Random;
 @Service
 public class AdministrateurServiceImpl implements AdministrateurService {
@@ -40,6 +41,7 @@ public class AdministrateurServiceImpl implements AdministrateurService {
             Date date = new Date();
             Administrateur user = administrateurMapper.toEntity(AdministrateurDto);
             user.setActived(false);
+            user.setRole("ADMINISTRATEUR");
             user.setActivationKey(activationkey);
             user.setCreatedDate(date);
             newUserDto = administrateurMapper.toDto(administrateurRepository.save(user));
@@ -55,7 +57,7 @@ public class AdministrateurServiceImpl implements AdministrateurService {
         Random random = new Random();
         String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         StringBuilder sb = new StringBuilder();
-        int length = 4;
+        int length = 6;
         for(int i = 0; i < length; i++) {
             int index = random.nextInt(alphabet.length());
             char randomChar = alphabet.charAt(index);
@@ -108,9 +110,12 @@ public class AdministrateurServiceImpl implements AdministrateurService {
     @Override
     public AdministrateurDto signUpComplete(String mail, String Code) {
         Administrateur utilisateur = administrateurRepository.findByMail(mail);
-        utilisateur.setActived(true);
-        utilisateur.setActivationKey(null);
-        Administrateur signUser = administrateurRepository.save(utilisateur);
+        Administrateur signUser = new Administrateur();
+        if(Objects.equals(utilisateur.getActivationKey(), Code)) {
+            utilisateur.setActived(true);
+            utilisateur.setActivationKey(null);
+            signUser = administrateurRepository.save(utilisateur);
+        }
 //        sendMail("registration complete",signUser.getMail(), "registration complete");
         return administrateurMapper.toDto(signUser);
     }
@@ -130,12 +135,15 @@ public class AdministrateurServiceImpl implements AdministrateurService {
     }
 
     @Override
-    public AdministrateurDto passwordRecoverComplete(AdministrateurDto AdministrateurDto) {
+    public AdministrateurDto passwordRecoverComplete(String code,AdministrateurDto AdministrateurDto) {
         Administrateur utilisateur = administrateurRepository.findByMail(AdministrateurDto.getMail());
-        utilisateur.setPassword(passwordEncoder.encode(AdministrateurDto.getPassword()));
-        utilisateur.setResetDate(null);
-        utilisateur.setResetKey(null);
-        Administrateur signUser = administrateurRepository.save(utilisateur);
+        Administrateur signUser = new Administrateur();
+        if(Objects.equals(utilisateur.getResetKey(), code)) {
+            utilisateur.setPassword(passwordEncoder.encode(AdministrateurDto.getPassword()));
+            utilisateur.setResetDate(null);
+            utilisateur.setResetKey(null);
+            signUser = administrateurRepository.save(utilisateur);
+        }
 //        sendMail("Recover Password Complete", user.getMail(),"Recover Password Complete" );
 //        signUser.setState("Recover Password Complete");
         return administrateurMapper.toDto(signUser);

@@ -45,6 +45,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             Date date = new Date();
             Utilisateur user = utilisateurMapper.toEntity(UtilisateurDto);
             user.setActived(false);
+            user.setRole("UTILISATEUR");
             user.setActivationKey(activationkey);
             user.setCreatedDate(date);
             newUserDto = utilisateurMapper.toDto(utilisateurRepository.save(user));
@@ -60,7 +61,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         Random random = new Random();
         String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         StringBuilder sb = new StringBuilder();
-        int length = 4;
+        int length = 6;
         for(int i = 0; i < length; i++) {
             int index = random.nextInt(alphabet.length());
             char randomChar = alphabet.charAt(index);
@@ -113,6 +114,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     @Override
     public UtilisateurDto signUpComplete(String mail, String Code) {
         Utilisateur utilisateur = utilisateurRepository.findByMail(mail);
+        System.out.println(mail);
         Utilisateur signUser = new Utilisateur();
         if(Objects.equals(utilisateur.getActivationKey(), Code)){
             utilisateur.setActived(true);

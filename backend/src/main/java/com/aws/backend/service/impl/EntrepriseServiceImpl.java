@@ -16,9 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+
 @Service
 public class EntrepriseServiceImpl implements EntrepriseService {
     @Autowired
@@ -41,6 +40,7 @@ public class EntrepriseServiceImpl implements EntrepriseService {
             Date date = new Date();
             Entreprise user = entrepriseMapper.toEntity(EntrepriseDto);
             user.setActived(false);
+            user.setRole("ENTREPRISE");
             user.setActivationKey(activationkey);
             user.setCreatedDate(date);
             newUserDto = entrepriseMapper.toDto(entrepriseRepository.save(user));
@@ -56,7 +56,7 @@ public class EntrepriseServiceImpl implements EntrepriseService {
         Random random = new Random();
         String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         StringBuilder sb = new StringBuilder();
-        int length = 4;
+        int length = 6;
         for(int i = 0; i < length; i++) {
             int index = random.nextInt(alphabet.length());
             char randomChar = alphabet.charAt(index);
@@ -103,19 +103,26 @@ public class EntrepriseServiceImpl implements EntrepriseService {
 
     @Override
     public EntrepriseDto EntrepriseGet(int EntrepriseId) {
-        return Dto(entrepriseRepository.findById(EntrepriseId));
+        return entrepriseMapper.toDto(entrepriseRepository.findById(EntrepriseId));
     }
 
     @Override
-    public List<Entreprise> EntrepriseGetList() {
-        return entrepriseRepository.findAll();
+    public List<EntrepriseDto> EntrepriseGetList() {
+        List<EntrepriseDto> entrepriseDtos = new ArrayList<>();
+        List<Entreprise> entreprises = entrepriseRepository.findAll();
+        for(Entreprise entreprise : entreprises){
+            entrepriseDtos.add(entrepriseMapper.toDto(entreprise));
+        }
+        return entrepriseDtos;
     }
 
     @Override
     public EntrepriseDto signUpComplete(String mail, String Code) {
         Entreprise utilisateur = entrepriseRepository.findByMail(mail);
-        utilisateur.setActived(true);
-        utilisateur.setActivationKey(null);
+        if(Objects.equals(utilisateur.getActivationKey(), Code)){
+            utilisateur.setActived(true);
+            utilisateur.setActivationKey(null);
+        }
         Entreprise signUser = entrepriseRepository.save(utilisateur);
 //        sendMail("registration complete",signUser.getMail(), "registration complete");
         return entrepriseMapper.toDto(signUser);
@@ -136,12 +143,15 @@ public class EntrepriseServiceImpl implements EntrepriseService {
     }
 
     @Override
-    public EntrepriseDto passwordRecoverComplete(EntrepriseDto EntrepriseDto) {
+    public EntrepriseDto passwordRecoverComplete(String Code, EntrepriseDto EntrepriseDto) {
         Entreprise utilisateur = entrepriseRepository.findByMail(EntrepriseDto.getMail());
-        utilisateur.setPassword(passwordEncoder.encode(EntrepriseDto.getPassword()));
-        utilisateur.setResetDate(null);
-        utilisateur.setResetKey(null);
-        Entreprise signUser = entrepriseRepository.save(utilisateur);
+        Entreprise signUser = new Entreprise();
+        if(Objects.equals(utilisateur.getResetKey(), Code)){
+            utilisateur.setPassword(passwordEncoder.encode(EntrepriseDto.getPassword()));
+            utilisateur.setResetDate(null);
+            utilisateur.setResetKey(null);
+            signUser = entrepriseRepository.save(utilisateur);
+        }
 //        sendMail("Recover Password Complete", user.getMail(),"Recover Password Complete" );
 //        signUser.setState("Recover Password Complete");
         return entrepriseMapper.toDto(signUser);

@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import './Validation.css'
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const VerificationPage = () => {
   const [verificationDigits, setVerificationDigits] = useState(Array(6).fill('')); // Crée un tableau de 6 éléments vides
-
+  const location = useLocation();
+  const { mail } = location.state;
+  const navigate = useNavigate();
   // Fonction pour gérer le changement de chaque chiffre de vérification
   const handleChange = (index :any, value: any) => {
     const newDigits = [...verificationDigits];
@@ -12,12 +16,32 @@ const VerificationPage = () => {
   };
 
   // Fonction pour soumettre le code de vérification
-  const handleSubmit = (e :any) => {
+  const handleSubmit = async (e :any) => {
     e.preventDefault();
     // Ici, vous pouvez ajouter la logique pour valider le code de vérification
     const code = verificationDigits.join(''); // Combinez les chiffres pour former le code complet
     console.log('Code de vérification soumis :', code);
     // Vous pouvez également implémenter la redirection vers la page suivante après la vérification
+    try {
+      const response = await fetch('http://localhost:8000/utilisateur/validation/'+code+'/'+mail, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          
+        },
+      });
+      if (response.ok) {
+        // Login successful
+       // onSignUpSuccess(response);
+        navigate('/utilisateur/connexion');
+      } else {
+        // Handle login failure
+        console.error('error failed');
+        
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
   };
 
   return (
@@ -28,7 +52,7 @@ const VerificationPage = () => {
       <form onSubmit={handleSubmit}>
      {/* Zone de saisie des chiffres de vérification */}
         <div className='verificationDigits'>
-            
+            <input type='hidden' value={mail} ></input>
           {verificationDigits.map((digit, index) => (
             <input
               key={index}

@@ -1,0 +1,44 @@
+.containercv {
+    border: 2px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 400px; /* Largeur du conteneur */
+    height: 200px; /* Hauteur du conteneur */
+    margin: 0 auto; /* Pour le centrer horizontalement */
+    border: 5px solid #004C8C;
+    text-align: center;
+    margin: 150px auto 0;
+  }
+  
+  .instruction {
+    margin-bottom: 20px;
+    font-weight: bold; /* Texte en gras */
+    font-size: 25px;
+  
+  }
+  
+  .file-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #004C8C;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .file-button:hover {
+    background-color: #74BBE4;
+  }
+  
+  .file-input {
+    display: none;
+  }
+  
+  .file-info {
+    margin-top: 10px;
+  }
+  
+  
+  

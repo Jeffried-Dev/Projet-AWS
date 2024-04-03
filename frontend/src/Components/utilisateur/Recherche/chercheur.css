@@ -28,7 +28,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color:#74BBE4; /* Couleur du bouton */
+  background-color:#74BBE4; 
 }
 
 .searchBar .inputSearch {
@@ -77,7 +77,7 @@
 }
 
 .inputSearch span {
-  color: black; /* Couleur du texte */
+  color: black; 
   padding: 1rem 2rem;
 }
 
@@ -92,7 +92,7 @@
   align-items: center;
   padding: 1rem;
   background-color:#004C8C; /* Couleur de la navbar */
-  color: white; /* Couleur du texte */
+  color: white; 
 }
 
 .navbar h1 {
@@ -103,10 +103,13 @@
   list-style: none;
   display: flex;
   justify-content: flex-end; /* Pour aligner les boutons à droite */
+  font-weight: bold;
   flex-grow: 1; /* Pour que les boutons prennent tout l'espace disponible à droite */
 }
 
-
+.navbar nav ul :hover {
+  color: #74BBE4;
+}
 
 .navbar nav ul li {
   margin-right: 1rem;
@@ -116,14 +119,12 @@
   margin-right: 0;
 }
 
-.navbar nav ul li a {
-  color: white; /* Couleur du texte des liens */
-  text-decoration: none;
-}
 
-.logo {
+.logos {
   font-size: 30px;
   font-weight: bold;
   color: white; /* Couleur du texte du logo */
 }
+
+
 

@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import './formulaire.css';
 
 const Formulaire = () => {
     const [selectedNumber, setSelectedNumber] = useState<string>('');
+    const [location, setLocation] = useState<{ streetNumber: string; street: string; city: string }>({
+        streetNumber: '',
+        street: '',
+        city: ''
+    });
 
     const handleNumberChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedNumber(event.target.value);
@@ -13,6 +18,14 @@ const Formulaire = () => {
         return numbers.map((num: string | number, index: number) => (
             <option key={index} value={typeof num === 'number' ? num.toString() : ''}>{num}</option>
         ));
+    };
+
+    const handleLocationChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = event.target;
+        setLocation(prevLocation => ({
+            ...prevLocation,
+            [name]: value
+        }));
     };
 
     return (
@@ -37,7 +50,7 @@ const Formulaire = () => {
                         <select id="numberOfPeople" name="numberOfPeople" value={selectedNumber} onChange={handleNumberChange}>
                             {renderNumberOptions()}
                         </select>
-                        
+
                     </div>
                     <label htmlFor="lieuPoste">Type de lieu du poste<span className="required">*</span></label>
                     <div className="select-container">
@@ -50,12 +63,17 @@ const Formulaire = () => {
                     </select>
                     </div>
 
+                    <label htmlFor="location">Lieu<span className="required">*</span></label>
+                    <div className="location-inputs">
+                        <input type="text" id="streetNumber" name="streetNumber" placeholder="Numéro de rue" value={location.streetNumber} onChange={handleLocationChange} required />
+                        <span></span>
+                        <input type="text" id="street" name="street" placeholder="Rue" value={location.street} onChange={handleLocationChange} required />
+                        <span></span>
+                        <input type="text" id="city" name="city" placeholder="Ville" value={location.city} onChange={handleLocationChange} required />
+                    </div>
 
-                    <label htmlFor="email">Lieu du poste<span className="required">*</span></label>
-                    <input type="email" id="email" name="email" />
-
-                    <label htmlFor="email">Code postal<span className="required">*</span></label>
-                    <input type="email" id="email" name="email" />
+                    <label htmlFor="postalCode">Code postal<span className="required">*</span></label>
+                    <input type="text" id="postalCode" name="postalCode" required />
                 </form>
 
                 <div className="buttons-formulaire">
@@ -68,3 +86,4 @@ const Formulaire = () => {
 };
 
 export default Formulaire;
+//

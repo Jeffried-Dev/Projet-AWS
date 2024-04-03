@@ -26,29 +26,30 @@
   
   .navbars-links a {
     text-decoration: none;
-    color: black ;
+    color:#004C8C ;
     font-weight: bold;
     transition: color 0.3s;
     align-items: right;
   }
   
   .navbars-links a:hover {
-    color: #007bff;
+    color: #74BBE4;
   }
   
   .publish-button {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #74BBE4;
     color: #ffffff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s;
+    font-weight: bold;
   }
   
   .publish-button:hover {
-    background-color: #0056b3;
+    background-color: #056BB3;
   }
   
   .contents {
@@ -67,7 +68,7 @@
     margin: 0; /* Supprime les marges par défaut */
   }
   .text-containers h1 {
-    background-image: url('../../../assets/pub.jpg');
+    background-image: url('../../../assets/F.jpg');
     height: 88vh; /* Utilisation de 100vh pour garantir que la section couvre toute la hauteur de la fenêtre */
     background-repeat: no-repeat;
     padding-top: 50px;
@@ -86,7 +87,24 @@
   .text-containers h1 > br {
     margin-left: -20px;
   }
-
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbars-logo img {
+    height: 40px; 
+    margin-right: 10px; /* Ajoute une marge à droite de l'image */
+  }
+  
+  .navbars-logo h1 {
+    margin: 0;
+    color: #004C8C; 
+    font-size: 30px; 
+    font-weight: bold; 
+    text-align: right; 
+    line-height: 43px;
+  }
   
 
 

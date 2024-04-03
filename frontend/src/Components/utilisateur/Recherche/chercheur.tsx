@@ -1,6 +1,7 @@
 import { useState,  ChangeEvent } from "react";
 import "./chercheur.css"
 import { Link } from 'react-router-dom';
+import logo from '../../../assets/Logof.jpg';
 
 
 function Chercheur(){
@@ -15,18 +16,19 @@ function Chercheur(){
         setValue(event.target.value);
     }
     
-    // Rendu du composant
+   
     return (
         <div className="searchPage">
-            {/* Navbar */}
             <div className="navbar">
- 
-                <h1 className="logo">CSRecrut</h1>
+            <div className="logo-container">
+                <img src={logo} className='logo' alt="Logo"></img>
+                <h2 className="logos">CSRecrut</h2>
+            </div>
                 <nav>
                     <ul>
                         <li><Link to="/">Accueil</Link></li>
                         <li><Link to="/a-propos">À propos</Link></li>
-                        <li><Link to="/utilisateur/profile">Profile</Link></li>
+                        <li><Link to="/utilisateur/profile">Contact</Link></li>
                         {/* Ajoutez d'autres liens de navigation ici */}
                     </ul>
                 </nav>

@@ -35,6 +35,7 @@
   display: flex;
   border-radius: 5px;
   overflow: hidden;
+  height: 60px; 
 }
 
 .inputSearch input {
@@ -46,6 +47,7 @@
   padding: 1rem;
   font-size: 25px;
   width: 500px; 
+  height: 100%;
 }
 
 .inputSearch input:focus {
@@ -77,8 +79,9 @@
 }
 
 .inputSearch span {
-  color: black; 
+  color: #004C8C; 
   padding: 1rem 2rem;
+  font-size: 25px; 
 }
 
 .navbar {

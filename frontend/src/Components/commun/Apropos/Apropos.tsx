@@ -1,7 +1,7 @@
 import React from 'react';
 
 import entreprise from '../../../assets/entreprise.jpg';
-import imgEntrep from '../../../assets/entreprise.jpg';
+
 
 const Apropos = () => {
   return (

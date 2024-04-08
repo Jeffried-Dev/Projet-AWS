@@ -20,6 +20,7 @@ import Formulaire3 from  './Components/entreprise/formulaire3/formulaire3';
 import Validation from './Components/utilisateur/Validation/Validation';
 import ImportCV from './Components/utilisateur/importercv/importercv';
 import Formulaire2 from './Components/entreprise/formulaire2/formulaire2';
+
 const App: React.FC = () => {
   return (
     <div className="app">
@@ -55,6 +56,7 @@ function AppWithRouter() {
         <Route path="/entreprise/offre" element={< Publication />} />
         <Route path="/entreprise/formulaire" element={< Form />} />
         <Route path="/entreprise/formulaire3" element={< Formulaire3 />} />
+        
         <Route path="/entreprise/offre" element={< Publication />} />
         <Route path="/entreprise/formulaire2" element={< Formulaire2 />} />
         {/* routes administrateur */}

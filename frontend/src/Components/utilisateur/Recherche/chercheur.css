@@ -35,7 +35,7 @@
   display: flex;
   border-radius: 5px;
   overflow: hidden;
-  height: 60px;
+  height: 60px; 
 }
 
 .inputSearch input {
@@ -79,9 +79,9 @@
 }
 
 .inputSearch span {
-  color: black; 
+  color: #004C8C; 
   padding: 1rem 2rem;
-  font-size: 25px;
+  font-size: 25px; 
 }
 
 .navbar {

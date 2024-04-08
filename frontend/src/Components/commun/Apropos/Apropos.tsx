@@ -1,8 +1,8 @@
 import React from 'react';
 
+import entreprise from '../../../assets/entreprise.jpg';
 import imgEntrep from '../../../assets/entreprise.jpg';
 
-import './Apropos.css';
 const Apropos = () => {
   return (
     <div className="min-h-screen bg-[#f1f2f6] flex items-center justify-center p-6" id="AproposPage">
@@ -14,7 +14,7 @@ const Apropos = () => {
             alt="Illustration"
             className="w-full h-auto"
             height="600"
-            src={ imgEntrep} // Utilisez votre logo ici
+            src={ entreprise} // Utilisez votre logo ici
             style={{
               aspectRatio: '600/600',
               objectFit: 'cover',

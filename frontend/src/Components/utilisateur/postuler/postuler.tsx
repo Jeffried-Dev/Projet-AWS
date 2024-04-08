@@ -1,6 +1,5 @@
-import { useState } from 'react'; // Importez useState si nécessaire
-import { Link } from 'react-router-dom'; // Importez Link de React Router
-import login from '../../../assets/login.jpg'; // Importez l'image de Contact depuis les assets
+import React, { useState } from 'react';
+import login from 'C:/Users/bouba/OneDrive/Documents/GitHub/Projet-AWS/frontend/src/assets/login.jpg'
 
 export default function Contact() {
   // État pour le mail et le message
@@ -8,8 +7,31 @@ export default function Contact() {
   const [message, setMessage] = useState('');
 
   // Fonction pour gérer la soumission du formulaire
-  const handleSubmit = (event: { preventDefault: () => void; }) => {
+  const handleSubmit = async (event:any) => {
     event.preventDefault();
+    try {
+      const requestBody = {
+        email: email,
+        message: message
+      };
+      const response = await fetch('http://localhost:8000/postuler/offre', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody)
+      });
+
+      if (response.ok) {
+        setMessage('Postulation réussie!');
+        // Vous pouvez naviguer vers une autre page ou effectuer d'autres actions ici
+      } else {
+        setMessage('Échec de la postulation. Veuillez réessayer.');
+      }
+    } catch (error) {
+      console.error('Erreur lors de la postulation:', error);
+      setMessage('Une erreur est survenue. Veuillez réessayer.');
+    }
   };
 
   return (
@@ -24,8 +46,8 @@ export default function Contact() {
             className="w-full h-auto"
             src={login}
             style={{
-             height: '100%', // Redimensionner l'image 
-             maxWidth: '100%', // Ajuster l'objet de l'image pour qu'elle s'adapte à la nouvelle taille
+              height: '100%', // Redimensionner l'image 
+              maxWidth: '100%', // Ajuster l'objet de l'image pour qu'elle s'adapte à la nouvelle taille
             }}
           />
         </div>
@@ -38,7 +60,7 @@ export default function Contact() {
             {/* Champ pour le nom d'utilisateur */}
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700" htmlFor="email">
-                adresse mail
+                Adresse mail
               </label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <input
@@ -62,7 +84,7 @@ export default function Contact() {
                 <textarea
                   className="block w-full pl-10 pr-3 sm:text-sm border-gray-300 rounded-md"
                   id="message"
-                  placeholder="laissez un message"
+                  placeholder="Laissez un message"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   required
@@ -71,9 +93,8 @@ export default function Contact() {
               </div>
             </div>
             {/* Bouton de Contact */}
-            <button className="w-full bg-[#004c8c] text-white py-2 rounded-md" type="submit" style={{margin : '1px 1px 1px 1px'}}>Envoyer</button>
+            <button className="w-full bg-[#004c8c] text-white py-2 rounded-md" type="submit" style={{ margin: '1px' }}>Envoyer</button>
           </form>
-          
         </div>
       </div>
     </div>

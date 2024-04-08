@@ -1,4 +1,5 @@
 import React from 'react';
+
 import entreprise from 'C:/Users/bouba/OneDrive/Documents/GitHub/Projet-AWS/frontend/src/assets/entreprise.jpg';
 
 const Apropos = () => {
@@ -7,19 +8,7 @@ const Apropos = () => {
       {/* Conteneur principal */}
       <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-4xl flex space-x-8">
         {/* Première moitié de la mise en page avec une image */}
-        <div className="w-1/2">
-          <img
-            alt="Illustration"
-            className="w-full h-auto"
-            height="600"
-            src={ entreprise} // Utilisez votre logo ici
-            style={{
-              aspectRatio: '600/600',
-              objectFit: 'cover',
-            }}
-            width="800"
-          />
-        </div>
+        
         {/* Deuxième moitié de la mise en page avec le texte */}
         <div className="w-1/2 flex flex-col justify-center">
           <h1 className="text-3xl font-bold mb-4">À propos de CSRecrut</h1>

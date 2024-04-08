@@ -1,11 +1,12 @@
 /* Style du conteneur de vérification */
 .verification-container {
     max-width: 400px; /* Définition de la largeur maximale du conteneur */
-    margin: 50px auto; /* Centrage horizontal du conteneur avec une marge supérieure de 50px */
+    margin: 150px auto 0; /* Centrage horizontal du conteneur avec une marge supérieure de 50px */
     padding: 20px; /* Ajout de 20px de rembourrage à l'intérieur du conteneur */
     border: 1px solid #ccc; /* Ajout d'une bordure de 1px solide avec une couleur grise */
     border-radius: 5px; /* Arrondir les coins du conteneur */
     background-color: #f9f9f9; /* Définition de la couleur de fond du conteneur */
+
 }
 
 /* Style du titre de la section de vérification */

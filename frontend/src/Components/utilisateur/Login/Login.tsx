@@ -13,6 +13,7 @@ export default function Loginentre() {
  // const [username, setUsername] = useState('');
   //const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState<ConnexionFormData>({
     mail: '',
     password: '',
@@ -46,7 +47,7 @@ export default function Loginentre() {
       } else {
         // Handle login failure
         console.error('error failed');
-        
+        setError('Nom d\'utilisateur ou mot de passe incorrect');
       }
     } catch (error) {
       console.error('Error during login:', error);
@@ -114,6 +115,7 @@ export default function Loginentre() {
             </div>
             {/* Bouton de connexion */}
             <button className="w-full bg-[#004c8c] text-white py-2 rounded-md" type="submit">Se connecter</button>
+            {error && <div style={{ color: 'red' }}>{error}</div>}
           </form>
           {/* Liens pour la récupération de mot de passe et l'inscription */}
           {/* 

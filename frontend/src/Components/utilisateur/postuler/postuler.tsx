@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import login from 'C:/Users/bouba/OneDrive/Documents/GitHub/Projet-AWS/frontend/src/assets/login.jpg'
+import login from '../../../assets/login.jpg'
 
 export default function Contact() {
   // État pour le mail et le message

@@ -1,6 +1,6 @@
 import React from 'react';
 
-
+import entreprise from 'C:/Users/bouba/OneDrive/Documents/GitHub/Projet-AWS/frontend/src/assets/entreprise.jpg';
 
 const Apropos = () => {
   return (

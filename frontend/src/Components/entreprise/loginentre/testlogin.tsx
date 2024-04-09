@@ -28,7 +28,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:8000/utilisateur/inscription', {
+      const response = await fetch('https://projet-aws-backend.onrender.com/utilisateur/inscription', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

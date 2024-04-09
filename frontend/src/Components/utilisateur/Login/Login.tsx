@@ -31,7 +31,7 @@ export default function Loginentre() {
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
     try {
-      const response = await fetch('http://localhost:8000/utilisateur/connexion', {
+      const response = await fetch('https://projet-aws-backend.onrender.com/utilisateur/connexion', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

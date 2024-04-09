@@ -14,7 +14,7 @@ export default function Contact() {
         email: email,
         message: message
       };
-      const response = await fetch('http://localhost:8000/postuler/offre', {
+      const response = await fetch('https://projet-aws-backend.onrender.com/postuler/offre', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

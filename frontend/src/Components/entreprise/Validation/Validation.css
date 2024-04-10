@@ -1,0 +1,53 @@
+/* Style du conteneur de vérification */
+.verification-container {
+    max-width: 400px; /* Définition de la largeur maximale du conteneur */
+    margin: 150px auto 0; /* Centrage horizontal du conteneur avec une marge supérieure de 50px */
+    padding: 20px; /* Ajout de 20px de rembourrage à l'intérieur du conteneur */
+    border: 1px solid #ccc; /* Ajout d'une bordure de 1px solide avec une couleur grise */
+    border-radius: 5px; /* Arrondir les coins du conteneur */
+    background-color: #f9f9f9; /* Définition de la couleur de fond du conteneur */
+
+}
+
+/* Style du titre de la section de vérification */
+.verification-container h2 {
+    font-size: 24px; /* Définition de la taille de police du titre */
+    margin-bottom: 20px; /* Ajout de 20px de marge inférieure pour séparer le titre du contenu suivant */
+    text-align: center; /* Centrage du titre horizontalement */
+}
+
+/* Style du formulaire de vérification */
+.verification-container form {
+    display: flex; /* Utilisation de flexbox pour afficher les éléments en colonne */
+    flex-direction: column; /* Alignement des éléments en colonne */
+    align-items: center; /* Centrage des éléments horizontalement */
+}
+
+/* Style des champs de saisie de texte */
+.verification-container input[type="text"] {
+    width: 40px; /* Définition de la largeur des champs de saisie de texte */
+    height: 40px; /* Définition de la hauteur des champs de saisie de texte */
+    margin: 0 5px; /* Ajout de 5px de marge à gauche et à droite des champs de saisie de texte */
+    border: 1px solid #ccc; /* Ajout d'une bordure de 1px solide avec une couleur grise */
+    border-radius: 5px; /* Arrondir les coins des champs de saisie de texte */
+    font-size: 20px; /* Définition de la taille de police des champs de saisie de texte */
+    text-align: center; /* Centrage du texte horizontalement */
+}
+
+/* Style du bouton de soumission */
+.verification-container button {
+    padding: 10px 20px; /* Ajout de rembourrage au bouton */
+    margin-top: 20px; /* Ajout de 20px de marge en haut du bouton */
+    border: none; /* Suppression de la bordure du bouton */
+    border-radius: 5px; /* Arrondir les coins du bouton */
+    cursor: pointer; /* Définition du curseur au survol du bouton */
+    font-size: 16px; /* Définition de la taille de police du bouton */
+    background-color: #007bff; /* Définition de la couleur de fond du bouton */
+    color: #fff; /* Définition de la couleur du texte du bouton */
+}
+
+/* Style du bouton de soumission lorsque désactivé */
+.verification-container button:disabled {
+    background-color: #ccc; /* Définition de la couleur de fond du bouton lorsque désactivé */
+    cursor: not-allowed; /* Changement du curseur en "non autorisé" lorsque le bouton est désactivé */
+}

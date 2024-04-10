@@ -14,10 +14,11 @@ export default function Contact() {
         email: email,
         message: message
       };
-      const response = await fetch('https://projet-aws-backend.onrender.com/postuler/offre', {
+      const response = await fetch('https://projet-aws-backend.onrender.com/postuler/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem("token") 
         },
         body: JSON.stringify(requestBody)
       });

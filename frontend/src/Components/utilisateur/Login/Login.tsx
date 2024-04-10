@@ -1,5 +1,4 @@
 import { useState } from 'react'; // Importez useState si nécessaire
-import { Link } from 'react-router-dom'; // Importez Link de React Router
 import login from '../../../assets/login.jpg'; // Importez l'image de connexion depuis les assets
 import { useNavigate } from 'react-router-dom';
 

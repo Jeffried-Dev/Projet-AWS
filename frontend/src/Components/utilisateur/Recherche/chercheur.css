@@ -38,6 +38,10 @@
   height: 60px; 
 }
 
+.searchBar{
+  margin: 1rem;
+}
+
 .inputSearch input {
   font-size: 2rem;
   color: black; /* Couleur du texte */

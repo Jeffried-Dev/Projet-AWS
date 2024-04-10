@@ -12,5 +12,5 @@ export default interface Ioffres{
     duree?: string | null
     entreprise?: Ientreprise | null
     postulers?: Ipostulers[] | null
-    offre?: Ioffres | null
+   // offre?: Ioffres | null
 }

@@ -125,7 +125,10 @@ function Chercheur(){
                     </li>*/
                     <div
                         key={obj.id}
-                        onClick={() => handleObjectClick(obj)}
+                        onClick={() => {
+                            console.log("Clicked on:", obj);
+                            handleObjectClick(obj);
+                          }}
                         style={{
                             background: "#f0f0f0", // Couleur d'arrière-plan
                             borderRadius: "8px", // Rayon de la bordure
@@ -134,7 +137,7 @@ function Chercheur(){
                             cursor: "pointer", // Curseur indiquant que l'élément est cliquable
                         }}
                         >
-                    {obj.name}
+                        {obj.name}
                     </div>
                     ))}
                 </div>

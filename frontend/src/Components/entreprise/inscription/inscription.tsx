@@ -51,7 +51,7 @@ export default function Component() {
       formData.adresse = location
       try {
         const response = await fetch('https://projet-aws-backend.onrender.com/entreprise/inscription', {
-          method: 'GET',
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             //'Authorization': 'Bearer ' + localStorage.getItem("token") 

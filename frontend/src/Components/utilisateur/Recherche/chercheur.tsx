@@ -28,7 +28,7 @@ function Chercheur(){
         const fetchObjects = async () => {
         try {
             const response = await fetch("https://projet-aws-backend.onrender.com/offre/list",{
-                method: 'POST',
+                method: 'GET',
                 headers: {
                   'Content-Type': 'application/json',
                   'Authorization': 'Bearer ' + localStorage.getItem("token")

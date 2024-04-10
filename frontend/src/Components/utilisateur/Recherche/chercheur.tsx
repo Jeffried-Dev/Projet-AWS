@@ -23,6 +23,12 @@ function Chercheur(){
     const [selectedObject, setSelectedObject] = useState<offreDto | null>(null);
     const [filter, setFilter] = useState<string>("");
 
+    const listOfObjects: offreDto[] = [
+        { id: 1, name: "Objet 1" , description:"D'accord, vous pouvez utiliser des <div>avec des styles CSS pour obtenir des"},
+        { id: 2, name: "Objet 2", description:"arrière-plans colorés et des bordures arrondies. Voici comment vous pouvez modifier " },
+        { id: 3, name: "Objet 3", description:"arrière-plans colorés et des bordures arrondies. Voici comment vous pouvez modifier votre code pour utiliser des <div>avec les styles appropriés à la place des élé"}
+      ];
+
     useEffect(() => {
         // Fonction pour récupérer la liste d'objets via fetch au chargement de la page
         const fetchObjects = async () => {
@@ -39,6 +45,7 @@ function Chercheur(){
             }
             const data = await response.json();
             setObjects(data);
+            setObjects(listOfObjects);
         } catch (error) {
             console.error("Erreur:", error);
         }
@@ -56,9 +63,11 @@ function Chercheur(){
     };
 
     // Filtrer la liste d'objets en fonction du texte saisi dans le champ de saisie
-    const filteredObjects = objects.filter((obj) =>
-        obj.name.toLowerCase().includes(filter.toLowerCase())
-    );
+    const filteredObjects = Array.isArray(objects)
+  ? objects.filter((obj) =>
+      obj.name.toLowerCase().includes(filter.toLowerCase())
+    )
+  : [];
         
     return (
         <div className="searchPage">
@@ -109,22 +118,40 @@ function Chercheur(){
                 {/* Partie gauche: Liste d'objets */}
                 <div style={{ flex: 1 }}>
                 <h2>Liste des objets</h2>
-                <ul>
+                <div>
                     {filteredObjects.map((obj) => (
-                    <li key={obj.id} onClick={() => handleObjectClick(obj)}>
+                    /*<li key={obj.id} onClick={() => handleObjectClick(obj)}>
                         {obj.name}
-                    </li>
+                    </li>*/
+                    <div
+                        key={obj.id}
+                        onClick={() => handleObjectClick(obj)}
+                        style={{
+                            background: "#f0f0f0", // Couleur d'arrière-plan
+                            borderRadius: "8px", // Rayon de la bordure
+                            padding: "8px", // Marge intérieure
+                            marginBottom: "8px", // Marge inférieure entre les éléments
+                            cursor: "pointer", // Curseur indiquant que l'élément est cliquable
+                        }}
+                        >
+                    {obj.name}
+                    </div>
                     ))}
-                </ul>
+                </div>
                 </div>
                 {/* Partie droite: Détails de l'objet sélectionné */}
                 <div style={{ flex: 2 }}>
                 {selectedObject && (
-                    <div>
-                    <h2>Détails de l'objet</h2>
-                    <p>Nom: {selectedObject.name}</p>
-                    <p>Description: {selectedObject.description}</p>
-                    {/* Afficher d'autres détails de l'objet si nécessaire */}
+                    <div style={{
+                        background: "#f0f0f0", // Couleur d'arrière-plan
+                        borderRadius: "8px", // Rayon de la bordure
+                        padding: "8px", // Marge intérieure
+                        marginBottom: "8px", // Marge inférieure entre les éléments
+                      }}>
+                        <h2>Détails de l'objet</h2>
+                        <p>Nom: {selectedObject.name}</p>
+                        <p>Description: {selectedObject.description}</p>
+                        {/* Afficher d'autres détails de l'objet si nécessaire */}
                     </div>
                 )}
                 </div>

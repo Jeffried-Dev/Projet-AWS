@@ -26,7 +26,7 @@ public class JwtFilter extends OncePerRequestFilter {
     public JwtFilter(UtilisateurService utilisateurService, AdministrateurService administrateurService, EntrepriseService entrepriseService, JwtService jwtService) {
         this.utilisateurService = utilisateurService;
         this.entrepriseService = entrepriseService;
-        this.administrateurService =administrateurService;
+        this.administrateurService = administrateurService;
         this.jwtService = jwtService;
     }
 

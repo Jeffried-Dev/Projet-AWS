@@ -3,6 +3,7 @@ import "./chercheur.css"
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/Logof.jpg';
 import Ioffres from "../../../objets/offres"
+import React from "react";
 
 function Chercheur(){
     // Liste des métiers informatiques
@@ -162,5 +163,6 @@ function Chercheur(){
         </div>
     );
 }
+
 
 export default Chercheur;

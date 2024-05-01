@@ -10,7 +10,6 @@ import InscriptionUser from './Components/utilisateur/inscription/UserInscriptio
 import Loginentre from './Components/entreprise/loginentre/loginentre';
 import Contact from './Components/commun/contact/contact';
 import Apropos from './Components/commun/Apropos/Apropos';
-//import Logintest from './Components/entreprise/loginentre/testlogin';
 import Postuler from './Components/utilisateur/postuler/postuler';
 import Chercheur from './Components/utilisateur/Recherche/chercheur';
 import UserProfile from'./Components/utilisateur/UserProfile/UserProfile';
@@ -18,6 +17,7 @@ import Publication from './Components/entreprise/offre/offre';
 import Form from './Components/entreprise/formulaire/formulaire';
 import Formulaire3 from  './Components/entreprise/formulaire3/formulaire3';
 import Validation from './Components/utilisateur/Validation/Validation';
+import ValidationEnt from './Components/entreprise/Validation/Validation';
 import ImportCV from './Components/utilisateur/importercv/importercv';
 import Formulaire2 from './Components/entreprise/formulaire2/formulaire2';
 
@@ -60,7 +60,7 @@ function AppWithRouter() {
         <Route path="/entreprise/offre" element={< Publication />} />
         <Route path="/entreprise/formulaire" element={< Form />} />
         <Route path="/entreprise/formulaire3" element={< Formulaire3 />} />
-        
+        <Route path="/entreprise/Validation" element={<ValidationEnt />} />
         <Route path="/entreprise/offre" element={< Publication />} />
         <Route path="/entreprise/formulaire2" element={< Formulaire2 />} />
         {/* routes administrateur */}

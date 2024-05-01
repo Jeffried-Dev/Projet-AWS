@@ -27,7 +27,7 @@ const VerificationPage = () => {
     console.log('Code de vérification soumis :', code);
     // Vous pouvez également implémenter la redirection vers la page suivante après la vérification
     try {
-      const response = await fetch('https://projet-aws-backend.onrender.com/utilisateur/validation/'+code+'/'+mail, {
+      const response = await fetch('https://projet-aws-backend.onrender.com/entreprise/validation/'+code+'/'+mail, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ const VerificationPage = () => {
       if (response.ok) {
         // Login successful
        // onSignUpSuccess(response);
-        navigate('/utilisateur/connexion');
+        navigate('/entreprise/connexion');
       } else {
         // Handle login failure
         console.error('error failed');

@@ -25,6 +25,8 @@ public class JwtFilter extends OncePerRequestFilter {
 
     public JwtFilter(UtilisateurService utilisateurService, AdministrateurService administrateurService, EntrepriseService entrepriseService, JwtService jwtService) {
         this.utilisateurService = utilisateurService;
+        this.entrepriseService = entrepriseService;
+        this.administrateurService = administrateurService;
         this.jwtService = jwtService;
     }
 
@@ -37,15 +39,20 @@ public class JwtFilter extends OncePerRequestFilter {
 
         // Bearer eyJhbGciOiJIUzI1NiJ9.eyJub20iOiJBY2hpbGxlIE1CT1VHVUVORyIsImVtYWlsIjoiYWNoaWxsZS5tYm91Z3VlbmdAY2hpbGxvLnRlY2gifQ.zDuRKmkonHdUez-CLWKIk5Jdq9vFSUgxtgdU1H2216U
         final String authorization = request.getHeader("Authorization");
+
         if(authorization != null && authorization.startsWith("Bearer ")){
             token = authorization.substring(7);
             isTokenExpired = jwtService.isTokenExpired(token);
             username = jwtService.extractUsername(token);
             role = jwtService.extractRole(token);
         }
-
+        System.out.println(isTokenExpired);
+        System.out.println(username);
+        System.out.println(role);
+        System.out.println(token);
         if(!isTokenExpired && username != null && role!=null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = null;
+
             if(role.equals("ADMINISTRATEUR")){
                 userDetails = administrateurService.loadUserByUsername(username);
             }else if(role.equals("ENTREPRISE")){

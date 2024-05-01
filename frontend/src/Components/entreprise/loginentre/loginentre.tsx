@@ -1,16 +1,43 @@
 import { useState } from 'react'; // Importez useState si nécessaire
-import { Link } from 'react-router-dom'; // Importez Link de React Router
 import imgEntrep from '../../../assets/entreprise.jpg';
+import { useNavigate } from 'react-router-dom';
 
 export default function Loginentre() {
   // État pour le nom d'utilisateur et le mot de passe
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const [error, setError] = useState('');
 
   // Fonction pour gérer la soumission du formulaire
-  const handleSubmit = (event: { preventDefault: () => void; }) => {
+  const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
-    // Ajoutez votre logique de connexion ici
+    try {
+      const formData = {
+        mail: username,
+        password: password
+      };
+      const response = await fetch('https://projet-aws-backend.onrender.com/entreprise/connexion', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        const responseData = await response.json();
+        const signUpUser = responseData.data;
+        localStorage.setItem('mail', username);
+        localStorage.setItem('token', signUpUser.token);
+        navigate('/utilisateur/recherche');
+      } else {
+        // Handle login failure
+        console.error('error failed');
+        setError('Nom d\'utilisateur ou mot de passe incorrect');
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
   };
 
   return (
@@ -48,6 +75,7 @@ export default function Loginentre() {
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
+                  required
                 />
                 {/* Icône utilisateur va ici */}
               </div>
@@ -65,12 +93,14 @@ export default function Loginentre() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
                 {/* Icône de verrouillage va ici */}
               </div>
             </div>
             {/* Bouton de connexion */}
             <button className="w-full bg-[#004c8c] text-white py-2 rounded-md" type="submit">Se connecter</button>
+            {error && <div style={{ color: 'red' }}>{error}</div>}
           </form>
           {/* Liens pour la récupération de mot de passe et l'inscription */}
           {/* 

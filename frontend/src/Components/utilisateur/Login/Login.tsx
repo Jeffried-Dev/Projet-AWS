@@ -1,5 +1,4 @@
 import { useState } from 'react'; // Importez useState si nécessaire
-import { Link } from 'react-router-dom'; // Importez Link de React Router
 import login from '../../../assets/login.jpg'; // Importez l'image de connexion depuis les assets
 import { useNavigate } from 'react-router-dom';
 
@@ -13,6 +12,7 @@ export default function Loginentre() {
  // const [username, setUsername] = useState('');
   //const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState<ConnexionFormData>({
     mail: '',
     password: '',
@@ -30,7 +30,7 @@ export default function Loginentre() {
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
     try {
-      const response = await fetch('http://localhost:8000/utilisateur/connexion', {
+      const response = await fetch('https://projet-aws-backend.onrender.com/utilisateur/connexion', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ export default function Loginentre() {
       } else {
         // Handle login failure
         console.error('error failed');
-        
+        setError('Nom d\'utilisateur ou mot de passe incorrect');
       }
     } catch (error) {
       console.error('Error during login:', error);
@@ -114,6 +114,7 @@ export default function Loginentre() {
             </div>
             {/* Bouton de connexion */}
             <button className="w-full bg-[#004c8c] text-white py-2 rounded-md" type="submit">Se connecter</button>
+            {error && <div style={{ color: 'red' }}>{error}</div>}
           </form>
           {/* Liens pour la récupération de mot de passe et l'inscription */}
           {/* 

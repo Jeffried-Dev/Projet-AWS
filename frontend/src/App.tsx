@@ -3,7 +3,7 @@ import './App.css';
 import Footer from './Components/commun/homePage/footer/footer';
 import Header from './Components/commun/homePage/header/header';
 import Rectangle from './Components/commun/homePage/rectangle/rectangle';
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Page1 from './Components/utilisateur/Login/Login';
 import Inscription from './Components/entreprise/inscription/inscription';
 import InscriptionUser from './Components/utilisateur/inscription/UserInscription'
@@ -21,6 +21,8 @@ import Validation from './Components/utilisateur/Validation/Validation';
 import ImportCV from './Components/utilisateur/importercv/importercv';
 import Formulaire2 from './Components/entreprise/formulaire2/formulaire2';
 
+
+
 const App: React.FC = () => {
   return (
     <div className="app">
@@ -36,7 +38,9 @@ const App: React.FC = () => {
 
 function AppWithRouter() {
   return (
+  
       <Routes>
+
         {/* routes communes */}  
         <Route path="/" element={<App />} />
         <Route path="/contact" element={<Contact />} />
@@ -60,9 +64,16 @@ function AppWithRouter() {
         <Route path="/entreprise/offre" element={< Publication />} />
         <Route path="/entreprise/formulaire2" element={< Formulaire2 />} />
         {/* routes administrateur */}
-
+         {/* Routes des étapes de formulaire */}
+       
+  
       </Routes>
+    
+   
   );
+
+
+
 }
 
 export default AppWithRouter;

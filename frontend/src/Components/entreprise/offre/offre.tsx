@@ -5,7 +5,7 @@ import './offre.css';
 const Navbars = () => {
   return (
     <nav className="navbars">
-      <div className="navbars-logo">
+      <div className="navbars-logo"> //bootstrap attribut pour responsivité 
       <div className="logo-container">
       <img src={logo} className='logo' alt="Logo"></img>
       <h1 className="logo">CSRecrut</h1>

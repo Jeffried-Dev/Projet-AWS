@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Footer from './Components/commun/homePage/footer/footer';
 import Header from './Components/commun/homePage/header/header';
+import EntrepriseHeader from './Components/entreprise/header/index';
 import Rectangle from './Components/commun/homePage/rectangle/rectangle';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Page1 from './Components/utilisateur/Login/Login';
@@ -26,12 +27,12 @@ import Formulaire2 from './Components/entreprise/formulaire2/formulaire2';
 const App: React.FC = () => {
   return (
     <div className="app">
-      <Header />
+      <Header/>
       <div className="content">
-        <Rectangle color="#F1F2F6" bottomTextColor="#56BB3" isLeftButtonVisible={true} isRightButtonVisible={false} />
-        <Rectangle color="#74BBE4" bottomTextColor="#FFFF" isLeftButtonVisible={false} isRightButtonVisible={true} />
+        <Rectangle color="#F1F2F6" bottomTextColor="#56BB3" isLeftButtonVisible={true} isRightButtonVisible={false}/>
+        <Rectangle color="#74BBE4" bottomTextColor="#FFFF" isLeftButtonVisible={false} isRightButtonVisible={true}/>
       </div>
-      <Footer />
+      <Footer/>
     </div>
   );
 }
@@ -42,27 +43,26 @@ function AppWithRouter() {
       <Routes>
 
         {/* routes communes */}  
-        <Route path="/" element={<App />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/Apropos" element={<Apropos />} />
+        <Route path="/" element={<App/>}/>
+        <Route path="/contact" element={<><Header /><Contact/><Footer /></>}/>
+        <Route path="/Apropos" element={<><Header /><Apropos/><Footer /></>}/>
         {/* routes utilisateurs */}  
-        <Route path="/utilisateur/connexion" element={<Page1 />}> </Route>
-        <Route path="/utilisateur/inscription" element={<InscriptionUser/>} />
-        <Route path="/utilisateur/postuler" element={<Postuler />} />
-        <Route path="/utilisateur/importercv" element={< ImportCV />} />
-        <Route path="/utilisateur/recherche" element={<Chercheur />} />
-        <Route path="/utilisateur/Validation" element={<Validation />} />
-        <Route path="/utilisateur/profile" element={<UserProfile username="JohnDoe" email="johndoe@example.com" bio="Lorem ipsum dolor sit amet" />} />
+        <Route path="/utilisateur/connexion" element={<><Header /><Page1/><Footer /></>}> </Route>
+        <Route path="/utilisateur/inscription" element={<><Header /><InscriptionUser/><Footer /></>}/>
+        <Route path="/utilisateur/postuler" element={<><Header /><Postuler/><Footer /></>}/>
+        <Route path="/utilisateur/importercv" element={<><Header />< ImportCV /><Footer /></>} />
+        <Route path="/utilisateur/recherche" element={<><Header /><Chercheur/><Footer /></>}/>
+        <Route path="/utilisateur/Validation" element={<><Header /><Validation/><Footer /></>}/>
+        <Route path="/utilisateur/profile" element={<><Header /><UserProfile username="JohnDoe" email="johndoe@example.com" bio="Lorem ipsum dolor sit amet"/><Footer /></>}/>
         
         {/* routes entreprises */}  
-        <Route path="/entreprise/inscription" element={<Inscription />} /> {/* Ajoutez cette route pour la page d'inscription */}    
-        <Route path="/entreprise/connexion" element = {<Loginentre />}/>
-        <Route path="/entreprise/offre" element={< Publication />} />
-        <Route path="/entreprise/formulaire" element={< Form />} />
-        <Route path="/entreprise/formulaire3" element={< Formulaire3 />} />
-        <Route path="/entreprise/Validation" element={<ValidationEnt />} />
-        <Route path="/entreprise/offre" element={< Publication />} />
-        <Route path="/entreprise/formulaire2" element={< Formulaire2 />} />
+        <Route path="/entreprise/inscription" element={<><Header /><Inscription /><Footer /></>}/>
+        <Route path="/entreprise/connexion" element = {<><Header /><Loginentre/><Footer /></>}/>
+        <Route path="/entreprise/Validation" element={<><Header /><ValidationEnt/><Footer /></>}/>
+        <Route path="/entreprise/offre" element={<><EntrepriseHeader />< Publication/><Footer /></>}/>
+        <Route path="/entreprise/formulaire" element={<><EntrepriseHeader />< Form/><Footer /></>}/>
+        <Route path="/entreprise/formulaire3" element={<><EntrepriseHeader />< Formulaire3/><Footer /></>}/>
+        <Route path="/entreprise/formulaire2" element={<><EntrepriseHeader />< Formulaire2/><Footer /></>}/>
         {/* routes administrateur */}
          {/* Routes des étapes de formulaire */}
        

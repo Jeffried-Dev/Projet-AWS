@@ -1,15 +1,10 @@
 import React from 'react';
 
-import entreprise from '../../../assets/entreprise.jpg';
-import imgEntrep from '../../../assets/entreprise.jpg';
-
 const Apropos = () => {
   return (
-    <div className="min-h-screen bg-[#f1f2f6] flex items-center justify-center p-6" id="AproposPage">
+    <div className="min-h-screen bg-[#f1f2f6] flex items-center justify-center p-6">
       {/* Conteneur principal */}
       <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-4xl flex space-x-8">
-        {/* Première moitié de la mise en page avec une image */}
-        
         {/* Deuxième moitié de la mise en page avec le texte */}
         <div className="w-1/2 flex flex-col justify-center">
           <h1 className="text-3xl font-bold mb-4">À propos de CSRecrut</h1>
@@ -18,7 +13,7 @@ const Apropos = () => {
           </p>
         </div>
       </div>
-    </div>  
+    </div>
   );
 };
 

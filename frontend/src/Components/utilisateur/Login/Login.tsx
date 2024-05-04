@@ -1,6 +1,7 @@
 import { useState } from 'react'; // Importez useState si nécessaire
 import login from '../../../assets/login.jpg'; // Importez l'image de connexion depuis les assets
 import { useNavigate } from 'react-router-dom';
+import React from 'react';
 
 interface ConnexionFormData {
   mail: string;

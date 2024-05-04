@@ -1,6 +1,6 @@
-import { useState } from 'react'; // Importez useState si nécessaire
-import { Link } from 'react-router-dom'; // Importez Link de React Router
-import login from '../../../assets/login.jpg'; // Importez l'image de Contact depuis les assets
+import { useState } from 'react';
+import login from '../../../assets/login.jpg';
+import React from 'react';
 
 export default function Contact() {
   // État pour le mail et le message
@@ -11,42 +11,31 @@ export default function Contact() {
   const handleSubmit = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
   };
-
-  // categorie de message
-
   return (
-    // Conteneur principal avec une mise en page centrée verticalement et horizontalement
     <div className="min-h-screen bg-[#f1f2f6] flex items-center justify-center p-6">
-      {/* Div pour contenir le formulaire de Contact */}
       <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-4xl flex space-x-8">
-        {/* Première moitié de la mise en page avec l'image de Contact */}
         <div className="w-1/2">
           <img
             alt="Illustration"
             className="w-full h-auto"
             src={login}
             style={{
-             height: '100%', // Redimensionner l'image 
-             maxWidth: '100%', // Ajuster l'objet de l'image pour qu'elle s'adapte à la nouvelle taille
+              height: '100%', // Redimensionner l'image 
+              maxWidth: '100%', // Ajuster l'objet de l'image pour qu'elle s'adapte à la nouvelle taille
             }}
           />
         </div>
-        {/* Deuxième moitié de la mise en page avec le formulaire de Contact */}
         <div className="w-1/2 space-y-6">
-          {/* Titre du formulaire */}
           <h2 className="text-4xl font-bold">Contact</h2>
-          <h5>Vous pouvez nous laisser un message ici! <br></br>
-          Notre équipe vous recontactera dans les meilleures delais.</h5>
-          {/* Formulaire de Contact */}
-          <form onSubmit={handleSubmit}>
-            {/* Champ pour le nom d'utilisateur */}
+          <h5>Vous pouvez nous laisser un message ici! <br /> Notre équipe vous recontactera dans les meilleurs délais.</h5>
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700" htmlFor="email">
-                adresse mail
+                Adresse mail
               </label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <input
-                  className="block w-full pl-10 pr-3 sm:text-sm border-gray-300 rounded-md"
+                  className="block w-full pl-3 pr-10 py-2 sm:text-sm border-gray-300 rounded-md"
                   id="email"
                   placeholder="example@mail.com"
                   type="text"
@@ -54,32 +43,28 @@ export default function Contact() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
-                {/* Icône utilisateur va ici */}
               </div>
             </div>
-            {/* Champ pour le mot de passe */}
             <div className="mb-12">
               <label className="block text-sm font-medium text-gray-700" htmlFor="message">
                 Message
               </label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <textarea
-                  className="block w-full pl-10 pr-3 sm:text-sm border-gray-300 rounded-md"
+                  className="block w-full pl-3 pr-10 py-2 sm:text-sm border-gray-300 rounded-md"
                   id="message"
-                  placeholder="laissez un message"
+                  placeholder="Laissez un message"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   required
                 />
-                {/* Icône de verrouillage va ici */}
               </div>
             </div>
-            {/* Bouton de Contact */}
-            <button className="w-full bg-[#004c8c] text-white py-2 rounded-md" type="submit" style={{margin : '1px 1px 1px 1px'}}>Envoyer</button>
+            <button className="w-full bg-[#004c8c] text-white py-2 rounded-md" type="submit">Envoyer</button>
           </form>
-          
         </div>
       </div>
     </div>
+
   );
 }

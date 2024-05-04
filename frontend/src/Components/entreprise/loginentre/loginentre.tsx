@@ -1,6 +1,7 @@
 import { useState } from 'react'; // Importez useState si nécessaire
 import imgEntrep from '../../../assets/entreprise.jpg';
 import { useNavigate } from 'react-router-dom';
+import React from 'react';
 
 export default function Loginentre() {
   // État pour le nom d'utilisateur et le mot de passe

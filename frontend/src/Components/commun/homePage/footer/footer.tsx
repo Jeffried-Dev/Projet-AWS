@@ -1,12 +1,12 @@
 import React from 'react';
-import './footer.css';
-
 
 const Footer: React.FC = () => {
   return (
-    <footer className="footer">
-      {/* Contenu du footer */}
-    </footer>
+    <div className="footer-wrapper  w-full flex flex-col">
+      <div className="footer-bottom py-4 px-4 bg-white text-blue-600 w-full">
+        <p className="text-center">&copy; {new Date().getFullYear()} CSRecrut. Tous droits réservés.</p>
+      </div>
+    </div>
   );
 }
 

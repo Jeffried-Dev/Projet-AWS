@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from "react";
-import "./importercv.css";
+//import "./importercv.css";
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/Logof.jpg';
 
@@ -15,29 +15,15 @@ const ImportCV = () => {
   };
 
   return (
-    <div>
-      <div className="navbar">
-        <div className="logo-container">
-          <img src={logo} className='logo' alt="Logo"></img>
-          <h2 className="logos">CSRecrut</h2>
-        </div>
-        <nav>
-          <ul>
-            <li><Link to="/">Accueil</Link></li>
-            <li><Link to="/Apropos">À propos</Link></li>
-            <li><Link to="/utilisateur/profile">Contact</Link></li>
-            {/* Ajoutez d'autres liens de navigation ici */}
-          </ul>
-        </nav>
-      </div>
-      <div className="containercv">
-        <p className="instruction">Veuillez importer votre CV ! </p>
-        <label htmlFor="file-upload" className="file-button">
+    <div className="min-h-screen bg-[#f1f2f6] flex items-center justify-center p-6 flex-grow">
+      <div className="containercv border-2 border-blue-500 p-8 rounded-lg text-center w-400 h-200 mx-auto mt-16">
+        <p className="instruction mb-8 font-semibold text-lg">Veuillez importer votre CV !</p>
+        <label htmlFor="file-upload" className="file-button bg-blue-500 text-white py-2 px-4 rounded-md cursor-pointer hover:bg-blue-600">
           Importer un CV
         </label>
         <input
           id="file-upload"
-          className="file-input"
+          className="file-input hidden"
           type="file"
           onChange={handleFileChange}
         />

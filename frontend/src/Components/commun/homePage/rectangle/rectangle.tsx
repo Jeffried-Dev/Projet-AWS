@@ -54,7 +54,7 @@ const Rectangle: React.FC<RectangleProps> = ({ color, bottomTextColor, isLeftBut
   return (
     <div className="rectangle container bg-white w-full h-screen flex flex-col justify-center items-center flex-grow" style={{ backgroundColor: color }}>
       <div className="animated-phrases-container mt-8 flex flex-col items-center">
-        {isLeftButtonVisible ? <div className="animated-phrase left-phrase text-blue-500">{leftPhrase}</div> : <div className="animated-phrase right-phrase text-white">{rightPhrase}</div>}
+        {isLeftButtonVisible ? <div className="animated-phrase left-phrase text-blue-500 text-2xl">{leftPhrase}</div> : <div className="animated-phrase right-phrase text-white text-2xl">{rightPhrase}</div>}
       </div>
       <div className="circle bg-white w-40 h-40 rounded-full flex items-center justify-center mx-auto mt-8">
         <img src={logo} className="circle rounded-full" alt="Logo" />

@@ -43,6 +43,7 @@ export default function Loginentre() {
         const signUpUser = responseData.data;
         localStorage.setItem('mail', formData.mail);
         localStorage.setItem('token', signUpUser.token);
+        localStorage.setItem('role', signUpUser.role);
         navigate('/utilisateur/recherche');
       } else {
         // Handle login failure

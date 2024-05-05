@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 const Header: React.FC = () => {
   
   return (
-    <header className="bg-white py-2 px-4 flex justify-between items-center w-full">
+    <header className="bg-white py-2 px-4 flex justify-between items-center w-full max-h-[75px]">
       <div>
         <img src={logo} className='h-16' alt="Logo" />
       </div>

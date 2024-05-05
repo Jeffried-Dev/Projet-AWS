@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import login from '../../../assets/login.jpg';
+import login from '../../../assets/3.jpg';
 import React from 'react';
 
 export default function Contact() {

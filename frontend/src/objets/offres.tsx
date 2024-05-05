@@ -7,9 +7,13 @@ export default interface Ioffres{
     id?: number | null
     name? : string | null
     description?: string | null
+    lieuPoste?: string | null
+    frequenceSalaire?: string | null
+    salaireMin?: string | null
+    salaireMax?: string | null
     adresse?: Iadresse | null
     typeOffre?: string | null
-    duree?: string | null
+   // duree?: string | null
     entreprise?: Ientreprise | null
     postulers?: Ipostulers[] | null
 }

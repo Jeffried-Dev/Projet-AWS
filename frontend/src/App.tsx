@@ -11,7 +11,7 @@ import Inscription from './Components/entreprise/inscription/inscription';
 import InscriptionUser from './Components/utilisateur/inscription/UserInscription'
 import Loginentre from './Components/entreprise/loginentre/loginentre';
 import Contact from './Components/commun/contact/contact';
-import Page404 from './Components/commun/page404/index';
+import Page404 from './Components/commun/Page404/index';
 import Apropos from './Components/commun/Apropos/Apropos';
 import Postuler from './Components/utilisateur/postuler/postuler';
 import Chercheur from './Components/utilisateur/Recherche/chercheur';
@@ -21,6 +21,7 @@ import Validation from './Components/utilisateur/Validation/Validation';
 import ValidationEnt from './Components/entreprise/Validation/Validation';
 import ImportCV from './Components/utilisateur/importercv/importercv';
 import ThreePartForm from './Components/entreprise/newOffre/index';
+import ListePostulants from './Components/entreprise/ListePostulants/Index';
 
 //import ProtectedRoute  from './Components/commun/ProtectedRoute/index';
 
@@ -51,7 +52,7 @@ function AppWithRouter() {
       <Route path="/contact" element={<><Header /><Contact/><Footer /></>}/>
       <Route path="/Apropos" element={<><Header /><Apropos/><Footer /></>}/>
       {/* <Route path="/404" element={<><Header /><Page404/><Footer /></>}/> */}
-      <Route path="*" element={<><Header /><Page404/><Footer /></>}/>
+      {/* <Route path="*" element={<><Header /><Page404/><Footer /></>}/> */}
       {/* <ProtectedRoute path="/utilisateur/postuler" element={<><UtilisateurHeader /><Postuler/><Footer /></>} requiredRole={1} redirectPath="/404"/> */}
       
       
@@ -70,7 +71,8 @@ function AppWithRouter() {
       <Route path="/entreprise/connexion" element = {<><Header /><Loginentre/><Footer /></>}/>
       <Route path="/entreprise/Validation" element={<><Header /><ValidationEnt/><Footer /></>}/>
       <Route path="/entreprise/offre" element={<><EntrepriseHeader />< Publication/><Footer /></>}/>
-      <Route path="/entreprise/formulaire" element={<><EntrepriseHeader />< ThreePartForm/><Footer /></>}/>
+      <Route path="/entreprise/ListePostulants" element={<><EntrepriseHeader /><ListePostulants/><Footer /></>}/>
+      <Route path="/entreprise/offre" element={<><EntrepriseHeader />< Publication/><Footer /></>}/><Route path="/entreprise/formulaire" element={<><EntrepriseHeader />< ThreePartForm/><Footer /></>}/>
       {/* routes administrateur */}
       {/* Routes des étapes de formulaire */}
     </Routes>

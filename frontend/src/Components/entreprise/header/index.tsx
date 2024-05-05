@@ -6,6 +6,12 @@ import logoLangue from '../../../assets/icone.png';
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  // rechercher les notifications:
+  const notifications = 5
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,6 +52,58 @@ const Header: React.FC = () => {
             </li>
             <li className="mr-3">
               <Link to="/contact" className="inline-block text-blue-600 no-underline font-bold hover:text-gray-800 hover:text-underline py-2 px-4">Contact</Link>
+            </li>
+            <li className="mr-3">
+              <div className="relative">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                  />
+                </svg>
+                {notifications > 0 && (
+                  <span className="bg-red-500 rounded-full w-5 h-5 text-white text-xs flex justify-center items-center absolute -top-1 -right-1">
+                    {notifications}
+                  </span>
+                )}
+              </div>
+            </li>
+            <li className="mr-3">
+              <div className="relative">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 cursor-pointer"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  onClick={handleToggle}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 17l-5-5m0 0l-5 5m5-5V3"
+                  />
+                </svg>
+                {isOpen && (
+                  <div className="absolute top-8 right-0 bg-white shadow-lg rounded-lg border border-gray-200">
+                    <button className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100">
+                      Modifier le profil
+                    </button>
+                    <button className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100">
+                      Se déconnecter
+                    </button>
+                  </div>
+                )}
+              </div>
             </li>
           </ul>
           <Link to="/entreprise/formulaire"><button

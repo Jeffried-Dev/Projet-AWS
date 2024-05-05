@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Publication = () => {
+const Candidature = () => {
   return (
     <div className="min-h-screen bg-[#f1f2f6] flex items-center justify-center container mx-auto flex flex-wrap pb-20 pt-20">
       <div className="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
@@ -139,4 +139,4 @@ const Publication = () => {
     </div>
   );
 }
-export default Publication;
+export default Candidature;

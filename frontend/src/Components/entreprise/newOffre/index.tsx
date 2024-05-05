@@ -139,10 +139,10 @@ const Formulaire: React.FC<Props> = ({ data, setData, onNext, onCancel }) => {
                     <div className="select-container">
                         <select id="lieuPoste" name="lieuPoste" value={lieuPoste} onChange={handleLieuPosteChange} className="w-full border border-gray-300 rounded-lg p-2">
                             <option value="">Choisir une option</option>
-                            <option value="option1">Télétravail complet</option>
-                            <option value="option2">Déplacements fréquents</option>
-                            <option value="option2">En personne, lieu précis</option>
-                            <option value="option3">Hybride</option>
+                            <option value="Télétravail complet">Télétravail complet</option>
+                            <option value="Déplacements fréquents">Déplacements fréquents</option>
+                            <option value="En personne, lieu précis">En personne, lieu précis</option>
+                            <option value="Hybride">Hybride</option>
                         </select>
                         {nextClicked && <span className="error-message">Veuillez choisir une option</span>}
                     </div>
@@ -338,10 +338,27 @@ const ThreePartForm = () => {
       setStep(1);
       navigate('/entreprise/offre');
     };
-    const handleSubmit = (data: any) => {
+    const handleSubmit = async (data: any) => {
       // Soumettre le formulaire avec toutes les données
-      //setFormData({ ...formData, ...data });
-      console.log('Formulaire soumis :', { ...formData, ...data });
+      setFormData({ ...formData, ...data });
+      console.log('Formulaire soumis :', formData);
+      try {
+            const response = await fetch("https://projet-aws-backend.onrender.com/offre/create",{
+                method: 'GET',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + localStorage.getItem("token")
+                },
+                body: JSON.stringify(formData),
+              });
+            if (!response.ok) {
+            throw new Error("Erreur lors de la récupération des données");
+            }else{
+                navigate('/entreprise/offre');
+            }
+        } catch (error) {
+            console.error("Erreur:", error);
+        }
     };
   
     return (

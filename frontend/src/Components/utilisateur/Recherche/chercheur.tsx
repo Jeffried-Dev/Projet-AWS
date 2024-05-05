@@ -113,31 +113,39 @@ function Chercheur(){
             {/* Liste d'Offres */}
             <div className="flex mt-8 max-w-[1000px]">
                 {/* Partie gauche: Liste d'Offres */}
-                <div className="flex-1 overflow-auto max-h-[650px]">
+                <div className="flex-1 overflow-auto h-[650px] max-h-full">
                     <div>
                         {filteredObjects.map((obj) => (
-                            <div
-                                key={obj.id}
+                            <div key={obj.id}
                                 onClick={() => {
                                     console.log("Clicked on:", obj);
                                     handleObjectClick(obj);
                                 }}
-                                className="bg-gray-200 rounded-lg p-4 mb-4 cursor-pointer"
+                                className="bg-gray-200 rounded-lg p-4 mb-4 cursor-pointer bg-white"
                             >
-                                {obj.name}
+                               <h1 className="text-xl font-bold mb-4 text-blue-900">{obj.name}</h1>
+                               <p><span className="font-bold text-blue-500">Entreprise:</span> {obj.entreprise?.username}</p>
+                               <p><span className="font-bold text-blue-500">Ville:</span> {obj.adresse?.ville?.name}</p>
+                               <p><span className="font-bold text-blue-500">Type Contrat:</span> {obj.typeOffre}</p>
                             </div>
                         ))}
                     </div>
                 </div>
                 {/* Partie droite: Détails de l'Offre sélectionné */}
-                <div className="flex-1 ml-4 max-h-[650px]">
+                <div className="flex-1 ml-4 ">
                     {selectedObject && (
-                        <div className="bg-gray-200 rounded-lg p-4 mb-4">
-                            <h2 className="text-xl font-bold mb-4">Détails de l'Offre</h2>
-                            <p><span className="font-bold">Nom:</span> {selectedObject.name}</p>
-                            <p><span className="font-bold">entreprise:</span> {selectedObject.entreprise?.username}</p>
-                            <p><span className="font-bold">Adresse:</span> {selectedObject.adresse?.numero} {selectedObject.adresse?.rue} {selectedObject.adresse?.ville?.name}, {selectedObject.adresse?.ville?.code}</p>
-                            <p><span className="font-bold">Description:</span> {selectedObject.description}</p>
+                        <div className="bg-gray-200 rounded-lg p-4 mb-4 bg-white">
+                            <h2 className="text-xl font-bold mb-4 text-blue-900">Détails de l'Offre</h2>
+                            <p><span className="font-bold text-blue-500">Poste : </span> {selectedObject.name}</p>
+                            <p><span className="font-bold text-blue-500">Entreprise : </span> {selectedObject.entreprise?.username}</p>
+                            <p><span className="font-bold text-blue-500">Type Contrat : </span> {selectedObject.typeOffre}</p>
+                            <p><span className="font-bold text-blue-500">Mode de Travail : </span> {selectedObject.lieuPoste}</p>
+                            <p><span className="font-bold text-blue-500">Frequence salaire : </span> {selectedObject.frequenceSalaire}</p>
+                            <p><span className="font-bold text-blue-500">Salaire minimale : </span> {selectedObject.salaireMin}</p>
+                            <p> <span className="font-bold text-blue-500">Salaire maximale : </span> {selectedObject.salaireMax}</p>
+                            <p><span className="font-bold text-blue-500">Adresse : </span> {selectedObject.adresse?.numero} {selectedObject.adresse?.rue} {selectedObject.adresse?.ville?.name}, {selectedObject.adresse?.ville?.code}</p>
+                            <br></br>
+                            <p><span className="font-bold text-blue-500">Description : </span> {selectedObject.description}</p>
                         </div>
                     )}
                 </div>

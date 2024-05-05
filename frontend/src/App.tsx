@@ -50,9 +50,8 @@ function AppWithRouter() {
       <Route path="/" element={<App/>}/>
       <Route path="/contact" element={<><Header /><Contact/><Footer /></>}/>
       <Route path="/Apropos" element={<><Header /><Apropos/><Footer /></>}/>
-      <Route path="/404" element={<><Header /><Page404/><Footer /></>}/>
-
-
+      {/* <Route path="/404" element={<><Header /><Page404/><Footer /></>}/> */}
+      <Route path="*" element={<><Header /><Page404/><Footer /></>}/>
       {/* <ProtectedRoute path="/utilisateur/postuler" element={<><UtilisateurHeader /><Postuler/><Footer /></>} requiredRole={1} redirectPath="/404"/> */}
       
       
@@ -60,6 +59,7 @@ function AppWithRouter() {
       <Route path="/utilisateur/connexion" element={<><Header /><LoginUser/><Footer /></>}> </Route>
       <Route path="/utilisateur/inscription" element={<><Header /><InscriptionUser/><Footer /></>}/>
       <Route path="/utilisateur/Validation" element={<><Header /><Validation/><Footer /></>}/>
+      
       <Route path="/utilisateur/postuler" element={<><UtilisateurHeader /><Postuler/><Footer /></>}/>
       <Route path="/utilisateur/importercv" element={<><UtilisateurHeader />< ImportCV /><Footer /></>} />
       <Route path="/utilisateur/recherche" element={<><UtilisateurHeader /><Chercheur/><Footer /></>}/>

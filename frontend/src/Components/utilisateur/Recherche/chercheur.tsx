@@ -82,67 +82,67 @@ function Chercheur(){
     ) : [];
         
     return (
-        <div className="min-h-screen bg-[#f1f2f6] flex flex-col items-center justify-start p-6">
-    {/* Barre de recherche */}
-    <div className="w-70 bg-gray-200 rounded-md mt-8 px-4 py-2 flex items-center">
-        {/* Champ de saisie de texte pour la recherche */}
-        <input type="text" value={filter} onChange={handleFilterChange} className="text-lg flex-grow px-4 bg-transparent focus:outline-none" placeholder="Rechercher un métier..." />
-        {/* Bouton de recherche */}
-        <button onClick={() => console.log(filter)} className="bg-blue-500 text-white text-lg px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none">
-            {/* Icône de recherche */}
-            <span className="material-symbols-outlined text-3xl">search</span>
-        </button>
-    </div>
-    {/* Liste des métiers */}
-    {/* {suggestions.length > 0 && (
-        <ul className="absolute bg-white w-70 rounded-md shadow-md mt-1">
-            {suggestions.map((suggestion, index) => (
-                <li
-                    key={index}
-                    onClick={() => {
-                        setFilter(suggestion);
-                        setSuggestions([]);
-                    }}
-                    className="px-4 py-2 cursor-pointer hover:bg-blue-500 hover:text-white text-lg"
-                >
-                    {suggestion}
-                </li>
-            ))}
-        </ul>
-    )} */}
-    {/* Liste d'Offres */}
-    <div className="flex mt-8 max-w-[1000px]">
-        {/* Partie gauche: Liste d'Offres */}
-        <div className="flex-1 overflow-auto max-h-[650px]">
-            <div>
-                {filteredObjects.map((obj) => (
-                    <div
-                        key={obj.id}
-                        onClick={() => {
-                            console.log("Clicked on:", obj);
-                            handleObjectClick(obj);
-                        }}
-                        className="bg-gray-200 rounded-lg p-4 mb-4 cursor-pointer"
-                    >
-                        {obj.name}
+        <div className="min-h-screen bg-[#f1f2f6] flex flex-col items-center justify-start p-6 pt-20">
+            {/* Barre de recherche */}
+            <div className="w-70 bg-gray-200 rounded-md mt-8 px-4 py-2 flex items-center">
+                {/* Champ de saisie de texte pour la recherche */}
+                <input type="text" value={filter} onChange={handleFilterChange} className="text-lg flex-grow px-4 bg-transparent focus:outline-none" placeholder="Rechercher un métier..." />
+                {/* Bouton de recherche */}
+                <button onClick={() => console.log(filter)} className="bg-blue-500 text-white text-lg px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none">
+                    {/* Icône de recherche */}
+                    <span className="material-symbols-outlined text-3xl">search</span>
+                </button>
+            </div>
+            {/* Liste des métiers */}
+            {/* {suggestions.length > 0 && (
+                <ul className="absolute bg-white w-70 rounded-md shadow-md mt-1">
+                    {suggestions.map((suggestion, index) => (
+                        <li
+                            key={index}
+                            onClick={() => {
+                                setFilter(suggestion);
+                                setSuggestions([]);
+                            }}
+                            className="px-4 py-2 cursor-pointer hover:bg-blue-500 hover:text-white text-lg"
+                        >
+                            {suggestion}
+                        </li>
+                    ))}
+                </ul>
+            )} */}
+            {/* Liste d'Offres */}
+            <div className="flex mt-8 max-w-[1000px]">
+                {/* Partie gauche: Liste d'Offres */}
+                <div className="flex-1 overflow-auto max-h-[650px]">
+                    <div>
+                        {filteredObjects.map((obj) => (
+                            <div
+                                key={obj.id}
+                                onClick={() => {
+                                    console.log("Clicked on:", obj);
+                                    handleObjectClick(obj);
+                                }}
+                                className="bg-gray-200 rounded-lg p-4 mb-4 cursor-pointer"
+                            >
+                                {obj.name}
+                            </div>
+                        ))}
                     </div>
-                ))}
+                </div>
+                {/* Partie droite: Détails de l'Offre sélectionné */}
+                <div className="flex-1 ml-4 max-h-[650px]">
+                    {selectedObject && (
+                        <div className="bg-gray-200 rounded-lg p-4 mb-4">
+                            <h2 className="text-xl font-bold mb-4">Détails de l'Offre</h2>
+                            <p><span className="font-bold">Nom:</span> {selectedObject.name}</p>
+                            <p><span className="font-bold">entreprise:</span> {selectedObject.entreprise?.username}</p>
+                            <p><span className="font-bold">Adresse:</span> {selectedObject.adresse?.numero} {selectedObject.adresse?.rue} {selectedObject.adresse?.ville?.name}, {selectedObject.adresse?.ville?.code}</p>
+                            <p><span className="font-bold">Description:</span> {selectedObject.description}</p>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
-        {/* Partie droite: Détails de l'Offre sélectionné */}
-        <div className="flex-1 ml-4 max-h-[650px]">
-            {selectedObject && (
-                <div className="bg-gray-200 rounded-lg p-4 mb-4">
-                    <h2 className="text-xl font-bold mb-4">Détails de l'Offre</h2>
-                    <p><span className="font-bold">Nom:</span> {selectedObject.name}</p>
-                    <p><span className="font-bold">entreprise:</span> {selectedObject.entreprise?.username}</p>
-                    <p><span className="font-bold">Adresse:</span> {selectedObject.adresse?.numero} {selectedObject.adresse?.rue} {selectedObject.adresse?.ville?.name}, {selectedObject.adresse?.ville?.code}</p>
-                    <p><span className="font-bold">Description:</span> {selectedObject.description}</p>
-                </div>
-            )}
-        </div>
-    </div>
-</div>
 
     );
 }

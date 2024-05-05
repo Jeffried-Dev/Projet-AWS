@@ -111,13 +111,13 @@ const Formulaire: React.FC<Props> = ({ data, setData, onNext, onCancel }) => {
     
     return (
         <div className="container-page flex flex-col items-center bg-gray-200 pt-20 min-h-screen">
-            <div className="container-image w-1/2 rounded-lg overflow-hidden mb-8 relative" style={{ backgroundImage: `url(${compImage})`, backgroundSize: "contain", backgroundPosition: "center", height: "200px", width: ""}}>
+            <div className="container-image w-2/3 rounded-lg overflow-hidden mb-8 relative" style={{ backgroundImage: `url(${compImage})`, backgroundSize: "contain", backgroundPosition: "center", height: "200px", width: ""}}>
                 <div className="texte-sur-image  top-0 right-0 transform translate-y-1/2 translate-x-11/5 text-right">
                     <h2 className="text-blue-900 text-4xl font-bold mb-4">Créer une offre <br /> d'emploi</h2>
                 </div>
             </div>
 
-            <div className="container-formulaire w-3/5 bg-white p-8 rounded-lg shadow-md mb-8">
+            <div className="container-formulaire w-4/5 bg-white p-8 rounded-lg shadow-md mb-8">
                 <form>
                     {/* <label htmlFor="name" className="block mb-2">Nom de l'entreprise<span className="required">*</span></label>
                     <input type="text" id="name" name="name" value={name} onChange={handleNameChange} className="w-full border border-gray-300 rounded-lg p-2" />
@@ -219,13 +219,13 @@ const Formulaire2: React.FC<Props> = ({ data, setData, onNext, onPrevious }) => 
     
     return (
         <div className="container-page flex flex-col items-center bg-gray-200 pt-20 min-h-screen">
-            <div className="container-image w-1/2 rounded-lg overflow-hidden mb-8 relative" style={{ backgroundImage: `url(${compImage2})`,  backgroundPosition: "center", height: "200px", width: ""}}>
+            <div className="container-image w-2/3 rounded-lg overflow-hidden mb-8 relative" style={{ backgroundImage: `url(${compImage2})`,  backgroundPosition: "center", height: "200px", width: ""}}>
                 <div className="relative">
                 <h1 className="absolute top-0 right-0 transform translate-y-1/2 text-white text-2xl md:text-3xl font-bold px-4">Plus de détails</h1>
                 </div>
             </div>
 
-            <div className="container-formulaire md:w-3/4 rounded-lg bg-white shadow-md p-8">
+            <div className="container-formulaire w-4/5 rounded-lg bg-white shadow-md p-8">
                 <form>
                 <label htmlFor="typePoste" className="block mb-2">
                     Type de poste<span className="text-red-500">*</span>
@@ -295,13 +295,13 @@ const Formulaire3: React.FC<Props> = ({ data, setData, onPrevious, onSubmit }) =
    
     return (
         <div className="container-page flex flex-col items-center bg-gray-200 pt-20 min-h-screen">
-            <div className="container-image w-1/2 rounded-lg overflow-hidden mb-8 relative" style={{ backgroundImage: `url(${compImage3})`,  backgroundPosition: "center", height: "200px", width: ""}}>
+            <div className="container-image w-2/3 rounded-lg overflow-hidden mb-8 relative" style={{ backgroundImage: `url(${compImage3})`,  backgroundPosition: "center", height: "200px", width: ""}}>
                 <div className="relative">
                 <h1 className="absolute top-0 right-0 transform translate-y-1/2 text-white text-2xl md:text-3xl font-bold px-4">Décrire l'offre</h1>
                 </div>
             </div>
 
-            <div className="container-formulaire md:w-3/5 rounded-lg bg-white shadow-md p-8">
+            <div className="container-formulaire w-4/5 rounded-lg bg-white shadow-md p-8">
                 <form>
                 <label htmlFor="message" className="block mb-2">
                     Description du poste<span className="text-red-500">*</span>

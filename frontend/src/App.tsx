@@ -28,9 +28,15 @@ const App: React.FC = () => {
   return (
     <div className="app">
       <Header/>
-      <div className="content">
-        <Rectangle color="#F1F2F6" bottomTextColor="#56BB3" isLeftButtonVisible={true} isRightButtonVisible={false}/>
-        <Rectangle color="#74BBE4" bottomTextColor="#FFFF" isLeftButtonVisible={false} isRightButtonVisible={true}/>
+      <div className="pt-20 w-full">
+        <div className="container w-full px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
+          <div className="flex flex-col w-full md:w-1/2 justify-center items-start text-center md:text-left">
+            <Rectangle color="#F1F2F6" bottomTextColor="#56BB3" isLeftButtonVisible={true} isRightButtonVisible={false}/>
+          </div>
+          <div className="flex flex-col w-full md:w-1/2 justify-center items-start text-center ">        
+            <Rectangle color="#74BBE4" bottomTextColor="#FFFF" isLeftButtonVisible={false} isRightButtonVisible={true}/>
+          </div>
+        </div>
       </div>
       <Footer/>
     </div>

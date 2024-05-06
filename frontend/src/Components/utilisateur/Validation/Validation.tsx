@@ -51,7 +51,7 @@ const VerificationPage = () => {
 
   return (
     <div className="min-h-screen bg-[#f1f2f6] flex items-center justify-center p-6 flex-grow">
-      <div className="verification-container max-w-xs mx-auto my-8 p-6 bg-white rounded-lg shadow-xl">
+      <div className="verification-container mx-auto  my-8 p-6 bg-white rounded-lg shadow-xl">
         <h2 className="text-2xl font-bold text-center mb-6">Vérification du compte</h2>
         <form onSubmit={handleSubmit} className="flex flex-col items-center">
           <div className="verificationDigits flex justify-center mb-6">

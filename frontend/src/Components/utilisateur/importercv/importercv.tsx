@@ -34,7 +34,7 @@ const ImportCV = () => {
       formData.append('file', pdfFile); // Ajoute le fichier PDF
       //formData.append('offre', offre.id);
       try {
-        const response = await fetch(`http://localhost:8000/postuler/create/${offre.id}`,{
+        const response = await fetch(`https://projet-aws-backend.onrender.com/postuler/create/${offre.id}`,{
             method: 'POST',
             headers: {
               'Authorization': 'Bearer ' + localStorage.getItem("token")

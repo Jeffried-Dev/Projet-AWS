@@ -12,7 +12,7 @@ const ListePostulants = () => {
         //Fonction pour récupérer la liste d'Offres via fetch au chargement de la page
         const fetchObjects = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/postuler/PostulerByOffreId/${offre.id}`,{
+                const response = await fetch(`https://projet-aws-backend.onrender.com/postuler/PostulerByOffreId/${offre.id}`,{
                     method: 'GET',
                     headers: {
                     'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ const ListePostulants = () => {
         async function handleCv(obj: Ipostulers){
             try {
                 console.log(obj.cv)
-                const response = await fetch(`http://localhost:8000/postuler/files/${obj.cv}`,{
+                const response = await fetch(`https://projet-aws-backend.onrender.com/postuler/files/${obj.cv}`,{
                     method: 'GET',
                     headers: {
                     'Content-Type': 'application/json',
@@ -60,7 +60,12 @@ const ListePostulants = () => {
 
                 // Créez un URL à partir du blob
                 const url = window.URL.createObjectURL(blob);
-                // Créez un lien <a> pour télécharger le fichier
+                // // Ouvrez une nouvelle fenêtre pour afficher le fichier PDF
+                // const pdfWindow = window.open(url, '_blank');
+                // if (!pdfWindow) {
+                //     throw new Error("Impossible d'ouvrir une nouvelle fenêtre");
+                // }
+                // // Créez un lien <a> pour télécharger le fichier
                 const link = document.createElement('a');
                 link.href = url;
                 const nompdf = 'Cv_' + obj.offre?.name +'_'+ Math.random()+'.pdf'
@@ -69,7 +74,7 @@ const ListePostulants = () => {
                 document.body.appendChild(link);
                 // Cliquez sur le lien pour démarrer le téléchargement
                 link.click();
-                // Nettoyez l'URL après le téléchargement
+                //Nettoyez l'URL après le téléchargement
                 window.URL.revokeObjectURL(url);
             } catch (error) {
                 console.error("Erreur:", error);
@@ -81,7 +86,7 @@ const ListePostulants = () => {
                 const form = obj
                 form.state = true
                 form.decision = decision
-                const response = await fetch("http://localhost:8000/postuler/update",{
+                const response = await fetch("https://projet-aws-backend.onrender.com/postuler/update",{
                     method: 'PUT',
                     headers: {
                       'Content-Type': 'application/json',
@@ -139,7 +144,7 @@ const ListePostulants = () => {
                                         console.log("Clicked on:", obj);
                                         handleCv(obj);
                                     }
-                                } className='bg-blue-600 mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out'>Visualiser</button></td>
+                                } className='bg-blue-600 mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out'><i className="fas fa-eye mr-2"></i>Visualiser</button></td>
                             {obj.state ? 
                                 <td> {obj.decision ? <span className='text-green-600 font-bold'>Accepté(e)</span> : <span className='text-red-600 font-bold'>Refusé(e)</span>} </td>
                             : <td className="py-4 px-6 border-b border-blue-light"><button onClick={() => {

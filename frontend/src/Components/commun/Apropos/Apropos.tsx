@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const Apropos = () => {
   return (
     <section className="bg-white border-b py-8">

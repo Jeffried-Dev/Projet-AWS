@@ -63,7 +63,7 @@ function AppWithRouter() {
       <Route path="/utilisateur/importercv" element={<><UtilisateurHeader />< ImportCV /><Footer /></>} />
       <Route path="/utilisateur/recherche" element={<><UtilisateurHeader /><Chercheur/><Footer /></>}/>
       <Route path="/utilisateur/candidature" element={<><UtilisateurHeader /><ListeCandidature/><Footer /></>}/>
-      <Route path="/utilisateur/profile" element={<><UtilisateurHeader /><UserProfile username="JohnDoe" email="johndoe@example.com" bio="Lorem ipsum dolor sit amet"/><Footer /></>}/>
+      <Route path="/utilisateur/profile" element={<><UtilisateurHeader /><UserProfile /><Footer /></>}/>
       
       {/* routes entreprises */}  
       <Route path="/entreprise/inscription" element={<><Header /><Inscription /><Footer /></>}/>

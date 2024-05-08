@@ -2,23 +2,30 @@ import { useState } from 'react'; // Importez useState si nécessaire
 import imgEntrep from '../../../assets/entreprise.jpg';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
+import Ientreprise from '../../../objets/entreprise';
 
 export default function Loginentre() {
   // État pour le nom d'utilisateur et le mot de passe
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState<Ientreprise>({
+    mail: '',
+    password: '',
+  });
   const navigate = useNavigate();
   const [error, setError] = useState('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+        ...prevState,
+        [name]: value,
+    }));
+  };
 
   // Fonction pour gérer la soumission du formulaire
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
     try {
-      const formData = {
-        mail: username,
-        password: password
-      };
-      const response = await fetch('http://localhost:8000/entreprise/connexion', {
+      const response = await fetch('https://projet-aws-backend.onrender.com/entreprise/connexion', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -31,7 +38,9 @@ export default function Loginentre() {
           setError(responseData.message)
         }else{
           const signUpUser = responseData.data;
-          localStorage.setItem('mail', username);
+          if(formData.mail){
+            localStorage.setItem('mail', formData.mail);
+          }
           localStorage.setItem('token', signUpUser.token);
           localStorage.setItem('role', signUpUser.role);
           navigate('/entreprise/offre');
@@ -66,21 +75,22 @@ export default function Loginentre() {
         </div>
         {/* Deuxième moitié de la mise en page avec le formulaire de connexion */}
         <div className="w-1/2 space-y-6">
-          <h2 className="text-4xl font-bold">Connexion</h2>
+          <h2 className="text-4xl font-bold text-blue-500">Connexion</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-6">
               {/* Champ pour le nom d'utilisateur */}
               <label className="block text-sm font-medium text-gray-700" htmlFor="username">
-                Nom d'utilisateur
+                Adresse e-mail <span className='text-red-500'>*</span> 
               </label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <input
-                  className="block w-full pl-10 pr-3 sm:text-sm border-gray-300 rounded-md"
+                  className="border-2 border-blue-600 rounded-md w-full h-[35px] p-2"
                   id="username"
-                  placeholder="@username OR example@mail.com"
+                  placeholder="example@mail.com"
                   type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  name="mail"
+                  value={formData.mail}
+                  onChange={handleChange}
                   required
                 />
                 {/* Icône utilisateur va ici */}
@@ -89,23 +99,23 @@ export default function Loginentre() {
             <div className="mb-12">
               {/* Champ pour le mot de passe */}
               <label className="block text-sm font-medium text-gray-700" htmlFor="password">
-                Mot de passe
+                Mot de passe <span className='text-red-500'>*</span> 
               </label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <input
-                  className="block w-full pl-10 pr-3 sm:text-sm border-gray-300 rounded-md"
-                  id="password"
-                  placeholder="Enter your password"
+                  className="border-2 border-blue-600 rounded-md w-full h-[35px] p-2"
+                  name="password"
+                  placeholder="mot de passe"
                   type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={formData.password}
+                  onChange={handleChange}
                   required
                 />
                 {/* Icône de verrouillage va ici */}
               </div>
             </div>
             {/* Bouton de connexion */}
-            <button className="w-full bg-[#004c8c] text-white py-2 rounded-md" type="submit">Se connecter</button>
+            <button className="w-full bg-blue-600 text-white py-2 rounded-md h-[35px]" type="submit">Se connecter</button>
             {error && <div style={{ color: 'red' }}>{error}</div>}
           </form>
           {/* Liens pour la récupération de mot de passe et l'inscription */}

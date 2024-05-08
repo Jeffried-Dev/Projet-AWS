@@ -18,7 +18,7 @@ export default function Loginentre() {
         mail: username,
         password: password
       };
-      const response = await fetch('https://projet-aws-backend.onrender.com/entreprise/connexion', {
+      const response = await fetch('http://localhost:8000/entreprise/connexion', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -27,15 +27,19 @@ export default function Loginentre() {
       });
       if (response.ok) {
         const responseData = await response.json();
-        const signUpUser = responseData.data;
-        localStorage.setItem('mail', username);
-        localStorage.setItem('token', signUpUser.token);
-        localStorage.setItem('role', signUpUser.role);
-        navigate('/utilisateur/recherche');
+        if(responseData.status != 200){
+          setError(responseData.message)
+        }else{
+          const signUpUser = responseData.data;
+          localStorage.setItem('mail', username);
+          localStorage.setItem('token', signUpUser.token);
+          localStorage.setItem('role', signUpUser.role);
+          navigate('/entreprise/offre');
+        }
       } else {
         // Handle login failure
         console.error('error failed');
-        setError('Nom d\'utilisateur ou mot de passe incorrect');
+        setError('Email ou mot de passe incorrect');
       }
     } catch (error) {
       console.error('Error during login:', error);

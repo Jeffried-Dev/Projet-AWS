@@ -6,5 +6,4 @@ export default interface Iadresse{
     rue?: string| null
     numero?: number | null
     ville?: Iville | null
-    offres?: Ioffres[] | null
 }

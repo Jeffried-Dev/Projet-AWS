@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../../assets/Logof.jpg';
 import logoLangue from '../../../assets/icone.png';
 
@@ -7,6 +7,8 @@ const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  
   // rechercher les notifications:
   const notifications = 5
   const handleToggle = () => {
@@ -14,6 +16,13 @@ const Header: React.FC = () => {
   };
 
   useEffect(() => {
+    if(localStorage.getItem("role") !== 'ADMINISTRATEUR'){
+      if(localStorage.getItem("role") !== 'ENTREPRISE'){
+        localStorage.clear()
+        navigate('/404')
+      }
+    }
+    
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
@@ -28,11 +37,20 @@ const Header: React.FC = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  function handleDeconnect(){
+    localStorage.clear()
+    navigate('/');
+  }
+
+  function handleProfile(){
+    navigate('/utilisateur/profile');
+  }
+
   return (
     <nav id="header" className={`fixed w-full z-30 top-0 ${isScrolled ? 'bg-white' : 'bg-white'} text-white`}>
       <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
         <div className="pl-4 flex items-center">
-          <Link to="/" className="toggleColour text-blue-600 no-underline hover:no-underline font-bold text-2xl lg:text-2xl">
+          <Link to="/" className="toggleColour text-blue-600 hover:text-blue-500 no-underline hover:no-underline font-bold text-2xl lg:text-2xl">
             <img src={logo} className='h-8 fill-current inline' alt="Logo" /> 
             CSRecrut
           </Link>
@@ -46,12 +64,20 @@ const Header: React.FC = () => {
           </button>
         </div>
         <div className={`w-full flex-grow lg:flex lg:items-center lg:w-auto mt-2 lg:mt-0 ${isMenuOpen ? 'block' : 'hidden'} bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20`} id="nav-content">
+          
           <ul className="list-reset lg:flex justify-end flex-1 items-center">
+          <Link to="/entreprise/formulaire"><button
+              id="navAction"
+              className="mx-auto lg:mx-0 hover:underline bg-gray-200 text-blue-600 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+            >
+              Publier une offre d'emploi
+            </button>
+          </Link>
+            {/* <li className="mr-3">
+              <Link to="/Apropos" className="inline-block py-2 px-4 text-blue-600 font-bold hover:text-blue-500 no-underline">Apropos</Link>
+            </li> */}
             <li className="mr-3">
-              <Link to="/Apropos" className="inline-block py-2 px-4 text-blue-600 font-bold hover:text-gray-800 no-underline">Apropos</Link>
-            </li>
-            <li className="mr-3">
-              <Link to="/contact" className="inline-block text-blue-600 no-underline font-bold hover:text-gray-800 hover:text-underline py-2 px-4">Contact</Link>
+              <Link to="/entreprise/offre" className="inline-block text-blue-600 no-underline font-bold hover:text-blue-500 hover:text-underline py-2 px-4">Mes offres</Link>
             </li>
             <li className="mr-3">
               <div className="relative">
@@ -95,10 +121,10 @@ const Header: React.FC = () => {
                 </svg>
                 {isOpen && (
                   <div className="absolute top-8 right-0 bg-white shadow-lg rounded-lg border border-gray-200">
-                    <button className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100">
+                    <button className="block w-full text-left px-4 py-2 text-green-800 hover:bg-gray-100" onClick={handleProfile}>
                       Modifier le profil
                     </button>
-                    <button className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100">
+                    <button className="block w-full text-left px-4 py-2 text-red-800 hover:bg-gray-100" onClick={handleDeconnect}>
                       Se déconnecter
                     </button>
                   </div>
@@ -106,13 +132,6 @@ const Header: React.FC = () => {
               </div>
             </li>
           </ul>
-          <Link to="/entreprise/formulaire"><button
-            id="navAction"
-            className="mx-auto lg:mx-0 hover:underline bg-gray-200 text-blue-600 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
-          >
-            Publier une offre d'emploi
-          </button>
-          </Link>
         </div>
       </div>
       <hr className="border-b border-gray-100 opacity-25 my-0 py-0" />

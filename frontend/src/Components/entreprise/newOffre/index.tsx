@@ -20,7 +20,12 @@ const Formulaire: React.FC<Props> = ({ data, setData, onNext, onCancel }) => {
     const [ville, setVille] = useState(data.adresse?.ville?.name ||'');
     const [code, setCode] = useState(data.adresse?.ville?.code || 0);
     const [lieuPoste, setLieuPoste] = useState(data.lieuPoste ||'');
-    const [selectedNumber, setSelectedNumber] = useState('');
+    // États de validation des champs
+   // const [nameValid, setNameValid] = useState(false);
+   // const [numberValid, setNumberValid] = useState(false);
+    const [locationValid, setLocationValid] = useState(false);
+    const [nextClicked, setNextClicked] = useState(false);
+    //const [selectedNumber, setSelectedNumber] = useState('');
     const [adresse, setLocation] = useState<Iadresse>({
         numero: data.adresse?.numero || 0,
         rue: data.adresse?.rue || '',
@@ -36,16 +41,10 @@ const Formulaire: React.FC<Props> = ({ data, setData, onNext, onCancel }) => {
         ));
     };
 
-    // États de validation des champs
-    const [nameValid, setNameValid] = useState(false);
-    const [numberValid, setNumberValid] = useState(false);
-    const [locationValid, setLocationValid] = useState(false);
-    const [nextClicked, setNextClicked] = useState(false);
-
     // Gestion des changements dans les champs
     const handleNumberChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedNumber(event.target.value);
-        setNumberValid(event.target.value !== '');
+        //setSelectedNumber(event.target.value);
+        //setNumberValid(event.target.value !== '');
     };
 
     const handleLieuPosteChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -91,7 +90,7 @@ const Formulaire: React.FC<Props> = ({ data, setData, onNext, onCancel }) => {
     const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setName(value);
-        setNameValid(value.trim() !== '');
+        //setNameValid(value.trim() !== '');
     };
 
     // Vérification de la validité du formulaire
@@ -124,7 +123,7 @@ const Formulaire: React.FC<Props> = ({ data, setData, onNext, onCancel }) => {
                     {!nameValid && <span className="error-message">Veuillez remplir ce champ</span>} */}
 
                     <label htmlFor="email" className="block mb-2">Intitulé du poste<span className="required">*</span></label>
-                    <input type="email" id="email" name="email" value={name} onChange={handleNameChange} className="w-full border border-gray-300 rounded-lg p-2" />
+                    <input type="email" id="email" name="email" value={name} onChange={handleNameChange} className="w-full border border-gray-300 rounded-lg p-2" required/>
                     {nextClicked && <span className="error-message">Veuillez remplir ce champ</span>}
 
                     <label htmlFor="numberOfPeople" className="block mb-2">Nombre de personnes à recruter<span className="required">*</span></label>
@@ -322,6 +321,7 @@ const Formulaire3: React.FC<Props> = ({ data, setData, onPrevious, onSubmit }) =
 const ThreePartForm = () => {
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({});
+    const [error, setError] = useState('');
     const navigate = useNavigate();
   
     const handleNext = (data: React.SetStateAction<{}>) => {
@@ -340,21 +340,25 @@ const ThreePartForm = () => {
     };
     const handleSubmit = async (data: any) => {
       // Soumettre le formulaire avec toutes les données
-      setFormData({ ...formData, ...data });
-      console.log('Formulaire soumis :', formData);
-      try {
-            const response = await fetch("https://projet-aws-backend.onrender.com/offre/create",{
-                method: 'GET',
+        console.log('Formulaire soumis :', formData);
+        try {
+            const response = await fetch("http://localhost:8000/offre/create",{
+                method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
                   'Authorization': 'Bearer ' + localStorage.getItem("token")
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({ ...formData, ...data }),
               });
             if (!response.ok) {
             throw new Error("Erreur lors de la récupération des données");
             }else{
-                navigate('/entreprise/offre');
+                const responseData = await response.json();
+                if(responseData.status != 200){
+                    setError(responseData.message)
+                }else{
+                    navigate('/entreprise/offre');
+                }
             }
         } catch (error) {
             console.error("Erreur:", error);

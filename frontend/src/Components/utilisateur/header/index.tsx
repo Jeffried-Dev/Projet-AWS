@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../../assets/Logof.jpg';
-import logoLangue from '../../../assets/icone.png';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
   // rechercher les notifications:
   const notifications = 5
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
 
-
   useEffect(() => {
+    if(localStorage.getItem("role") !== 'ADMINISTRATEUR'){
+      if(localStorage.getItem("role") !== 'UTILISATEUR'){
+        localStorage.clear()
+        navigate('/404')
+      }
+    }
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
@@ -29,11 +35,20 @@ const Header: React.FC = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  function handleDeconnect(){
+    localStorage.clear()
+    navigate('/');
+  }
+
+  function handleProfile(){
+    navigate('/utilisateur/profile');
+  }
+
   return (
     <nav id="header" className={`fixed w-full z-30 top-0 ${isScrolled ? 'bg-white' : 'bg-white'} text-white`}>
       <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
         <div className="pl-4 flex items-center">
-          <Link to="/" className="toggleColour text-blue-600 no-underline hover:no-underline font-bold text-2xl lg:text-2xl">
+          <Link to="/" className="toggleColour text-blue-600 no-underline hover:text-blue-500 hover:no-underline font-bold text-2xl lg:text-2xl">
             <img src={logo} className='h-8 fill-current inline' alt="Logo" /> 
             CSRecrut
           </Link>
@@ -49,10 +64,10 @@ const Header: React.FC = () => {
         <div className={`w-full flex-grow lg:flex lg:items-center lg:w-auto mt-2 lg:mt-0 ${isMenuOpen ? 'block' : 'hidden'} bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20`} id="nav-content">
           <ul className="list-reset lg:flex justify-end flex-1 items-center">
             <li className="mr-3">
-              <Link to="/Apropos" className="inline-block py-2 px-4 text-blue-600 font-bold hover:text-gray-800 no-underline">Apropos</Link>
+              <Link to="/utilisateur/candidature" className="inline-block py-2 px-4 text-blue-600 font-bold hover:text-blue-500 no-underline">Mes candidatures</Link>
             </li>
             <li className="mr-3">
-              <Link to="/contact" className="inline-block text-blue-600 no-underline font-bold hover:text-gray-800 hover:text-underline py-2 px-4">Contact</Link>
+              <Link to="/utilisateur/recherche" className="inline-block text-blue-600 no-underline font-bold hover:text-blue-500 hover:text-underline py-2 px-4">Rechercher</Link>
             </li>
             <li className="mr-3">
               <div className="relative">
@@ -96,10 +111,10 @@ const Header: React.FC = () => {
                 </svg>
                 {isOpen && (
                   <div className="absolute top-8 right-0 bg-white shadow-lg rounded-lg border border-gray-200">
-                    <button className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100">
+                    <button className="block w-full text-left px-4 py-2 text-green-800 hover:bg-gray-100" onClick={handleProfile}>
                       Modifier le profil
                     </button>
-                    <button className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100">
+                    <button className="block w-full text-left px-4 py-2 text-red-800 hover:bg-gray-100" onClick={handleDeconnect}>
                       Se déconnecter
                     </button>
                   </div>

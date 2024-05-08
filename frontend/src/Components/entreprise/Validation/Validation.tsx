@@ -26,7 +26,7 @@ const VerificationPage = () => {
     console.log('Code de vérification soumis :', code);
     
     try {
-      const response = await fetch('https://projet-aws-backend.onrender.com/entreprise/validation/'+code+'/'+mail, {
+      const response = await fetch('http://localhost:8000/entreprise/validation/'+code+'/'+mail, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 //import './Validation.css'
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import logo from '../../../assets/Logof.jpg';
 
 const VerificationPage = () => {
   const [verificationDigits, setVerificationDigits] = useState(Array(6).fill('')); // Crée un tableau de 6 éléments vides

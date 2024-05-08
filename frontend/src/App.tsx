@@ -13,7 +13,6 @@ import Loginentre from './Components/entreprise/loginentre/loginentre';
 import Contact from './Components/commun/contact/contact';
 import Page404 from './Components/commun/page404/index';
 import Apropos from './Components/commun/Apropos/Apropos';
-import Postuler from './Components/utilisateur/postuler/postuler';
 import Chercheur from './Components/utilisateur/Recherche/chercheur';
 import UserProfile from'./Components/utilisateur/UserProfile/UserProfile';
 import Publication from './Components/entreprise/offre/offre';
@@ -61,7 +60,6 @@ function AppWithRouter() {
       <Route path="/utilisateur/inscription" element={<><Header /><InscriptionUser/><Footer /></>}/>
       <Route path="/utilisateur/Validation" element={<><Header /><Validation/><Footer /></>}/>
       
-      <Route path="/utilisateur/postuler" element={<><UtilisateurHeader /><Postuler/><Footer /></>}/>
       <Route path="/utilisateur/importercv" element={<><UtilisateurHeader />< ImportCV /><Footer /></>} />
       <Route path="/utilisateur/recherche" element={<><UtilisateurHeader /><Chercheur/><Footer /></>}/>
       <Route path="/utilisateur/candidature" element={<><UtilisateurHeader /><ListeCandidature/><Footer /></>}/>
@@ -74,7 +72,7 @@ function AppWithRouter() {
 
       <Route path="/entreprise/offre" element={<><EntrepriseHeader />< Publication/><Footer /></>}/>
       <Route path="/entreprise/ListePostulants" element={<><EntrepriseHeader /><ListePostulants/><Footer /></>}/>
-      <Route path="/entreprise/offre" element={<><EntrepriseHeader />< Publication/><Footer /></>}/><Route path="/entreprise/formulaire" element={<><EntrepriseHeader />< ThreePartForm/><Footer /></>}/>
+      <Route path="/entreprise/formulaire" element={<><EntrepriseHeader />< ThreePartForm/><Footer /></>}/>
       <Route path="/entreprise/profile" element={<><EntrepriseHeader /><EntrepriseProfile/><Footer /></>}/>
       {/* routes administrateur */}
       {/* Routes des étapes de formulaire */}

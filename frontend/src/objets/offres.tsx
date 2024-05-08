@@ -13,7 +13,6 @@ export default interface Ioffres{
     salaireMax?: string | null
     adresse?: Iadresse | null
     typeOffre?: string | null
-   // duree?: string | null
+    state?: boolean | null
     entreprise?: Ientreprise | null
-    postulers?: Ipostulers[] | null
 }

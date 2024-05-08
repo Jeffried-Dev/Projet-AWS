@@ -49,8 +49,8 @@ export default function Component() {
     if(formData.password = formData.repeatedpassword){
       formData.description = description
       formData.adresse = location
-      try {
-        const response = await fetch('https://projet-aws-backend.onrender.com/entreprise/inscription', {
+      try { //https://projet-aws-backend.onrender.com
+        const response = await fetch('http://localhost:8000/entreprise/inscription', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -60,12 +60,16 @@ export default function Component() {
         });
         if (response.ok) {
           // Login successful
-         // onSignUpSuccess(response);
-          navigate('/entreprise/Validation',{
-            state: {
-              mail: formData.mail,
-            }
-          });
+          const responseData = await response.json();
+         if(responseData.status != 200){
+          setError(responseData.message)
+          }else{
+            navigate('/entreprise/Validation',{
+              state: {
+                mail: formData.mail,
+              }
+            });
+          }
         } else {
           // Handle login failure
           console.error('Login failed');

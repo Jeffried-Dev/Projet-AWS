@@ -1,3 +1,4 @@
+import Ioffres from "./offres"
 import IUser from "./user"
 
 export default interface Ipostulers{
@@ -7,5 +8,5 @@ export default interface Ipostulers{
     state?: boolean | false
     decision?: boolean | false
     utilisateur?: IUser | null
-
+    offre?: Ioffres | null
 }

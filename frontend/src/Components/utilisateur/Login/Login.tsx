@@ -31,7 +31,7 @@ export default function Loginentre() {
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
     try {
-      const response = await fetch('https://projet-aws-backend.onrender.com/utilisateur/connexion', {
+      const response = await fetch('http://localhost:8000/utilisateur/connexion', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -40,11 +40,17 @@ export default function Loginentre() {
       });
       if (response.ok) {
         const responseData = await response.json();
-        const signUpUser = responseData.data;
-        localStorage.setItem('mail', formData.mail);
-        localStorage.setItem('token', signUpUser.token);
-        localStorage.setItem('role', signUpUser.role);
-        navigate('/utilisateur/recherche');
+        
+        console.log(responseData)
+        if(responseData.status !== 200){
+          setError(responseData.message)
+        }else{
+          const signUpUser = responseData.data;
+          localStorage.setItem('mail', formData.mail);
+          localStorage.setItem('token', signUpUser.token);
+          localStorage.setItem('role', signUpUser.role);
+          navigate('/utilisateur/recherche');
+        }
       } else {
         // Handle login failure
         console.error('error failed');

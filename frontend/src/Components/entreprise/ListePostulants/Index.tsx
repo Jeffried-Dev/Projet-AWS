@@ -128,16 +128,16 @@ const ListePostulants = () => {
                 <table className="text-left w-full md:w-[75%] border-collapse bg-white"> 
                     <thead>
                         <tr>
-                            <th className="py-4 px-6 bg-blue-lightest font-bold uppercase text-sm text-blue-dark border-b border-blue-light">Name</th>
-                            <th className="py-4 px-6 bg-blue-lightest font-bold uppercase text-sm text-blue-dark border-b border-blue-light">Last Name</th>
-                            <th className="py-4 px-6 bg-blue-lightest font-bold uppercase text-sm text-blue-dark border-b border-blue-light">Email</th>
-                            <th className="py-4 px-6 bg-blue-lightest font-bold uppercase text-sm text-blue-dark border-b border-blue-light">Cv</th>
+                            <th className="py-4 px-6 bg-blue-lightest font-bold uppercase text-sm text-blue-dark border-b border-blue-light">Prénom</th>
+                            <th className="py-4 px-6 bg-blue-lightest font-bold uppercase text-sm text-blue-dark border-b border-blue-light">Nom</th>
+                            <th className="py-4 px-6 bg-blue-lightest font-bold uppercase text-sm text-blue-dark border-b border-blue-light">Adresse e-mail</th>
+                            <th className="py-4 px-6 bg-blue-lightest font-bold uppercase text-sm text-blue-dark border-b border-blue-light">CV</th>
                             <th className="py-4 px-6 bg-blue-lightest font-bold uppercase text-sm text-blue-dark border-b border-blue-light">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {objects?.map((obj) => (<tr className="hover:bg-blue-lighter">
-                            <td className="py-4 px-6 border-b border-blue-light">{obj.utilisateur?.name}</td>
+                            <td className="py-4 px-6 border-b border-blue-light">{obj.utilisateur?.secondName}</td>
                             <td className="py-4 px-6 border-b border-blue-light">{obj.utilisateur?.name}</td>
                             <td className="py-4 px-6 border-b border-blue-light">{obj.utilisateur?.mail}</td>
                             <td className="py-4 px-6 border-b border-blue-light"><button onClick={() => {

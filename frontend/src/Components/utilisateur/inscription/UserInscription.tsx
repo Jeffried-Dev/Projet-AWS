@@ -11,6 +11,7 @@ const UserInscription = () => {
     gender: '',
     nationality: '',
     secondName: '',
+    name:''
   });
 
   const [error, setError] = useState('');

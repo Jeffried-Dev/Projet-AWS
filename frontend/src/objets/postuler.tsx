@@ -1,5 +1,5 @@
 import Ioffres from "./offres"
-import IUser from "./user"
+import Iutilisateur from "./utilisateur"
 
 export default interface Ipostulers{
     id?: string |null
@@ -7,6 +7,6 @@ export default interface Ipostulers{
     cv?: string | null
     state?: boolean | false
     decision?: boolean | false
-    utilisateur?: IUser | null
+    utilisateur?: Iutilisateur | null
     offre?: Ioffres | null
 }

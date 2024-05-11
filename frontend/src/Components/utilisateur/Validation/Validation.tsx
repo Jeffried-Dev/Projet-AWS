@@ -7,6 +7,7 @@ const VerificationPage = () => {
   const [verificationDigits, setVerificationDigits] = useState(Array(6).fill('')); // Crée un tableau de 6 éléments vides
   const location = useLocation();
   const { mail } = location.state;
+  const [isLoading, setIsLoading] = useState(false);
   console.log(mail)
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ const VerificationPage = () => {
     // Ici, vous pouvez ajouter la logique pour valider le code de vérification
     const code = verificationDigits.join(''); // Combinez les chiffres pour former le code complet
     console.log('Code de vérification soumis :', code);
+    setIsLoading(true);
     // Vous pouvez également implémenter la redirection vers la page suivante après la vérification
     try {
       const response = await fetch('https://projet-aws-backend.onrender.com/utilisateur/validation/'+code+'/'+mail, {
@@ -45,6 +47,7 @@ const VerificationPage = () => {
     } catch (error) {
       console.error('Error during login:', error);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -64,8 +67,7 @@ const VerificationPage = () => {
               />
             ))}
           </div>
-          <button type="submit" className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-            Valider
+          <button type="submit" className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"disabled={isLoading}>{isLoading ? 'Chargement...' : 'Valider'}
           </button>
           {error && <div className="text-red-500 mt-2">{error}</div>}
         </form>

@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 //import './Validation.css'
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import logo from '../../../assets/Logof.jpg';
 
 const VerificationPage = () => {
   const [verificationDigits, setVerificationDigits] = useState(Array(6).fill('')); // Crée un tableau de 6 éléments vides
@@ -11,6 +9,7 @@ const VerificationPage = () => {
   const { mail } = location.state;
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   // Fonction pour gérer le changement de chaque chiffre de vérification
   const handleChange = (index :any, value: any) => {
     const newDigits = [...verificationDigits];
@@ -24,9 +23,9 @@ const VerificationPage = () => {
     e.preventDefault();
     const code = verificationDigits.join('');
     console.log('Code de vérification soumis :', code);
-    
+    setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/entreprise/validation/'+code+'/'+mail, {
+      const response = await fetch('https://projet-aws-backend.onrender.com/entreprise/validation/'+code+'/'+mail, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -45,6 +44,7 @@ const VerificationPage = () => {
     } catch (error) {
       console.error('Error during login:', error);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -64,8 +64,8 @@ const VerificationPage = () => {
               />
             ))}
           </div>
-          <button type="submit" className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-            Valider
+          <button type="submit" className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600" disabled={isLoading}>{isLoading ? 'Chargement...' : 'Valider'}
+            
           </button>
           {error && <div className="text-red-500 mt-2">{error}</div>}
         </form>

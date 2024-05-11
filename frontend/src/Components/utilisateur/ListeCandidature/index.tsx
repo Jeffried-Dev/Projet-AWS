@@ -5,7 +5,7 @@ import Ipostulers from '../../../objets/postuler';
 const Candidature = () => {
   const [objects, setObjects] = useState<Ipostulers[] | null >(null);
   const navigate = useNavigate();
-
+  const [isLoading, setIsLoading] = useState(false);
   const truncateDescription = (description: string): string => {
     return description.length > 200 ? description.substring(0, 300) + '...' : description;
   };
@@ -14,7 +14,7 @@ const Candidature = () => {
     //Fonction pour récupérer la liste d'Offres via fetch au chargement de la page
     const fetchObjects = async () => {
     try {
-        const response = await fetch("http://localhost:8000/postuler/PostulerByUser",{
+        const response = await fetch("https://projet-aws-backend.onrender.com/postuler/PostulerByUser",{
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -41,13 +41,42 @@ const Candidature = () => {
     fetchObjects();
   }, []);
 
-    // function handlepostule() {
-    //   navigate('/utilisateur/importercv',{
-    //       state: {
-    //         offre: selectedObject,
-    //       }
-    //   });
-    // }
+  const handleclick = async (obj: Ipostulers) => {
+    setIsLoading(true);
+    try {
+      const form = obj
+      const response = await fetch(`https://projet-aws-backend.onrender.com/postuler/delete/${form.id}`,{
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem("token")
+          },
+        });
+      if (!response.ok) {
+      throw new Error("Erreur lors de la récupération des données");
+      }else{
+          const responseData = await response.json();
+          if(responseData.status === 200){
+              const updatedObjects = objects?.map((obj) => {
+                  if (obj.id === form.id) {
+                      return {};
+                  } else {
+                      return obj;
+                  }
+              });
+              if(updatedObjects){
+                  setObjects(updatedObjects);
+              }
+          }else{
+              console.log(responseData)
+          }
+
+      }
+    } catch (error) {
+        console.error("Erreur:", error);
+    }
+    setIsLoading(false);
+  }
 
     // faire une modale pour le deatail sur la candidature, pour suprimer et autre
 
@@ -74,9 +103,13 @@ const Candidature = () => {
             </div>
             <div className="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
               <div className="flex items-center justify-center">
-                <button className=" bg-blue-600 mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                  Action
-                </button>
+                  {obj.state === false && <button onClick={() => {
+                                      console.log("Clicked on:", obj);
+                                      handleclick(obj);
+                                  }} className="bg-red-600 mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-2 px-4 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out" disabled={isLoading}>{isLoading ? 'Chargement...' : 'Supprimer'}
+                  </button>}
+                  {obj.state === true && obj.decision && <span className='text-green-600 font-bold'>Accepté(e)</span>}
+                  {obj.state === true && !obj.decision && <span className='text-red-600 font-bold'>Refusé(e)</span>}
               </div>
             </div>
           </div>

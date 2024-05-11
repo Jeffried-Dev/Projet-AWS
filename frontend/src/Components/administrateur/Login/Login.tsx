@@ -29,7 +29,7 @@ export default function Loginentre() {
     event.preventDefault();
     setIsLoading(true);
     try {
-      const response = await fetch('https://projet-aws-backend.onrender.com/utilisateur/connexion', {
+      const response = await fetch('https://projet-aws-backend.onrender.com/administrateur/connexion', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ export default function Loginentre() {
           }
           localStorage.setItem('token', signUpUser.token);
           localStorage.setItem('role', signUpUser.role);
-          navigate('/utilisateur/recherche');
+          navigate('/admin/dashboard');
         }
       } else {
         // Handle login failure
@@ -82,7 +82,7 @@ export default function Loginentre() {
         {/* Deuxième moitié de la mise en page avec le formulaire de connexion */}
         <div className="w-1/2 space-y-6">
           {/* Titre du formulaire */}
-          <h2 className="text-4xl font-bold text-blue-500">Connexion</h2>
+          <h2 className="text-4xl font-bold text-blue-500">Connexion Admin</h2>
           {/* Formulaire de connexion */}
           <form onSubmit={handleSubmit}>
             {/* Champ pour le nom d'utilisateur */}

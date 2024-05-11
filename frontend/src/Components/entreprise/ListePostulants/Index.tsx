@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Ipostulers from '../../../objets/postuler';
 
 const ListePostulants = () => {
@@ -7,12 +7,14 @@ const ListePostulants = () => {
     const navigate = useNavigate();
     const { offre } = location.state;
     const [objects, setObjects] = useState<Ipostulers[] | null >(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading2, setIsLoading2] = useState(false);
     
     useEffect(() => {
         //Fonction pour récupérer la liste d'Offres via fetch au chargement de la page
         const fetchObjects = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/postuler/PostulerByOffreId/${offre.id}`,{
+                const response = await fetch(`https://projet-aws-backend.onrender.com/postuler/PostulerByOffreId/${offre.id}`,{
                     method: 'GET',
                     headers: {
                     'Content-Type': 'application/json',
@@ -44,9 +46,10 @@ const ListePostulants = () => {
     }else{
 
         async function handleCv(obj: Ipostulers){
+            setIsLoading(true);
             try {
                 console.log(obj.cv)
-                const response = await fetch(`http://localhost:8000/postuler/files/${obj.cv}`,{
+                const response = await fetch(`https://projet-aws-backend.onrender.com/postuler/files/${obj.cv}`,{
                     method: 'GET',
                     headers: {
                     'Content-Type': 'application/json',
@@ -60,7 +63,12 @@ const ListePostulants = () => {
 
                 // Créez un URL à partir du blob
                 const url = window.URL.createObjectURL(blob);
-                // Créez un lien <a> pour télécharger le fichier
+                // // Ouvrez une nouvelle fenêtre pour afficher le fichier PDF
+                // const pdfWindow = window.open(url, '_blank');
+                // if (!pdfWindow) {
+                //     throw new Error("Impossible d'ouvrir une nouvelle fenêtre");
+                // }
+                // // Créez un lien <a> pour télécharger le fichier
                 const link = document.createElement('a');
                 link.href = url;
                 const nompdf = 'Cv_' + obj.offre?.name +'_'+ Math.random()+'.pdf'
@@ -69,19 +77,21 @@ const ListePostulants = () => {
                 document.body.appendChild(link);
                 // Cliquez sur le lien pour démarrer le téléchargement
                 link.click();
-                // Nettoyez l'URL après le téléchargement
+                //Nettoyez l'URL après le téléchargement
                 window.URL.revokeObjectURL(url);
             } catch (error) {
                 console.error("Erreur:", error);
             }
+            setIsLoading(false);
         }
 
         async function handleDecision(obj: Ipostulers,decision: boolean) {
+            setIsLoading2(true);
             try {
                 const form = obj
                 form.state = true
                 form.decision = decision
-                const response = await fetch("http://localhost:8000/postuler/update",{
+                const response = await fetch("https://projet-aws-backend.onrender.com/postuler/update",{
                     method: 'PUT',
                     headers: {
                       'Content-Type': 'application/json',
@@ -116,6 +126,7 @@ const ListePostulants = () => {
             } catch (error) {
                 console.error("Erreur:", error);
             }
+            setIsLoading2(false);
         }
 
         return (
@@ -123,32 +134,32 @@ const ListePostulants = () => {
                 <table className="text-left w-full md:w-[75%] border-collapse bg-white"> 
                     <thead>
                         <tr>
-                            <th className="py-4 px-6 bg-blue-lightest font-bold uppercase text-sm text-blue-dark border-b border-blue-light">Name</th>
-                            <th className="py-4 px-6 bg-blue-lightest font-bold uppercase text-sm text-blue-dark border-b border-blue-light">Last Name</th>
-                            <th className="py-4 px-6 bg-blue-lightest font-bold uppercase text-sm text-blue-dark border-b border-blue-light">Email</th>
-                            <th className="py-4 px-6 bg-blue-lightest font-bold uppercase text-sm text-blue-dark border-b border-blue-light">Cv</th>
+                            <th className="py-4 px-6 bg-blue-lightest font-bold uppercase text-sm text-blue-dark border-b border-blue-light">Prénom</th>
+                            <th className="py-4 px-6 bg-blue-lightest font-bold uppercase text-sm text-blue-dark border-b border-blue-light">Nom</th>
+                            <th className="py-4 px-6 bg-blue-lightest font-bold uppercase text-sm text-blue-dark border-b border-blue-light">Adresse e-mail</th>
+                            <th className="py-4 px-6 bg-blue-lightest font-bold uppercase text-sm text-blue-dark border-b border-blue-light">CV</th>
                             <th className="py-4 px-6 bg-blue-lightest font-bold uppercase text-sm text-blue-dark border-b border-blue-light">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {objects?.map((obj) => (<tr className="hover:bg-blue-lighter">
-                            <td className="py-4 px-6 border-b border-blue-light">{obj.utilisateur?.name}</td>
+                            <td className="py-4 px-6 border-b border-blue-light">{obj.utilisateur?.secondName}</td>
                             <td className="py-4 px-6 border-b border-blue-light">{obj.utilisateur?.name}</td>
                             <td className="py-4 px-6 border-b border-blue-light">{obj.utilisateur?.mail}</td>
                             <td className="py-4 px-6 border-b border-blue-light"><button onClick={() => {
                                         console.log("Clicked on:", obj);
                                         handleCv(obj);
                                     }
-                                } className='bg-blue-600 mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out'>Visualiser</button></td>
+                                } className='bg-blue-600 mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-2 px-4 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out'disabled={isLoading}>{isLoading ? 'Chargement...' : `Télécharger`}</button></td>
                             {obj.state ? 
                                 <td> {obj.decision ? <span className='text-green-600 font-bold'>Accepté(e)</span> : <span className='text-red-600 font-bold'>Refusé(e)</span>} </td>
                             : <td className="py-4 px-6 border-b border-blue-light"><button onClick={() => {
                                         console.log("Clicked on:", obj);
                                         handleDecision(obj,true);
-                                    }} className='bg-green-600 mx-auto lg:mx-0 hover:underline gradient text-Black font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out'>accepter</button> <button onClick={() => {
+                                    }} className='bg-green-600 mx-auto lg:mx-0 hover:underline gradient text-Black font-bold rounded-full my-6 py-2 px-4 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out' disabled={isLoading2}>{isLoading2 ? 'Chargement...' : 'Accepter'}</button> <button onClick={() => {
                                         console.log("Clicked on:", obj);
                                         handleDecision(obj,false);
-                                    }} className='bg-red-600 mx-auto lg:mx-0 hover:underline gradient text-Black font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out'>rejeter</button></td>}
+                                    }} className='bg-red-600 mx-auto lg:mx-0 hover:underline gradient text-Black font-bold rounded-full my-6 py-2 px-4 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out'disabled={isLoading2}>{isLoading2 ? 'Chargement...' : 'Rejeter'}</button></td>}
                         </tr>))} 
                     </tbody>
                 </table>

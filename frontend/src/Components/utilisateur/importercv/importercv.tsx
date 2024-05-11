@@ -12,6 +12,7 @@ const ImportCV = () => {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState<number>(1);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
@@ -29,19 +30,21 @@ const ImportCV = () => {
   };
 
   const savePdf = async () => {
+    setIsLoading(true);
     if (pdfFile) {
       const formData = new FormData();
       formData.append('file', pdfFile); // Ajoute le fichier PDF
-      //formData.append('offre', offre.id);
       try {
-        const response = await fetch(`http://localhost:8000/postuler/create/${offre.id}`,{
+        const response = await fetch(`https://projet-aws-backend.onrender.com/postuler/create/${offre.id}`,{
             method: 'POST',
             headers: {
               'Authorization': 'Bearer ' + localStorage.getItem("token")
             },
-            body: formData,
+            body: formData, // /postuler/create1 
           });
+          console.log(response)
         if (!response.ok) {
+          
           throw new Error("Erreur lors de la récupération des données");
         } else {
           navigate('/utilisateur/candidature');
@@ -50,6 +53,7 @@ const ImportCV = () => {
           console.error("Erreur:", error);
       }
     }
+    setIsLoading(false);
   };
 
   return (
@@ -77,8 +81,8 @@ const ImportCV = () => {
             onChange={handleFileChange}
           />
           {pdfFile && (
-            <button onClick={savePdf} className="save-button bg-blue-500 text-white py-2 px-4 rounded-md cursor-pointer hover:bg-blue-600 mt-4">
-              Enregistrer
+            <button onClick={savePdf} className="save-button bg-blue-500 text-white py-2 px-4 rounded-md cursor-pointer hover:bg-blue-600 mt-4" disabled={isLoading}>{isLoading ? 'Chargement...' : 'Enregistrer'}
+              
             </button>
           )}
       </div>

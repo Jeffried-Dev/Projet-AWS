@@ -22,7 +22,7 @@ function Chercheur(){
         //Fonction pour récupérer la liste d'Offres via fetch au chargement de la page
         const fetchObjects = async () => {
         try {
-            const response = await fetch("http://localhost:8000/offre/list",{
+            const response = await fetch("https://projet-aws-backend.onrender.com/offre/list",{
                 method: 'GET',
                 headers: {
                   'Content-Type': 'application/json',
@@ -81,7 +81,9 @@ function Chercheur(){
                         <span className="material-symbols-outlined text-3xl">Recherche</span>
                     </button>
                 </div>
-                <div className="flex mt-8 max-w-[1000px]"><p className="text-lg text-gray-700 mb-8">Aucune offre disponible pour le moment.</p></div>
+                <br></br>
+                <br></br>
+                <div className="flex mt-8 max-w-[1000px] px-4 py-2"><p className="text-lg text-gray-700 mb-8">Aucune offre disponible pour le moment.</p></div>
                 
             </div>);
     }else{    

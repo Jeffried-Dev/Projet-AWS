@@ -1,19 +1,15 @@
 export default interface IUser {
     id?: any | null,
-    username?: string | null,
-    name?: string | null,
+    name?: string,
     mail?: string,
     password?: string,
     role?: string
-    tel?: number| null
-    image?: string | null,
-    gender?: string| null
-    nationality?: string| null
-    secondName?: string| null
-    dateNaiss?: Date| null,
+    tel?: number
+    repeatedpassword?: string
     verification?: boolean | false
     actived?: boolean | false
     activationKey?: string | null
+    createdDate?: Date | null
     resetKey?: string | null
     token?: string | null
   }

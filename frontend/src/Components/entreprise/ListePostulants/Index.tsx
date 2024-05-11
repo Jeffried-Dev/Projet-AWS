@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Ipostulers from '../../../objets/postuler';
 
 const ListePostulants = () => {
@@ -7,6 +7,8 @@ const ListePostulants = () => {
     const navigate = useNavigate();
     const { offre } = location.state;
     const [objects, setObjects] = useState<Ipostulers[] | null >(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading2, setIsLoading2] = useState(false);
     
     useEffect(() => {
         //Fonction pour récupérer la liste d'Offres via fetch au chargement de la page
@@ -44,6 +46,7 @@ const ListePostulants = () => {
     }else{
 
         async function handleCv(obj: Ipostulers){
+            setIsLoading(true);
             try {
                 console.log(obj.cv)
                 const response = await fetch(`https://projet-aws-backend.onrender.com/postuler/files/${obj.cv}`,{
@@ -79,9 +82,11 @@ const ListePostulants = () => {
             } catch (error) {
                 console.error("Erreur:", error);
             }
+            setIsLoading(false);
         }
 
         async function handleDecision(obj: Ipostulers,decision: boolean) {
+            setIsLoading2(true);
             try {
                 const form = obj
                 form.state = true
@@ -121,6 +126,7 @@ const ListePostulants = () => {
             } catch (error) {
                 console.error("Erreur:", error);
             }
+            setIsLoading2(false);
         }
 
         return (
@@ -144,16 +150,16 @@ const ListePostulants = () => {
                                         console.log("Clicked on:", obj);
                                         handleCv(obj);
                                     }
-                                } className='bg-blue-600 mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out'><i className="fas fa-eye mr-2"></i>Visualiser</button></td>
+                                } className='bg-blue-600 mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-2 px-4 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out'disabled={isLoading}>{isLoading ? 'Chargement...' : `Télécharger`}</button></td>
                             {obj.state ? 
                                 <td> {obj.decision ? <span className='text-green-600 font-bold'>Accepté(e)</span> : <span className='text-red-600 font-bold'>Refusé(e)</span>} </td>
                             : <td className="py-4 px-6 border-b border-blue-light"><button onClick={() => {
                                         console.log("Clicked on:", obj);
                                         handleDecision(obj,true);
-                                    }} className='bg-green-600 mx-auto lg:mx-0 hover:underline gradient text-Black font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out'>accepter</button> <button onClick={() => {
+                                    }} className='bg-green-600 mx-auto lg:mx-0 hover:underline gradient text-Black font-bold rounded-full my-6 py-2 px-4 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out' disabled={isLoading2}>{isLoading2 ? 'Chargement...' : 'Accepter'}</button> <button onClick={() => {
                                         console.log("Clicked on:", obj);
                                         handleDecision(obj,false);
-                                    }} className='bg-red-600 mx-auto lg:mx-0 hover:underline gradient text-Black font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out'>rejeter</button></td>}
+                                    }} className='bg-red-600 mx-auto lg:mx-0 hover:underline gradient text-Black font-bold rounded-full my-6 py-2 px-4 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out'disabled={isLoading2}>{isLoading2 ? 'Chargement...' : 'Rejeter'}</button></td>}
                         </tr>))} 
                     </tbody>
                 </table>

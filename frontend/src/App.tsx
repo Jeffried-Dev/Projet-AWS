@@ -23,8 +23,10 @@ import ThreePartForm from './Components/entreprise/newOffre/index';
 import ListePostulants from './Components/entreprise/ListePostulants/Index';
 import EntrepriseProfile from './Components/entreprise/profil/index';
 import ListeCandidature from './Components/utilisateur/ListeCandidature/index';
-
-//import ProtectedRoute  from './Components/commun/ProtectedRoute/index';
+import LoginAdmin from './Components/administrateur/Login/Login';
+import AdminDashboard from './Components/administrateur/tableauBord/index';
+import Adminstatistique from './Components/administrateur/statistique/index';
+import AdminHeader from './Components/administrateur/header/header';
 
 const App: React.FC = () => {
   return (
@@ -53,7 +55,6 @@ function AppWithRouter() {
       <Route path="/contact" element={<><Header /><Contact/><Footer /></>}/>
       <Route path="/Apropos" element={<><Header /><Apropos/><Footer /></>}/>
       <Route path="*" element={<><Header /><Page404/><Footer /></>}/>
-      {/* <ProtectedRoute path="/utilisateur/postuler" element={<><UtilisateurHeader /><Postuler/><Footer /></>} requiredRole={1} redirectPath="/404"/> */}
       
       {/* routes utilisateurs */}  
       <Route path="/utilisateur/connexion" element={<><Header /><LoginUser/><Footer /></>}> </Route>
@@ -74,8 +75,12 @@ function AppWithRouter() {
       <Route path="/entreprise/ListePostulants" element={<><EntrepriseHeader /><ListePostulants/><Footer /></>}/>
       <Route path="/entreprise/formulaire" element={<><EntrepriseHeader />< ThreePartForm/><Footer /></>}/>
       <Route path="/entreprise/profile" element={<><EntrepriseHeader /><EntrepriseProfile/><Footer /></>}/>
+      
       {/* routes administrateur */}
-      {/* Routes des étapes de formulaire */}
+      <Route path="/admin" element={<><Header /><LoginAdmin/><Footer /></>}/>
+
+      <Route path="/admin/dashboard" element={<><AdminHeader /><AdminDashboard/><Footer /></>}/>
+      {/* <Route path="/admin/statistique" element={<><AdminHeader /><Adminstatistique/><Footer /></>}/> */}
     </Routes>
   );
 

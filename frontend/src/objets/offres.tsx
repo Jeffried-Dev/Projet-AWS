@@ -15,4 +15,5 @@ export default interface Ioffres{
     typeOffre?: string | null
     state?: boolean | null
     entreprise?: Ientreprise | null
+    createdDate?: Date | null
 }

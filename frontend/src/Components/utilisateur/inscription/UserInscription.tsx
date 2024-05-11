@@ -16,17 +16,20 @@ const UserInscription = () => {
 
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
       ...prevState,
-      [name]: value,
+      [name]: name === 'dateNaiss' ? (value ? new Date(value) : null) : value,
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(formData)
+    setIsLoading(true);
     if(formData.password === formData.repeatedpassword){
       try {
         const response = await fetch('https://projet-aws-backend.onrender.com/utilisateur/inscription', {
@@ -57,7 +60,7 @@ const UserInscription = () => {
     }else{
       console.error('password failed');
     }
-    
+    setIsLoading(false);
   };
 
   return (
@@ -224,7 +227,7 @@ const UserInscription = () => {
                 </div>
                 
                 {/* Bouton d'inscription */}
-                <button className="w-full bg-blue-600 text-white h-[35px] rounded-md" type="submit">S'inscrire</button>
+                <button className="w-full bg-blue-600 text-white h-[35px] rounded-md" type="submit" disabled={isLoading}>{isLoading ? 'Chargement...' : 'S\'inscrire'}</button>
                 {error && <div style={{ color: 'red' }}>{error}</div>}
               </div>
             </form>

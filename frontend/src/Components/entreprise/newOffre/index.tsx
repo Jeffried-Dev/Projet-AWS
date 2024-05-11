@@ -285,11 +285,14 @@ const Formulaire2: React.FC<Props> = ({ data, setData, onNext, onPrevious }) => 
 
 const Formulaire3: React.FC<Props> = ({ data, setData, onPrevious, onSubmit }) => {
     const [description, setDescription] = useState(data.description ||'');
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = () => {
+        setIsLoading(false);
         if (onSubmit) {
             onSubmit({ description });
         }
+        setIsLoading(true);
     };
    
     return (
@@ -310,7 +313,7 @@ const Formulaire3: React.FC<Props> = ({ data, setData, onPrevious, onSubmit }) =
 
                 <div className="flex justify-between mt-6">
                 <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg" onClick={onPrevious}>Retour</button>
-                <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg" onClick={handleSubmit}>Poster</button>
+                <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg" onClick={handleSubmit} disabled={isLoading}>{isLoading ? 'Chargement...' : 'Poster'}</button>
                 </div>
             </div>
         </div>

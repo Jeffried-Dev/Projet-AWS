@@ -12,6 +12,7 @@ export default function Loginentre() {
   });
   const navigate = useNavigate();
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -24,6 +25,7 @@ export default function Loginentre() {
   // Fonction pour gérer la soumission du formulaire
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
+    setIsLoading(true);
     try {
       const response = await fetch('https://projet-aws-backend.onrender.com/entreprise/connexion', {
         method: 'POST',
@@ -53,6 +55,7 @@ export default function Loginentre() {
     } catch (error) {
       console.error('Error during login:', error);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -115,7 +118,7 @@ export default function Loginentre() {
               </div>
             </div>
             {/* Bouton de connexion */}
-            <button className="w-full bg-blue-600 text-white py-2 rounded-md h-[35px]" type="submit">Se connecter</button>
+            <button className="w-full bg-blue-600 text-white py-2 rounded-md h-[35px]" type="submit" disabled={isLoading}>{isLoading ? 'Chargement...' : 'Se connecter'}</button>
             {error && <div style={{ color: 'red' }}>{error}</div>}
           </form>
           {/* Liens pour la récupération de mot de passe et l'inscription */}

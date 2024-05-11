@@ -9,6 +9,7 @@ export default interface IUser {
     verification?: boolean | false
     actived?: boolean | false
     activationKey?: string | null
+    createdDate?: Date | null
     resetKey?: string | null
     token?: string | null
   }

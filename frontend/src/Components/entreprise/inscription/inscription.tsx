@@ -8,6 +8,7 @@ export default function Component() {
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const [description, setDescription] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<Ientreprise>({
     mail: '',
     password: '',
@@ -27,8 +28,9 @@ export default function Component() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if(formData.password = formData.repeatedpassword){
+      setIsLoading(true);
       formData.description = description
-      try { //https://projet-aws-backend.onrender.com
+      try { //https://projet-aws-backend.onrender./com
         const response = await fetch('https://projet-aws-backend.onrender.com/entreprise/inscription', {
           method: 'POST',
           headers: {
@@ -58,6 +60,7 @@ export default function Component() {
       } catch (error) {
         console.error('Error during login:', error);
       }
+      setIsLoading(false);
     }else{
       console.error('password failed');
     }
@@ -133,7 +136,7 @@ export default function Component() {
                   </div>
                 </div>
                 {/* Bouton d'inscription */}
-                <button className="w-full h-[35px] bg-blue-600 rounded-md text-white" type="submit">S'inscrire</button>
+                <button className="w-full h-[35px] bg-blue-600 rounded-md text-white" type="submit" disabled={isLoading}>{isLoading ? 'Chargement...' : 'S\'inscrire'}</button>
                 {error && <div style={{ color: 'red' }}>{error}</div>}
               </div>
             </form>

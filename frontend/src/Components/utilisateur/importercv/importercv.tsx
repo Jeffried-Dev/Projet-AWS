@@ -35,12 +35,12 @@ const ImportCV = () => {
       const formData = new FormData();
       formData.append('file', pdfFile); // Ajoute le fichier PDF
       try {
-        const response = await fetch(`https://projet-aws-backend.onrender.com/postuler/create/${offre.id}`,{
+        const response = await fetch(`https://projet-aws-backend.onrender.com/postuler/create1/${offre.id}`,{
             method: 'POST',
             headers: {
               'Authorization': 'Bearer ' + localStorage.getItem("token")
             },
-            body: formData, // /postuler/create1 
+           // body: formData, // /postuler/create1 
           });
           console.log(response)
         if (!response.ok) {

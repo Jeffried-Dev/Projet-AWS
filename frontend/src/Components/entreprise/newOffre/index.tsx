@@ -125,15 +125,7 @@ const Formulaire: React.FC<Props> = ({ data, setData, onNext, onCancel }) => {
                     <label htmlFor="email" className="block mb-2">Intitulé du poste<span className="required">*</span></label>
                     <input type="email" id="email" name="email" value={name} onChange={handleNameChange} className="w-full border border-gray-300 rounded-lg p-2" required/>
                     {nextClicked && <span className="error-message">Veuillez remplir ce champ</span>}
-
-                    <label htmlFor="numberOfPeople" className="block mb-2">Nombre de personnes à recruter<span className="required">*</span></label>
-                    {/* <div className="select-container">
-                        <select id="numberOfPeople" name="numberOfPeople" value={selectedNumber} onChange={handleNumberChange} className="w-full border border-gray-300 rounded-lg p-2 appearance-none">
-                            {renderNumberOptions()}
-                        </select>
-                        {nextClicked && <span className="error-message">Veuillez choisir une option</span>}
-                    </div> */}
-
+                    
                     <label htmlFor="lieuPoste" className="block mb-2">Type de lieu du poste<span className="required">*</span></label>
                     <div className="select-container">
                         <select id="lieuPoste" name="lieuPoste" value={lieuPoste} onChange={handleLieuPosteChange} className="w-full border border-gray-300 rounded-lg p-2">
@@ -180,10 +172,15 @@ const Formulaire2: React.FC<Props> = ({ data, setData, onNext, onPrevious }) => 
     const [frequenceSalaire, setFrequenceSalaire] = useState(data.frequenceSalaire ||'');
     const [salaireMin, setSalaireMin] = useState(data.salaireMin ||'');
     const [salaireMax, setSalaireMax] = useState(data.salaireMax ||'');
+    const [error, setError] = useState('');
 
     const handleNext = () => {
-        if (onNext) {
-            onNext({ typeOffre,frequenceSalaire,salaireMin,salaireMax });
+        if(salaireMin<salaireMax){
+            if (onNext) {
+                onNext({ typeOffre,frequenceSalaire,salaireMin,salaireMax });
+            }
+        }else{
+            setError('Le salaire minimale doit être superieur au salaire maximale');
         }
       };
 
@@ -259,7 +256,7 @@ const Formulaire2: React.FC<Props> = ({ data, setData, onNext, onPrevious }) => 
                 </label>
                 <input type="text" id="salaireMin" name="salaireMin" value={salaireMin} onChange={handleSalaireMinChange} className="w-full border border-gray-300 rounded-lg p-2" />
                 {(buttonClicked && salaireMin.trim() === '') && <span className="error-message">Veuillez remplir ce champ</span>}
-
+                {error && <div style={{ color: 'red' }}>{error}</div>}
                 <label htmlFor="salaireMax" className="block mb-2">
                     Salaire maximum<span className="text-red-500">*</span>
                 </label>

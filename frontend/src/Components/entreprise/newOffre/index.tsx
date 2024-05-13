@@ -125,7 +125,7 @@ const Formulaire: React.FC<Props> = ({ data, setData, onNext, onCancel }) => {
                     <label htmlFor="email" className="block mb-2">Intitulé du poste<span className="required">*</span></label>
                     <input type="email" id="email" name="email" value={name} onChange={handleNameChange} className="w-full border border-gray-300 rounded-lg p-2" required/>
                     {nextClicked && <span className="error-message">Veuillez remplir ce champ</span>}
-                    
+
                     <label htmlFor="lieuPoste" className="block mb-2">Type de lieu du poste<span className="required">*</span></label>
                     <div className="select-container">
                         <select id="lieuPoste" name="lieuPoste" value={lieuPoste} onChange={handleLieuPosteChange} className="w-full border border-gray-300 rounded-lg p-2">
@@ -175,12 +175,8 @@ const Formulaire2: React.FC<Props> = ({ data, setData, onNext, onPrevious }) => 
     const [error, setError] = useState('');
 
     const handleNext = () => {
-        if(salaireMin<salaireMax){
-            if (onNext) {
-                onNext({ typeOffre,frequenceSalaire,salaireMin,salaireMax });
-            }
-        }else{
-            setError('Le salaire minimale doit être superieur au salaire maximale');
+        if (onNext) {
+            onNext({ typeOffre,frequenceSalaire,salaireMin,salaireMax });
         }
       };
 
@@ -205,7 +201,12 @@ const Formulaire2: React.FC<Props> = ({ data, setData, onNext, onPrevious }) => 
     };
 
     const isFormValid = () => {
-        return typeOffre.trim() !== '' && frequenceSalaire.trim() !== '' && salaireMin.trim() !== '' && salaireMax.trim() !== '';
+        if(salaireMin<salaireMax){
+            return typeOffre.trim() !== '' && frequenceSalaire.trim() !== '' && salaireMin.trim() !== '' && salaireMax.trim() !== '' ;
+        }else{
+            setError('Le salaire minimale doit être superieur au salaire maximale');
+            return false
+        }
     };
 
     const handleNextButtonClick = () => {

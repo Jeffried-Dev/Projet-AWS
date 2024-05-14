@@ -9,6 +9,7 @@ const TableauBord = () => {
     const [objects, setObjects] = useState<Ientreprise[] | null >(null);
     const [utilisateurs, setUtilisateurs] = useState<Iutilisateur[] | null >(null);
     const [offres, setOffres] = useState<Ioffres[] | null >(null);
+    const [isLoading, setIsLoading] = useState(false);
     const truncateDescription = (description: string): string => {
         return description.length > 200 ? description.substring(0, 300) + '...' : description;
       };
@@ -78,6 +79,133 @@ const TableauBord = () => {
         fetchObjects();
     }, []);
 
+    const handleActivationOffre = async (obj: Ioffres, bool: boolean) => {
+        setIsLoading(true);
+        try {
+          const form = obj
+          form.state = bool
+          const response = await fetch("https://projet-aws-backend.onrender.com/offre/update",{
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem("token")
+              },
+              body: JSON.stringify(form),
+            });
+          if (!response.ok) {
+          throw new Error("Erreur lors de la récupération des données");
+          }else{
+              const responseData = await response.json();
+              if(responseData.status === 200){
+                  const updatedObjects = offres?.map((obj) => {
+                      if (obj.id === form.id) {
+                          return {
+                              ...obj,
+                              'state': bool  
+                          };
+                      } else {
+                          return obj;
+                      }
+                  });
+                  if(updatedObjects){
+                    setOffres(updatedObjects);
+                  }
+              }else{
+                console.log(responseData)
+              }
+  
+          }
+        } catch (error) {
+            console.error("Erreur:", error);
+        }
+        setIsLoading(false);
+    }
+
+    const handleActivationUser = async (obj: Iutilisateur, bool: boolean) => {
+        setIsLoading(true);
+        try {
+          const form = obj
+          form.actived = bool
+          const response = await fetch("https://projet-aws-backend.onrender.com/utilisateur/update",{
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem("token")
+              },
+              body: JSON.stringify(form),
+            });
+          if (!response.ok) {
+          throw new Error("Erreur lors de la récupération des données");
+          }else{
+              const responseData = await response.json();
+              if(responseData.status === 200){
+                  const updatedObjects = utilisateurs?.map((obj) => {
+                      if (obj.id === form.id) {
+                          return {
+                              ...obj,
+                              'state': bool  
+                          };
+                      } else {
+                          return obj;
+                      }
+                  });
+                  if(updatedObjects){
+                    setUtilisateurs(updatedObjects);
+                  }
+              }else{
+                  console.log(responseData)
+              }
+  
+          }
+        } catch (error) {
+            console.error("Erreur:", error);
+        }
+        setIsLoading(false);
+    }
+
+    const handleActivationEntreprise = async (obj: Ientreprise, bool: boolean) => {
+        setIsLoading(true);
+        try {
+          const form = obj
+          form.actived = bool
+          console.log(form)
+          const response = await fetch("https://projet-aws-backend.onrender.com/entreprise/update",{
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem("token")
+              },
+              body: JSON.stringify(form),
+            });
+          if (!response.ok) {
+          throw new Error("Erreur lors de la récupération des données");
+          }else{
+              const responseData = await response.json();
+              if(responseData.status === 200){
+                  const updatedObjects = objects?.map((obj) => {
+                      if (obj.id === form.id) {
+                          return {
+                              ...obj,
+                              'state': bool  
+                          };
+                      } else {
+                          return obj;
+                      }
+                  });
+                  if(updatedObjects){
+                    setObjects(updatedObjects);
+                  }
+              }else{
+                  console.log(responseData)
+              }
+  
+          }
+        } catch (error) {
+            console.error("Erreur:", error);
+        }
+        setIsLoading(false);
+    }
+
     return (
         <div className="min-h-screen bg-[#f1f2f6] flex items-center container mx-auto flex flex-wrap pb-20 pt-20 py-4 px-6">
             <h1 className="text-3xl text-blue-600 pb-6">Tableau de bord</h1>
@@ -92,6 +220,7 @@ const TableauBord = () => {
                                 <th className="py-4 px-6 font-bold uppercase border border-slate-600">Nom</th>
                                 <th className="py-4 px-6 font-bold uppercase border border-slate-600">Adresse e-mail</th>
                                 <th className="py-4 px-6 font-bold uppercase border border-slate-600">Description</th>
+                                <th className="py-4 px-6 font-bold uppercase border border-slate-600">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -100,6 +229,19 @@ const TableauBord = () => {
                                 <td className="py-4 px-6 border border-slate-700">{obj.name}</td>
                                 <td className="py-4 px-6 border border-slate-700">{obj.mail}</td>
                                 {obj.description ? <td className="py-4 px-6 border border-slate-700">{truncateDescription(obj.description)}</td> : <td className="py-4 px-6 border-b"></td>}
+                                <td className="py-4 px-6 border border-slate-700">
+                                {obj.actived ? <button onClick={() => {
+                                      console.log("Clicked on:", obj);
+                                      handleActivationEntreprise(obj,false);
+                                  }} className="bg-red-600 mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-2 px-4 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out" disabled={isLoading}>{isLoading ? 'Chargement...' : 'Desactiver'}
+                
+              </button> : <button onClick={() => {
+                                      console.log("Clicked on:", obj);
+                                      handleActivationEntreprise(obj,true);
+                                  }} className="bg-green-600 mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-2 px-4 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out" disabled={isLoading}>{isLoading ? 'Chargement...' : 'Activer'}
+                
+              </button>}
+                                </td>
                             </tr>))} 
                         </tbody>
                     </table> : 
@@ -132,6 +274,7 @@ const TableauBord = () => {
                                 <th className="py-4 px-6 font-bold border-b">Adresse e-mail</th>
                                 <th className="py-4 px-6 font-bold border-b">Tel</th>
                                 <th className="py-4 px-6 font-bold border-b">Genre</th>
+                                <th className="py-4 px-6 font-bold border-b">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -142,6 +285,19 @@ const TableauBord = () => {
                                 <td className="py-4 px-6 border-b">{obj.mail}</td>
                                 <td className="py-4 px-6 border-b">{obj.tel}</td>
                                 <td className="py-4 px-6 border-b">{obj.gender}</td>
+                                <td className="py-4 px-6 border-b">
+                                {obj.actived ? <button onClick={() => {
+                                      console.log("Clicked on:", obj);
+                                      handleActivationUser(obj,false);
+                                  }} className="bg-red-600 mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-2 px-4 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out" disabled={isLoading}>{isLoading ? 'Chargement...' : 'Desactiver'}
+                
+                                    </button> : <button onClick={() => {
+                                        console.log("Clicked on:", obj);
+                                        handleActivationUser(obj,true);
+                                    }} className="bg-green-600 mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-2 px-4 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out" disabled={isLoading}>{isLoading ? 'Chargement...' : 'Activer'}
+                    
+                                    </button>}
+                                </td>
                             </tr>))} 
                         </tbody>
                     </table> : 
@@ -178,6 +334,7 @@ const TableauBord = () => {
                                 <th className="py-4 px-6 font-bold uppercase border border-slate-600">Type contrat</th>
                                 <th className="py-4 px-6 font-bold uppercase border border-slate-600">Frequence salaire</th>
                                 <th className="py-4 px-6 font-bold uppercase border border-slate-600">Description</th>
+                                <th className="py-4 px-6 font-bold uppercase border border-slate-600">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -188,6 +345,19 @@ const TableauBord = () => {
                                 <td className="py-4 px-6 border border-slate-700">{obj.typeOffre}</td>
                                 <td className="py-4 px-6 border border-slate-700">{obj.frequenceSalaire}</td>
                                 {obj.description ? <td className="py-4 px-6 border border-slate-700">{truncateDescription(obj.description)}</td> : <td className="py-4 px-6 border-b"></td>}
+                                <td className="py-4 px-6 border border-slate-700">
+                                {obj.state ? <button onClick={() => {
+                                      console.log("Clicked on:", obj);
+                                      handleActivationOffre(obj,false);
+                                  }} className="bg-red-600 mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-2 px-4 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out" disabled={isLoading}>{isLoading ? 'Chargement...' : 'Desactiver'}
+                
+                                </button> : <button onClick={() => {
+                                    console.log("Clicked on:", obj);
+                                    handleActivationOffre(obj,true);
+                                }} className="bg-green-600 mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-2 px-4 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out" disabled={isLoading}>{isLoading ? 'Chargement...' : 'Activer'}
+                                    
+                                </button>}
+                                </td>
                             </tr>))} 
                         </tbody>
                     </table> : 
